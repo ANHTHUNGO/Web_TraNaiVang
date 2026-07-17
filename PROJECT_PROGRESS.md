@@ -1,51 +1,20 @@
 # PROJECT PROGRESS — Trà Nai Vàng Website
 
-> Cập nhật lần cuối: **2026-07-17** · Giai đoạn hiện tại: **Giỏ hàng PRO + theo dõi/hủy đơn + trang chủ bán hàng — XONG, chờ user về duyệt**
+> Cập nhật lần cuối: **2026-07-17 (kết phiên)** · Trạng thái: **Prototype TMĐT desktop hoàn chỉnh — chờ user duyệt tổng để sang batch trang nội dung**
 
-## ✅ 2026-07-17 — User giao toàn quyền, đã hoàn thành 2 yêu cầu lớn
-1. **Giỏ hàng chuẩn TMĐT**: icon xe đẩy mới rõ ràng (mọi nơi), nút giỏ nổi bật (tròn xanh + badge cam); **tiến trình đơn tự chạy theo thời gian** Chờ xác nhận (0′) → Đã xác nhận (2′) → Đang giao (10′) → Hoàn tất (30′); **hủy đơn trong 10 phút** với modal 5 lý do tick; thông báo tự sinh theo đơn (vận chuyển/giao xong/hủy) trong tài khoản; timeline trang xác nhận sáng theo trạng thái thật.
-2. **Trang chủ bán hàng**: banner slider ngang full-width 4 slide thay ảnh được (sale/sự kiện/SP nổi bật/quà DN), autoplay + arrows + dots, song ngữ; **8 sản phẩm nổi bật ngay dưới banner**; các section thương hiệu xuống dưới.
-- Verify đầy đủ (đặt→hủy, mốc 12′/40′, mobile, 0 lỗi console). Chi tiết: CHANGELOG 2026-07-17.
-- ✅ Song ngữ VI/EN: user đã xem ("cũng khá ok").
+## 🔖 ĐIỂM DỪNG PHIÊN 2026-07-17 (đọc đầu tiên khi mở phiên mới)
+Đã hoàn thành và push GitHub (commit mới nhất `39c13de`):
+1. ✅ Trang chủ bán hàng: banner slider (mũi tên vào trong) → dải cam kết 1 dòng → **Sản phẩm nổi bật (8 SP + thanh tìm kiếm gợi ý trực tiếp bên phải tiêu đề)** → khối Đại lý → các section thương hiệu.
+2. ✅ Giỏ hàng PRO: icon xe đẩy, nút giỏ tròn xanh badge cam; tiến trình đơn theo thời gian (0/2/10/30 phút); hủy đơn ≤10 phút với modal 5 lý do.
+3. ✅ Chuông thông báo cạnh giỏ (badge chưa đọc, dropdown, đánh dấu đã đọc, nút Áp dụng mã) + modal xin quyền khi đăng ký (NĐ 13/2023: chuông bắt buộc, vị trí/cookie tuỳ chọn).
+4. ✅ Email tự động mọi sự kiện (mô phỏng outbox + tab "Email đã nhận"): đăng ký/đặt hàng (có ảnh SP + nút Theo dõi đơn)/từng bước vận chuyển/hủy/khuyến mãi/chính sách.
+5. ✅ Tối ưu chuyển đổi: **WELCOME15 -15%** + nút "Áp dụng ngay" ở email/chuông/tài khoản/màn hình đăng ký thành công (kèm 4 SP gợi ý); mã tự trừ tiền ở giỏ.
+6. ✅ Song ngữ VI/EN toàn site + tìm kiếm 2 thứ tiếng; Git+GitHub thiết lập xong.
 
-## ✅ SONG NGỮ VI/EN (2026-07-16 tối) — user duyệt batch TMĐT + yêu cầu song ngữ & tìm kiếm 2 thứ tiếng
-- `assets/i18n.js`: từ điển trung tâm ~170 khóa [vi,en] — nền i18n dùng lại cho Next.js.
-- Nút **VI|EN** trên header mọi trang (lưu localStorage `nv_lang`).
-- 30 SP có tên EN + keywords → **tìm kiếm hiểu cả 2 thứ tiếng** ("jasmine"→3 SP, "sam dua" không dấu→2 SP).
-- 9 trang dịch đủ UI chính; nội dung mẫu (review, thông báo) giữ VI → CMS lo sau.
-- Verify EN end-to-end: 0 lỗi console.
-- ✅ BATCH TMĐT: **USER ĐÃ DUYỆT** ("duyệt cho bạn vào phiên 3").
-
-## ✅ BATCH TMĐT (2026-07-16 chiều tối) — user lệnh "làm hết các trang + giỏ hàng hoàn chỉnh như Shopee, đi sâu từng trang sau"
-**Nền dùng chung (cấu trúc mở):**
-- `assets/site.css` — design system chung mọi trang mới
-- `assets/store.js` — 1 nguồn dữ liệu 30 SP + API giả lập: giỏ hàng {slug:qty}, wishlist, đã xem, voucher (NAIVANG10 -10%, FREESHIP), phí ship (free ≥500k), đơn hàng, user — tất cả localStorage
-- `assets/layout.js` — tự sinh header/footer/FAB đồng bộ (sửa 1 chỗ ăn toàn site)
-
-**6 trang mới (đều responsive, đã test):**
-1. `chi-tiet-san-pham.html?sp=slug` — gallery+thumbs, rating, qty, Thêm giỏ/Mua ngay, tab Mô tả/Đánh giá/Giao hàng, SP cùng loại, đã xem gần đây
-2. `gio-hang.html` — items + stepper + xoá, voucher, gợi ý freeship, tổng tiền, empty state
-3. `thanh-toan.html` — form validate (tên/SĐT/địa chỉ), ship tiêu chuẩn/nhanh, COD/chuyển khoản (hiện STK)/ví (chờ), tóm tắt đơn
-4. `xac-nhan-don.html?ma=` — timeline 4 bước kiểu Shopee, chi tiết đơn + địa chỉ + thanh toán
-5. `dang-nhap.html` — card giữa màn hình, tab Đăng nhập/Đăng ký đủ trường theo spec, social mock
-6. `tai-khoan.html` — sidebar 9 mục: hồ sơ (sửa được), địa chỉ (tự lấy từ đơn), đơn hàng (badge số + status chip), yêu thích, voucher (copy mã), điểm thưởng, thông báo, hỗ trợ, đăng xuất; guard chưa login → redirect
-
-**Đã nối mạch:** Home + Danh mục → chi tiết SP; icon tài khoản + giỏ (badge đếm) trên mọi header; `san-pham.html` refactor sang store.js chung.
-**E2E test PASS:** thêm giỏ (badge 2, toast) → giỏ 755k freeship → voucher -75.5k → checkout 679.5k → đặt hàng → mã NV02436275 + giỏ tự xoá → xác nhận timeline → đăng ký → tài khoản hiện đơn "Chờ xác nhận" 610k ✓
-**Bug đã sửa:** voucher code đè mã đơn (spread order trong thanh-toan.html).
-
-## ✅ PHIÊN 1 — Home Page: USER ĐÃ DUYỆT (2026-07-16 ~15:00)
-## ✅ PHIÊN 2 — Danh mục SP: USER ĐÃ DUYỆT (user lệnh "duyệt phiên 2")
-
-## ✅ PHIÊN 2 — Danh mục sản phẩm (`san-pham.html`) — 100% dựng xong, chờ duyệt
-- 30 sản phẩm THẬT (ảnh web cũ, slug sạch trong `assets/real/products/`), 7 danh mục.
-- Chức năng chạy thật (JS + localStorage): **chip lọc danh mục (có đếm số) · tìm kiếm KHÔNG DẤU ("sam dua" ra "Sâm Dứa") · sắp xếp (nổi bật/giá ↑↓/tên) · thêm giỏ hàng (badge trên header + toast) · yêu thích (tim, lưu localStorage) · trạng thái rỗng**.
-- Đồng bộ giao diện Home (token STYLE_GUIDE), breadcrumb, page-head gradient sage, newsletter + footer + FAB.
-- Home đã nối link: nav "Sản phẩm", nút "Xem tất cả sản phẩm", cột footer → `san-pham.html`.
-- Verify: desktop 1440 + mobile 375; 30/30 card, 0 ảnh hỏng; test tự động: lọc Oolong=6 ✓, search không dấu=2 ✓, sort desc=Phổ Nhĩ 450k ✓, badge giỏ=1 ✓, wishlist toast ✓.
-
-## ⚡ Sự kiện 2026-07-16 14:30
-User gửi đặc tả "HOÀN THIỆN CHỨC NĂNG BÁN HÀNG" → đã hấp thụ vào BRIEF §9–10, lộ trình 18 phiên. Nguyên tắc: thiết kế UI duyệt trước → Next.js + backend sau.
+## ▶️ VIỆC ĐẦU TIÊN PHIÊN MỚI
+1. Đọc 5 file: BRIEF → PROGRESS → TODO → STYLE_GUIDE → SEO_PLAN. Nhớ quy tắc: **chỉ tối ưu DESKTOP**, cache-bust khi sửa asset (hiện ?v=170729), cuối phiên commit+push.
+2. Chạy server: `python -m http.server 8931` trong thư mục dự án (nếu chưa chạy).
+3. Chờ feedback user về bản hiện tại; nếu duyệt → **batch kế: 5 trang chính sách + FAQ + Hướng dẫn mua hàng + Cổng đại lý (cấu trúc)** — trang mới dùng site.css/layout.js/i18n.js, viết song ngữ ngay.
 
 ## Trạng thái tổng quan
 | Giai đoạn | Nội dung | % | Ghi chú |

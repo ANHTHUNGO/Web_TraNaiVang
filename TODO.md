@@ -1,10 +1,10 @@
 # TODO — Trà Nai Vàng Website
-> Sắp theo ưu tiên. Cập nhật: 2026-07-16 15:20
+> Sắp theo ưu tiên. Cập nhật: 2026-07-17 (kết phiên)
 
 ## 🔴 P0 — Chặn tiến độ (cần user)
 - [x] ~~User duyệt Home Page~~ ✅ · ~~duyệt Phiên 2 danh mục~~ ✅
 - [x] ~~User duyệt BATCH TMĐT~~ ✅ · ~~SONG NGỮ~~ user xem "khá ok" ✅
-- [ ] **User về duyệt bản 17/07**: giỏ hàng xe đẩy mới + tiến trình/hủy đơn + trang chủ banner bán hàng
+- [ ] **User duyệt tổng bản 17/07 (desktop)**: banner+search trang chủ, giỏ hàng/tiến trình/hủy đơn, chuông+quyền, email tự động, WELCOME15
 - [ ] Ảnh banner khuyến mãi THẬT từ user (hiện dùng 4 ảnh web cũ; thay tại `assets/real/hero.jpg, terroir.jpg, banner-organic.jpg, banner-teaset.jpg` hoặc đổi src trong index.html khối BANNER SLIDER)
 - [ ] Bảng giá thật 30 SP (đang giả lập) · STK ngân hàng thật (đang mock) · duyệt tên EN của 30 SP (em tự dịch)
 - [ ] Dịch EN cho nội dung mẫu (review khách, thông báo, mô tả voucher) — sẽ theo CMS ở Next.js
