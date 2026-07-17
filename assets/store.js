@@ -78,7 +78,18 @@ function markSeen(slug){ let s=JSON.parse(localStorage.getItem('nv_seen')||'[]')
 function seenList(){ return JSON.parse(localStorage.getItem('nv_seen')||'[]').map(prodBySlug).filter(Boolean); }
 
 /* ---- VOUCHER (mock) ---- */
-const VOUCHERS = { "NAIVANG10":{type:"pct",val:10,label:"Giảm 10% toàn đơn"}, "FREESHIP":{type:"ship",val:0,label:"Miễn phí vận chuyển"} };
+const VOUCHERS = {
+  "WELCOME15":{type:"pct",val:15,label:"Giảm 15% đơn đầu tiên (thành viên mới)"},
+  "NAIVANG10":{type:"pct",val:10,label:"Giảm 10% toàn đơn"},
+  "FREESHIP":{type:"ship",val:0,label:"Miễn phí vận chuyển"}
+};
+function applyVoucher(code, silent){
+  code=(code||'').toUpperCase().trim();
+  if(!VOUCHERS[code]) return false;
+  localStorage.setItem('nv_voucher',code);
+  if(!silent) showToast(`${_t('vc.applied')||'Mã đã kích hoạt:'} ${code}`);
+  return true;
+}
 function shipFee(subtotal, method){ if(subtotal>=500000) return 0; return method==='fast'?45000:30000; }
 
 /* ---- ORDERS (mock) ---- */
@@ -145,10 +156,10 @@ function sendEmail(subject, body, kind, quiet){
 function emails(){ return JSON.parse(localStorage.getItem('nv_emails')||'[]'); }
 function _orderBody(o){
   return `<p>Mã đơn: <b>${o.code}</b> · ${o.date}</p>`
-   + o.items.map(i=>`<p>• ${i.name} × ${i.qty} — ${fmt(i.price*i.qty)}</p>`).join('')
-   + `<p>Tổng cộng: <b>${fmt(o.total)}</b></p>`
+   + o.items.map(i=>`<p style="display:flex;align-items:center;gap:10px;margin:8px 0"><img src="${prodImg(i.slug)}" width="46" height="46" style="border-radius:9px;object-fit:cover;flex:none"/><span>${i.name} × ${i.qty} — <b>${fmt(i.price*i.qty)}</b></span></p>`).join('')
+   + `<p>Tổng cộng: <b style="color:#5E7C3E;font-size:15px">${fmt(o.total)}</b></p>`
    + (o.addr?`<p>Giao tới: ${o.addr.name} · ${o.addr.phone}<br/>${o.addr.addr}, ${o.addr.district}, ${o.addr.city}</p>`:'')
-   + `<p>Theo dõi đơn tại mục Tài khoản → Đơn hàng của tôi.</p>`;
+   + `<p style="margin-top:12px"><a href="xac-nhan-don.html?ma=${o.code}" style="display:inline-block;background:#5E7C3E;color:#fff;padding:10px 24px;border-radius:30px;font-weight:600;text-decoration:none">${_t('em.track')} →</a></p>`;
 }
 /* gửi email khi đơn chuyển trạng thái (xác nhận → vận chuyển → giao xong) */
 function syncOrderEmails(){
@@ -185,7 +196,7 @@ function notiList(){
     L.push({id:o.code+':'+s, ic:{pending:'📝',confirm:'✅',shipping:'🚚',done:'🎉',cancelled:'✕'}[s], b:o.code, s:_t('noti.'+s)});
   });
   L.push({id:'freeship', ic:'🚚', b:'FREESHIP', s:_t('bell.p2')});
-  L.push({id:'welcome',  ic:'🎁', b:'NAIVANG10', s:_t('bell.p1')});
+  L.push({id:'welcome15', ic:'🎁', b:'WELCOME15', s:_t('noti.w15'), act:'WELCOME15'});
   return L;
 }
 function _notiRead(){ return new Set(JSON.parse(localStorage.getItem('nv_noti_read')||'[]')); }
@@ -214,10 +225,14 @@ function mountBell(){
     }
     const items=notiList(), rd=_notiRead();
     panel.innerHTML=`<div class="bp-head">${_t('bell.title')}<button id="bpRead">${_t('bell.markRead')}</button></div>`
-      + (items.length ? items.map(n=>`<div class="bp-item ${rd.has(n.id)?'':'unread'}"><span class="bi">${n.ic}</span><span><b>${n.b}</b><small>${n.s}</small></span></div>`).join('')
+      + (items.length ? items.map(n=>`<div class="bp-item ${rd.has(n.id)?'':'unread'}"><span class="bi">${n.ic}</span><span><b>${n.b}</b><small>${n.s}</small>${n.act?`<button class="bp-apply" data-ap="${n.act}">${_t('vc.apply')}</button>`:''}</span></div>`).join('')
                       : `<div class="bp-login">${_t('bell.empty')}</div>`);
     const r=panel.querySelector('#bpRead');
     if(r) r.onclick=e=>{e.stopPropagation(); markNotisRead(); render();};
+    panel.querySelectorAll('[data-ap]').forEach(b=>b.onclick=e=>{
+      e.stopPropagation();
+      if(applyVoucher(b.dataset.ap)) setTimeout(()=>location.href='san-pham.html',600);
+    });
   }
   w.querySelector('#bellBtn').onclick=e=>{e.stopPropagation(); render(); w.classList.toggle('open');};
   document.addEventListener('click',e=>{ if(!w.contains(e.target)) w.classList.remove('open'); });

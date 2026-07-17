@@ -5,9 +5,9 @@
 <title>Đăng nhập / Đăng ký — Trà Nai Vàng</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css?v=170728">
-<script src="assets/i18n.js?v=170728"></script>
-<script src="assets/store.js?v=170728"></script>
+<link rel="stylesheet" href="assets/site.css?v=170729">
+<script src="assets/i18n.js?v=170729"></script>
+<script src="assets/store.js?v=170729"></script>
 <style>
   .auth{min-height:calc(100vh - 240px);display:grid;place-items:center;padding:50px 20px;position:relative}
   .auth::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,var(--sage-100),transparent 60%);z-index:0}
@@ -80,7 +80,7 @@
   </div>
 </main>
 
-<script src="assets/layout.js?v=170728"></script>
+<script src="assets/layout.js?v=170729"></script>
 <script>
 /* nếu đã đăng nhập → vào thẳng tài khoản */
 if(currentUser()) location.href='tai-khoan.html';
@@ -117,6 +117,31 @@ document.getElementById('regBtn').onclick=()=>{
   openConsentModal(v);
 };
 
+/* Man hinh dang ky thanh cong: qua 15% + san pham goi y chon ngay */
+function showWelcome(name, email){
+  const main=document.querySelector('main.auth');
+  main.style.display='block'; main.style.padding='46px 20px 60px';
+  const FEAT=['tra-sam-dua','oolong-tu-quy','tra-xanh-hoa-lai','ca-gai-leo-tia-to'];
+  main.innerHTML=`<div class="wrap" style="max-width:1260px;margin:0 auto;position:relative;z-index:2">
+    <div style="max-width:560px;margin:0 auto;text-align:center;background:var(--paper);border:1px solid var(--line-soft);border-radius:20px;box-shadow:var(--shadow);padding:38px 34px">
+      <div style="width:74px;height:74px;border-radius:50%;background:var(--sage-100);display:grid;place-items:center;margin:0 auto 16px;font-size:34px">🎉</div>
+      <h1 style="font-size:27px;font-weight:500">${t('au.okTitle')}</h1>
+      <p style="font-size:13.5px;color:var(--stone);margin:8px 0 20px">${t('au.okSub')} <b>${email}</b> 📧🔔</p>
+      <div style="border:1.5px dashed var(--gold);border-radius:14px;background:#FFFDF5;padding:16px 18px;margin-bottom:20px">
+        <div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-2);font-weight:700;margin-bottom:6px">${t('au.gift')}</div>
+        <div style="font-family:var(--serif);font-size:24px;color:var(--tea)">WELCOME15 <span style="font-size:15px">— 15%</span></div>
+        <div style="font-size:12.5px;color:var(--stone);margin:4px 0 12px">${t('vc.w15')}</div>
+        <button class="btn btn-primary" id="wApply" style="padding:12px 28px;font-size:13.5px">${t('vc.apply')} →</button>
+      </div>
+      <a href="tai-khoan.html" style="font-size:13px;color:var(--tea);font-weight:600">${t('au.goAccount')} →</a>
+    </div>
+    <h2 style="text-align:center;font-weight:400;font-size:26px;margin:46px 0 22px">${t('au.forYou')}</h2>
+    <div class="pgrid">${FEAT.map(s=>pcardHTML(prodBySlug(s))).join('')}</div>
+  </div>`;
+  document.getElementById('wApply').onclick=()=>{ if(applyVoucher('WELCOME15')) setTimeout(()=>location.href='san-pham.html',600); };
+  updateBadge(); if(typeof updateBellBadge==='function') updateBellBadge();
+  window.scrollTo(0,0);
+}
 /* B2: xin quyen theo chinh sach nen tang & phap luat (Nghi dinh 13/2023/ND-CP) */
 function openConsentModal(v){
   const w=document.createElement('div'); w.className='modal-wrap';
@@ -137,10 +162,9 @@ function openConsentModal(v){
     try{ if('Notification' in window && Notification.permission==='default') Notification.requestPermission(); }catch(e){}
     try{ if(consent.loc && navigator.geolocation) navigator.geolocation.getCurrentPosition(()=>{},()=>{},{timeout:3000}); }catch(e){}
     setUser({name:v('r-name'),phone:v('r-phone'),email:v('r-email'),dob:v('r-dob'),sex:v('r-sex'),points:100,consent});
-    try{ sendEmail(t('em.sWelcome'), `<p>Chào ${v('r-name')},</p><p>Tài khoản Trà Nai Vàng của bạn đã sẵn sàng. Tặng bạn <b>100 điểm thưởng</b> và mã <b>NAIVANG10</b> giảm 10% cho đơn đầu tiên 🎁</p><p>Chuông thông báo đã bật: bạn sẽ nhận cập nhật đơn hàng, ưu đãi và các thông báo quan trọng qua email này (${v('r-email')}).</p><p>Quyền đã đồng ý lúc ${consent.at}: thông báo ✓${consent.loc?' · vị trí ✓':''}${consent.track?' · cookie ✓':''}</p>`, 'system', true); }catch(e){}
+    try{ sendEmail(t('em.sWelcome'), `<p>Chào ${v('r-name')},</p><p>Tài khoản Trà Nai Vàng của bạn đã sẵn sàng. Tặng bạn <b>100 điểm thưởng</b> 🎁</p><p style="background:#E7EEDA;border-radius:12px;padding:12px 14px">🎁 <b>Mã WELCOME15 — GIẢM 15%</b> cho đơn hàng đầu tiên của bạn.<br/><a href="san-pham.html?ap=WELCOME15" style="display:inline-block;margin-top:8px;background:#5E7C3E;color:#fff;padding:9px 20px;border-radius:30px;font-weight:600;text-decoration:none">${t('em.shopNow')} →</a></p><p>Chuông thông báo đã bật: bạn sẽ nhận cập nhật đơn hàng, ưu đãi và các thông báo quan trọng qua email này (${v('r-email')}).</p><p>Quyền đã đồng ý lúc ${consent.at}: thông báo ✓${consent.loc?' · vị trí ✓':''}${consent.track?' · cookie ✓':''}</p>`, 'system', true); }catch(e){}
     w.remove();
-    showToast('Tạo tài khoản thành công! Chuông thông báo đã bật 🔔');
-    setTimeout(()=>location.href='tai-khoan.html',800);
+    showWelcome(v('r-name'), v('r-email'));
   };
 }
 </script>

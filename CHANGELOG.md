@@ -1,5 +1,16 @@
 # CHANGELOG — Trà Nai Vàng Website
 
+## 2026-07-17 — TỐI ƯU CHUYỂN ĐỔI: WELCOME15 + email có link đơn + tìm kiếm trang chủ ✅
+- **Voucher WELCOME15 (-15% đơn đầu cho thành viên mới)** + hàm `applyVoucher()`: mọi nơi hiện mã đều có nút **"Áp dụng ngay"** → mã kích hoạt, tự trừ tiền ở giỏ/thanh toán, chuyển tới trang mua sắm.
+- **Email đơn hàng nâng cấp**: ảnh sản phẩm từng món + nút "Theo dõi đơn hàng →" mở trang tiến trình (xac-nhan-don.html?ma=...). Email chào mừng có khối quà WELCOME15 + nút "Áp dụng ngay & mua sắm" (link san-pham.html?ap=WELCOME15).
+- **Chuông**: thông báo "Bạn nhận được mã giảm 15% cho lần đầu đăng ký! 🎁" kèm nút Áp dụng ngay.
+- **Màn hình đăng ký thành công mới**: hộp quà WELCOME15 + nút áp dụng + "Vào tài khoản" + lưới "Dành riêng cho bạn" 4 SP gợi ý chọn ngay.
+- **Tài khoản > Mã giảm giá**: 3 voucher (WELCOME15 nổi bật + NAIVANG10 + FREESHIP), mỗi mã có nút Áp dụng ngay + Sao chép.
+- **Trang chủ**: thanh tìm kiếm bên phải "Bộ sưu tập tuyển chọn" — gõ ra dropdown 6 gợi ý (ảnh+tên+giá, song ngữ, không dấu), Enter → trang danh mục ?q=; san-pham nhận ?q= và ?ap=.
+- i18n +13 khóa. Cache-bust ?v=170729.
+- Verify: search "oolong"=6 gợi ý ✓; đăng ký → màn hình quà + 4 SP ✓; Áp dụng ngay → giỏ tự trừ −48.000₫/320.000₫ ✓; đặt đơn NV61775552 → email có ảnh + link theo dõi + tổng 302.000₫ ✓; chuông có nút áp mã ✓.
+
+
 ## 2026-07-17 — EMAIL TỰ ĐỘNG CHO MỌI SỰ KIỆN ✅
 - `store.js`: hệ email mô phỏng (outbox localStorage `nv_emails`, tối đa 60): `sendEmail()`, `syncOrderEmails()` chạy mỗi lần tải trang — phát hiện đơn CHUYỂN TRẠNG THÁI và gửi email tương ứng (đặt hàng → xác nhận → đang giao → giao xong → hủy, theo `nv_email_stage`).
 - Email tự gửi tại: đăng ký (chào mừng + xác nhận quyền đã đồng ý), đặt hàng (chi tiết đơn), mỗi bước tiến trình đơn, hủy đơn (kèm lý do), chiến dịch khuyến mãi (1 lần/tài khoản), cập nhật chính sách (1 lần/tài khoản — mô phỏng thông báo thay đổi chính sách theo NĐ 13/2023).
