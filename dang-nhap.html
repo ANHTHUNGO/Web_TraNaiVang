@@ -5,9 +5,9 @@
 <title>Đăng nhập / Đăng ký — Trà Nai Vàng</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css?v=170726">
-<script src="assets/i18n.js?v=170726"></script>
-<script src="assets/store.js?v=170726"></script>
+<link rel="stylesheet" href="assets/site.css?v=170727">
+<script src="assets/i18n.js?v=170727"></script>
+<script src="assets/store.js?v=170727"></script>
 <style>
   .auth{min-height:calc(100vh - 240px);display:grid;place-items:center;padding:50px 20px;position:relative}
   .auth::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,var(--sage-100),transparent 60%);z-index:0}
@@ -80,7 +80,7 @@
   </div>
 </main>
 
-<script src="assets/layout.js?v=170726"></script>
+<script src="assets/layout.js?v=170727"></script>
 <script>
 /* nếu đã đăng nhập → vào thẳng tài khoản */
 if(currentUser()) location.href='tai-khoan.html';
@@ -114,10 +114,34 @@ document.getElementById('regBtn').onclick=()=>{
   document.getElementById('agreeErr').style.display=agree?'none':'block';
   ok&=agree;
   if(!ok)return;
-  setUser({name:v('r-name'),phone:v('r-phone'),email:v('r-email'),dob:v('r-dob'),sex:v('r-sex'),points:100});
-  showToast('Tạo tài khoản thành công! Tặng bạn 100 điểm thưởng 🎁');
-  setTimeout(()=>location.href='tai-khoan.html',700);
+  openConsentModal(v);
 };
+
+/* B2: xin quyen theo chinh sach nen tang & phap luat (Nghi dinh 13/2023/ND-CP) */
+function openConsentModal(v){
+  const w=document.createElement('div'); w.className='modal-wrap';
+  w.innerHTML=`<div class="modal">
+    <h3>🔔 ${t('cs.title')}</h3>
+    <p class="cx-note">${t('cs.intro')}</p>
+    <label class="cx-opt" style="align-items:flex-start"><input type="checkbox" checked disabled style="margin-top:3px"/><span><b style="font-size:13.5px">${t('cs.noti')}</b><br/><small style="color:var(--stone)">${t('cs.notiS')}</small></span></label>
+    <label class="cx-opt" style="align-items:flex-start"><input type="checkbox" id="cs-loc" style="margin-top:3px"/><span><b style="font-size:13.5px">${t('cs.loc')}</b><br/><small style="color:var(--stone)">${t('cs.locS')}</small></span></label>
+    <label class="cx-opt" style="align-items:flex-start"><input type="checkbox" id="cs-track" style="margin-top:3px"/><span><b style="font-size:13.5px">${t('cs.track')}</b><br/><small style="color:var(--stone)">${t('cs.trackS')}</small></span></label>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" id="csBack">${t('cs.back')}</button>
+      <button class="btn btn-primary" id="csGo">${t('cs.agree')}</button>
+    </div></div>`;
+  document.body.appendChild(w);
+  w.querySelector('#csBack').onclick=()=>w.remove();
+  w.querySelector('#csGo').onclick=()=>{
+    const consent={noti:true, loc:w.querySelector('#cs-loc').checked, track:w.querySelector('#cs-track').checked, at:new Date().toLocaleString('vi-VN')};
+    try{ if('Notification' in window && Notification.permission==='default') Notification.requestPermission(); }catch(e){}
+    try{ if(consent.loc && navigator.geolocation) navigator.geolocation.getCurrentPosition(()=>{},()=>{},{timeout:3000}); }catch(e){}
+    setUser({name:v('r-name'),phone:v('r-phone'),email:v('r-email'),dob:v('r-dob'),sex:v('r-sex'),points:100,consent});
+    w.remove();
+    showToast('Tạo tài khoản thành công! Chuông thông báo đã bật 🔔');
+    setTimeout(()=>location.href='tai-khoan.html',800);
+  };
+}
 </script>
 </body>
 </html>

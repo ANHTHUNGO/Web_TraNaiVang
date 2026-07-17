@@ -1,5 +1,13 @@
 # CHANGELOG — Trà Nai Vàng Website
 
+## 2026-07-17 — CHUÔNG THÔNG BÁO + XIN QUYỀN KHI ĐĂNG KÝ ✅
+- **Chuông cạnh giỏ hàng** (mọi trang, tự gắn qua store.js `mountBell()`): badge đỏ số chưa đọc; dropdown liệt kê thông báo theo tài khoản — cập nhật tiến trình đơn (đặt/xác nhận/vận chuyển/giao xong/hủy) + ưu đãi; nút "Đánh dấu đã đọc" (localStorage `nv_noti_read`); chưa đăng nhập → mời Đăng nhập/Đăng ký.
+- **Bước xin quyền khi đăng ký** (modal sau khi bấm Đăng ký, theo chính sách sàn TMĐT + Nghị định 13/2023/NĐ-CP): ① Bật chuông thông báo — BẮT BUỘC mọi tài khoản (checked+disabled); ② Truy cập vị trí (tuỳ chọn, gọi Geolocation thật nếu tick); ③ Cookie & cá nhân hoá (tuỳ chọn). Đồng ý → lưu `user.consent{noti,loc,track,at}` + gọi Notification.requestPermission (guarded).
+- **Tài khoản > Hồ sơ**: thêm khối "Quyền & thông báo" — xem/đổi 2 quyền tuỳ chọn, lưu cùng hồ sơ.
+- i18n +17 khóa (bell.*, cs.*, pm.title). Cache-bust ?v=170727 (8 trang).
+- Verify: chưa login → panel mời đăng nhập ✓; đăng ký → modal quyền → đồng ý → consent lưu đúng ✓; badge 2 → mở panel 2 mục unread ✓ → đánh dấu đã đọc → badge ẩn ✓.
+
+
 ## 2026-07-17 — Đưa dự án lên Git + GitHub ✅
 - `git init` (branch main), .gitignore, commit đầu 144 files.
 - Remote: https://github.com/ANHTHUNGO/Web_TraNaiVang.git — push thành công (3b58282).

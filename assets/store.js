@@ -129,6 +129,55 @@ function currentUser(){ return JSON.parse(localStorage.getItem('nv_user')||'null
 function setUser(u){ localStorage.setItem('nv_user',JSON.stringify(u)); }
 function logout(){ localStorage.removeItem('nv_user'); }
 
+/* ---- CHUÔNG THÔNG BÁO (gắn tài khoản đăng ký) ---- */
+function notiList(){
+  if(!currentUser()) return [];
+  const L=[];
+  orders().slice(0,8).forEach(o=>{
+    const s=orderStatus(o);
+    L.push({id:o.code+':'+s, ic:{pending:'📝',confirm:'✅',shipping:'🚚',done:'🎉',cancelled:'✕'}[s], b:o.code, s:_t('noti.'+s)});
+  });
+  L.push({id:'freeship', ic:'🚚', b:'FREESHIP', s:_t('bell.p2')});
+  L.push({id:'welcome',  ic:'🎁', b:'NAIVANG10', s:_t('bell.p1')});
+  return L;
+}
+function _notiRead(){ return new Set(JSON.parse(localStorage.getItem('nv_noti_read')||'[]')); }
+function notiUnread(){ const r=_notiRead(); return notiList().filter(n=>!r.has(n.id)).length; }
+function markNotisRead(){ localStorage.setItem('nv_noti_read', JSON.stringify(notiList().map(n=>n.id))); updateBellBadge(); }
+function updateBellBadge(){
+  const b=document.getElementById('bellBadge'); if(!b) return;
+  const n=notiUnread(); b.textContent=n>9?'9+':n; b.style.display=n?'grid':'none';
+}
+function mountBell(){
+  const cart=document.querySelector('.nav-actions .cart-wrap');
+  if(!cart||document.getElementById('bellWrap')) return;
+  const w=document.createElement('div'); w.className='bell-wrap'; w.id='bellWrap';
+  w.innerHTML=`<button class="bell" id="bellBtn" aria-label="${_t('bell.title')}">
+    <svg viewBox="0 0 24 24" width="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9a6 6 0 1 1 12 0c0 4.6 1.6 6 2.4 6H3.6C4.4 15 6 13.6 6 9Z"/><path d="M10 19a2.2 2.2 0 0 0 4 0"/></svg>
+    <span class="cart-badge bell-badge" id="bellBadge" style="display:none">0</span></button>
+    <div class="bell-panel" id="bellPanel"></div>`;
+  cart.parentNode.insertBefore(w, cart);
+  const panel=w.querySelector('#bellPanel');
+  function render(){
+    if(!currentUser()){
+      panel.innerHTML=`<div class="bp-head">${_t('bell.title')}</div>
+        <div class="bp-login">🔔<p>${_t('bell.login')}</p>
+        <a class="btn btn-primary" style="padding:11px 22px;font-size:13px" href="dang-nhap.html">${_t('bell.loginBtn')}</a></div>`;
+      return;
+    }
+    const items=notiList(), rd=_notiRead();
+    panel.innerHTML=`<div class="bp-head">${_t('bell.title')}<button id="bpRead">${_t('bell.markRead')}</button></div>`
+      + (items.length ? items.map(n=>`<div class="bp-item ${rd.has(n.id)?'':'unread'}"><span class="bi">${n.ic}</span><span><b>${n.b}</b><small>${n.s}</small></span></div>`).join('')
+                      : `<div class="bp-login">${_t('bell.empty')}</div>`);
+    const r=panel.querySelector('#bpRead');
+    if(r) r.onclick=e=>{e.stopPropagation(); markNotisRead(); render();};
+  }
+  w.querySelector('#bellBtn').onclick=e=>{e.stopPropagation(); render(); w.classList.toggle('open');};
+  document.addEventListener('click',e=>{ if(!w.contains(e.target)) w.classList.remove('open'); });
+  updateBellBadge();
+}
+document.addEventListener('DOMContentLoaded', mountBell);
+
 /* ---- UI helpers ---- */
 function updateBadge(){ const b=document.getElementById('cartBadge'); if(b) b.textContent=cartCount(); }
 let _toastTimer;
