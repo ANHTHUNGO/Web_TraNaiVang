@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Chi tiết sản phẩm — Trà Nai Vàng</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css?v=170726">
+<script src="assets/i18n.js?v=170726"></script>
+<script src="assets/store.js?v=170726"></script>
+<style>
+  .pd{display:grid;grid-template-columns:1.02fr 1fr;gap:52px;padding:40px 0 60px}
+  .gal .main{border-radius:18px;overflow:hidden;border:1px solid var(--line-soft);background:#fff}
+  .gal .main img{width:100%;aspect-ratio:1/1;object-fit:cover}
+  .gal .thumbs{display:flex;gap:12px;margin-top:14px}
+  .gal .thumbs img{width:86px;height:86px;object-fit:cover;border-radius:12px;border:2px solid transparent;cursor:pointer;transition:border .2s}
+  .gal .thumbs img.on{border-color:var(--tea)}
+  .info .cat{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-2);font-weight:600}
+  .info h1{font-size:clamp(28px,3.4vw,42px);font-weight:400;margin:8px 0 10px}
+  .rate{display:flex;align-items:center;gap:10px;font-size:13.5px;color:var(--stone);margin-bottom:16px}
+  .stars{color:#E5A62C;letter-spacing:2px;font-size:15px}
+  .price-line{display:flex;align-items:baseline;gap:14px;padding:18px 0;border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);margin-bottom:20px}
+  .price-line .pr{font-family:var(--serif);font-size:34px;color:var(--tea)}
+  .price-line s{color:var(--stone);font-size:17px}
+  .price-line .off{background:var(--red);color:#fff;font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px}
+  .short{color:var(--stone);font-size:15px;margin-bottom:22px}
+  .buyrow{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+  .buyrow .btn{flex:1;min-width:170px}
+  .assure{display:flex;gap:22px;flex-wrap:wrap;margin-top:20px}
+  .assure .a{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--stone)}
+  .assure svg{width:17px;color:var(--tea);flex:none}
+  .wishbig{width:52px;height:52px;border-radius:50%;border:1px solid var(--line);background:var(--paper);display:grid;place-items:center;cursor:pointer;color:var(--stone);transition:all .25s;flex:none}
+  .wishbig:hover,.wishbig.on{color:#c0392b;border-color:#c0392b}
+  /* tabs */
+  .tabs{border-bottom:1px solid var(--line);display:flex;gap:30px;margin-bottom:26px}
+  .tabs button{background:none;border:none;font-family:var(--sans);font-size:14.5px;font-weight:600;color:var(--stone);padding:13px 2px;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px}
+  .tabs button.on{color:var(--tea);border-color:var(--tea)}
+  .tabpane{display:none;max-width:820px;color:var(--stone);font-size:15px}
+  .tabpane.on{display:block}
+  .tabpane h4{margin:18px 0 8px;font-size:17px;color:var(--ink)}
+  .rev{border:1px solid var(--line-soft);border-radius:14px;padding:18px 20px;margin-bottom:14px;background:var(--paper)}
+  .rev .rh{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+  .rev b{font-size:14px;color:var(--ink)}
+  .rev .stars{font-size:12px}
+  .rev p{font-size:14px}
+  .sec-t{font-family:var(--serif);font-size:26px;font-weight:400;margin:54px 0 22px}
+  @media(max-width:860px){.pd{grid-template-columns:1fr;gap:30px;padding-top:24px}}
+</style>
+</head>
+<body data-page="san-pham">
+<main class="wrap">
+  <div class="crumb" style="margin-top:22px"><a href="index.html" data-i18n="crumb.home">Trang chủ</a> › <a href="san-pham.html" data-i18n="nav.products">Sản phẩm</a> › <b id="crumbName"></b></div>
+
+  <div class="pd">
+    <div class="gal">
+      <div class="main"><img id="mainImg" src="" alt=""/></div>
+      <div class="thumbs" id="thumbs"></div>
+    </div>
+    <div class="info">
+      <span class="cat" id="cat"></span>
+      <h1 id="name"></h1>
+      <div class="rate"><span class="stars">★★★★★</span><span><b id="rateVal">4.8</b>/5 · <span id="rateCount">26</span> <span data-i18n="pd.reviews">đánh giá</span> · <span data-i18n="pd.sold">Đã bán</span> 312</span></div>
+      <div class="price-line"><span class="pr" id="price"></span><s id="old" style="display:none"></s><span class="off" id="off" style="display:none"></span></div>
+      <p class="short" id="short"></p>
+      <div class="buyrow">
+        <div class="qty"><button id="minus" aria-label="Giảm">−</button><input id="qty" value="1" inputmode="numeric"/><button id="plus" aria-label="Tăng">+</button></div>
+        <button class="wishbig" id="wishBtn" aria-label="Yêu thích"><svg viewBox="0 0 24 24" width="20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2 4 4 0 0 1 7 2c0 5.5-7 10-7 10Z"/></svg></button>
+      </div>
+      <div class="buyrow">
+        <button class="btn btn-ghost" id="addBtn" data-i18n="pd.addCart">Thêm vào giỏ</button>
+        <button class="btn btn-primary" id="buyBtn" data-i18n="pd.buyNow">Mua ngay</button>
+      </div>
+      <div class="assure">
+        <span class="a"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 7h13v10H3zM16 10h4l1 3v4h-5"/><circle cx="7" cy="19" r="1.6"/><circle cx="18" cy="19" r="1.6"/></svg><i style="font-style:normal" data-i18n="pd.a1">Freeship đơn từ 500k</i></span>
+        <span class="a"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 8l8-5 8 5v8l-8 5-8-5z"/></svg><i style="font-style:normal" data-i18n="pd.a2">Đổi trả trong 7 ngày</i></span>
+        <span class="a"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 6L9 17l-5-5"/></svg><i style="font-style:normal" data-i18n="pd.a3">Chính hãng Nai Vàng</i></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="tabs" id="tabs">
+    <button data-t="desc" class="on" data-i18n="pd.tab.desc">Mô tả sản phẩm</button>
+    <button data-t="rev" data-i18n="pd.tab.rev">Đánh giá (26)</button>
+    <button data-t="ship" data-i18n="pd.tab.ship">Giao hàng &amp; đổi trả</button>
+  </div>
+  <div class="tabpane on" id="pane-desc"></div>
+  <div class="tabpane" id="pane-rev">
+    <div class="rev"><div class="rh"><b>Ngọc Hân</b><span class="stars">★★★★★</span></div><p>Trà thơm đúng vị ký ức, đóng gói đẹp và chắc chắn. Sẽ ủng hộ dài lâu!</p></div>
+    <div class="rev"><div class="rh"><b>Minh Trí</b><span class="stars">★★★★★</span></div><p>Mua biếu ba mẹ, ông bà khen nước trà xanh, hậu ngọt. Giao hàng nhanh.</p></div>
+    <div class="rev"><div class="rh"><b>Thu Trang</b><span class="stars">★★★★☆</span></div><p>Hương tự nhiên, không gắt. Mong shop có thêm size dùng thử.</p></div>
+  </div>
+  <div class="tabpane" id="pane-ship" data-i18n="pd.shipPane">
+    <h4>Giao hàng</h4><p>Giao toàn quốc qua đối tác vận chuyển. Nội tỉnh Lâm Đồng 1–2 ngày, toàn quốc 2–5 ngày. Miễn phí vận chuyển cho đơn từ 500.000₫.</p>
+    <h4>Đổi trả</h4><p>Đổi trả trong 7 ngày nếu sản phẩm lỗi do sản xuất hoặc vận chuyển, còn nguyên tem/bao bì. Hotline hỗ trợ: 0855 256 512.</p>
+  </div>
+
+  <h2 class="sec-t" data-i18n="pd.related">Sản phẩm cùng loại</h2>
+  <div class="pgrid" id="related"></div>
+
+  <div id="seenWrap" style="display:none">
+    <h2 class="sec-t" data-i18n="pd.seen">Bạn đã xem gần đây</h2>
+    <div class="pgrid" id="seen"></div>
+  </div>
+</main>
+
+<script src="assets/layout.js?v=170726"></script>
+<script>
+const slug = new URLSearchParams(location.search).get('sp') || 'tra-sam-dua';
+const p = prodBySlug(slug) || PRODUCTS[0];
+document.title = prodName(p) + ' — Trà Nai Vàng';
+markSeen(p.slug);
+
+/* fill info */
+document.getElementById('crumbName').textContent = prodName(p);
+document.getElementById('cat').textContent = catName(p.cat);
+document.getElementById('name').textContent = prodName(p);
+document.getElementById('price').textContent = fmt(p.price);
+if(p.old){ const o=document.getElementById('old'), f=document.getElementById('off');
+  o.style.display='inline'; o.textContent=fmt(p.old);
+  f.style.display='inline'; f.textContent='-'+Math.round((1-p.price/p.old)*100)+'%'; }
+const SHORTS = {
+ "uop-huong":"Trà xanh Bảo Lộc ướp hương tự nhiên theo bí quyết hơn 40 năm — hương quyện sâu trong từng cánh trà, không hương liệu tổng hợp.",
+ "oolong":"Búp oolong cao nguyên hái tay, lên men bán phần và sao sấy chuẩn mực — nước vàng sánh, hậu ngọt dài.",
+ "tra-xanh":"Trà xanh đậm vị truyền thống từ vùng chè 800m+ — chát dịu, hậu ngọt, hương cốm non.",
+ "tra-den":"Trà đen lên men trọn vẹn, vị đậm đà ấm áp — nền hoàn hảo cho trà sữa và trà pha lạnh.",
+ "tra-quy":"Dòng trà quý sản lượng giới hạn — búp non tuyển tay, chế tác thủ công, dành cho người sành trà.",
+ "thao-moc":"Thảo mộc Việt lành tính, hỗ trợ thanh nhiệt và bảo vệ sức khỏe — dùng được hằng ngày.",
+ "pha-che":"Dòng trà chuyên cho pha chế: vị ổn định, lên màu đẹp, phù hợp quán trà sữa & cà phê."
+};
+document.getElementById('short').textContent = t('pd.short.'+p.cat);
+document.getElementById('pane-desc').innerHTML = `<p>${t('pd.short.'+p.cat)}</p>` + t('pd.info');
+
+/* gallery */
+const imgs = [prodImg(p.slug), 'assets/real/know-2.jpg', 'assets/real/know-3.jpg'];
+const main = document.getElementById('mainImg'); main.src=imgs[0]; main.alt=prodName(p);
+document.getElementById('thumbs').innerHTML = imgs.map((s,i)=>`<img src="${s}" class="${i===0?'on':''}" data-i="${i}" alt="Ảnh ${i+1}"/>`).join('');
+document.getElementById('thumbs').addEventListener('click',e=>{
+  const t=e.target.closest('img'); if(!t)return;
+  main.src=imgs[t.dataset.i];
+  document.querySelectorAll('.thumbs img').forEach(x=>x.classList.remove('on')); t.classList.add('on');
+});
+
+/* qty + actions */
+const qtyEl=document.getElementById('qty');
+const getQty=()=>Math.max(1,parseInt(qtyEl.value)||1);
+document.getElementById('minus').onclick=()=>qtyEl.value=Math.max(1,getQty()-1);
+document.getElementById('plus').onclick=()=>qtyEl.value=getQty()+1;
+document.getElementById('addBtn').onclick=()=>addCart(p.slug,getQty());
+document.getElementById('buyBtn').onclick=()=>{addCart(p.slug,getQty());location.href='thanh-toan.html';};
+const wb=document.getElementById('wishBtn');
+const syncWish=()=>{wb.classList.toggle('on',wishlist.has(p.slug));wb.querySelector('path').setAttribute('fill',wishlist.has(p.slug)?'currentColor':'none');};
+wb.onclick=()=>{toggleWish(p.slug);syncWish();};
+syncWish();
+
+/* tabs */
+document.getElementById('tabs').addEventListener('click',e=>{
+  const b=e.target.closest('button'); if(!b)return;
+  document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('on',x===b));
+  document.querySelectorAll('.tabpane').forEach(x=>x.classList.toggle('on',x.id==='pane-'+b.dataset.t));
+});
+
+/* related + seen */
+document.getElementById('related').innerHTML =
+  PRODUCTS.filter(x=>x.cat===p.cat&&x.slug!==p.slug).slice(0,4).map(pcardHTML).join('')
+  || PRODUCTS.slice(0,4).map(pcardHTML).join('');
+const seen = seenList().filter(x=>x.slug!==p.slug).slice(0,4);
+if(seen.length){document.getElementById('seenWrap').style.display='block';
+  document.getElementById('seen').innerHTML=seen.map(pcardHTML).join('');}
+</script>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Thanh toán — Trà Nai Vàng</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css?v=170726">
+<script src="assets/i18n.js?v=170726"></script>
+<script src="assets/store.js?v=170726"></script>
+<style>
+  .co{display:grid;grid-template-columns:1.4fr .9fr;gap:30px;padding:34px 0 40px;align-items:start}
+  .opt{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--line);border-radius:14px;padding:15px 16px;margin-bottom:11px;cursor:pointer;transition:all .2s;background:var(--paper)}
+  .opt:hover{border-color:var(--tea)}
+  .opt.on{border-color:var(--tea);box-shadow:0 0 0 3px rgba(94,124,62,.12)}
+  .opt input{accent-color:var(--tea);margin-top:4px}
+  .opt b{font-size:14px;display:block}
+  .opt small{color:var(--stone);font-size:12.5px}
+  .opt .fee{margin-left:auto;font-weight:600;font-size:13.5px;color:var(--tea);white-space:nowrap}
+  .bank{display:none;background:var(--sage-100);border-radius:12px;padding:14px 16px;font-size:13px;color:var(--forest);margin:-3px 0 12px}
+  .bank b{font-size:13px}
+  .oi{display:flex;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line-soft);font-size:13.5px}
+  .oi img{width:52px;height:52px;border-radius:10px;object-fit:cover;border:1px solid var(--line-soft)}
+  .oi .q{color:var(--stone)}
+  .oi .p{margin-left:auto;font-family:var(--serif);color:var(--tea);white-space:nowrap}
+  .sum .row{display:flex;justify-content:space-between;font-size:14px;padding:7px 0;color:var(--stone)}
+  .sum .row b{color:var(--ink)}
+  .sum .total{border-top:1px solid var(--line);margin-top:8px;padding-top:14px}
+  .sum .total .v{font-family:var(--serif);font-size:25px;color:var(--tea)}
+  @media(max-width:900px){.co{grid-template-columns:1fr}}
+</style>
+</head>
+<body data-page="thanh-toan">
+<main class="wrap">
+  <div class="crumb" style="margin-top:22px"><a href="index.html" data-i18n="crumb.home">Trang chủ</a> › <a href="gio-hang.html" data-i18n="ct.crumb">Giỏ hàng</a> › <b data-i18n="co.title">Thanh toán</b></div>
+  <h1 style="font-weight:400;font-size:clamp(28px,3.6vw,40px);margin-top:6px" data-i18n="co.title">Thanh toán</h1>
+
+  <div class="co">
+    <div>
+      <div class="panel" style="margin-bottom:22px">
+        <h3 data-i18n="co.info">Thông tin nhận hàng</h3>
+        <div class="frow">
+          <div class="field"><label data-i18n="co.name">Họ và tên *</label><input id="f-name" placeholder="Nguyễn Văn A"/><div class="err" data-i18n="co.errName">Vui lòng nhập họ tên</div></div>
+          <div class="field"><label data-i18n="co.phone">Số điện thoại *</label><input id="f-phone" inputmode="tel" placeholder="09xx xxx xxx"/><div class="err" data-i18n="co.errPhone">Số điện thoại chưa đúng</div></div>
+        </div>
+        <div class="field"><label data-i18n="co.email">Email <small>(nhận xác nhận đơn)</small></label><input id="f-email" type="email" placeholder="ban@email.com"/></div>
+        <div class="frow">
+          <div class="field"><label data-i18n="co.city">Tỉnh / Thành phố *</label>
+            <select id="f-city"><option value="" data-i18n="co.cityPh">Chọn tỉnh/thành</option><option>TP. Hồ Chí Minh</option><option>Hà Nội</option><option>Lâm Đồng</option><option>Đà Nẵng</option><option>Cần Thơ</option><option>Khác</option></select>
+            <div class="err" data-i18n="co.errCity">Chọn tỉnh/thành</div></div>
+          <div class="field"><label data-i18n="co.district">Quận / Huyện, Phường / Xã *</label><input id="f-district" placeholder="VD: Quận 3, P. Võ Thị Sáu"/><div class="err" data-i18n="co.errDistrict">Vui lòng nhập quận/huyện</div></div>
+        </div>
+        <div class="field"><label data-i18n="co.addr">Địa chỉ cụ thể *</label><input id="f-addr" placeholder="Số nhà, tên đường"/><div class="err" data-i18n="co.errAddr">Vui lòng nhập địa chỉ</div></div>
+        <div class="field"><label data-i18n="co.note">Ghi chú <small>(tuỳ chọn)</small></label><textarea id="f-note" rows="2" placeholder="VD: Giao giờ hành chính"></textarea></div>
+      </div>
+
+      <div class="panel" style="margin-bottom:22px">
+        <h3 data-i18n="co.ship">Vận chuyển</h3>
+        <label class="opt on"><input type="radio" name="ship" value="std" checked/><span><b data-i18n="co.shipStd">Giao tiêu chuẩn</b><small data-i18n="co.shipStdS">2–5 ngày toàn quốc</small></span><span class="fee" id="fee-std"></span></label>
+        <label class="opt"><input type="radio" name="ship" value="fast"/><span><b data-i18n="co.shipFast">Giao nhanh</b><small data-i18n="co.shipFastS">1–2 ngày (nội thành & Lâm Đồng)</small></span><span class="fee" id="fee-fast"></span></label>
+      </div>
+
+      <div class="panel">
+        <h3 data-i18n="co.pay">Phương thức thanh toán</h3>
+        <label class="opt on"><input type="radio" name="pay" value="cod" checked/><span><b data-i18n="co.cod">Thanh toán khi nhận hàng (COD)</b><small data-i18n="co.codS">Kiểm tra hàng trước khi thanh toán</small></span></label>
+        <label class="opt"><input type="radio" name="pay" value="bank"/><span><b data-i18n="co.bank">Chuyển khoản ngân hàng</b><small data-i18n="co.bankS">Xác nhận đơn ngay sau khi nhận được chuyển khoản</small></span></label>
+        <div class="bank" id="bankInfo"><b>Thông tin chuyển khoản:</b><br/>Ngân hàng: Vietcombank — CN Bảo Lộc<br/>Chủ TK: CÔNG TY TNHH TRÀ NAI VÀNG<br/>Số TK: 0123 456 789 · Nội dung: <b>SĐT của bạn</b></div>
+        <label class="opt" style="opacity:.55;cursor:not-allowed"><input type="radio" name="pay" value="wallet" disabled/><span><b data-i18n="co.wallet">Ví điện tử (MoMo / VNPay / ZaloPay)</b><small data-i18n="co.walletS">Sắp ra mắt</small></span></label>
+      </div>
+    </div>
+
+    <div class="panel sum" id="sumBox"></div>
+  </div>
+</main>
+
+<script src="assets/layout.js?v=170726"></script>
+<script>
+const items = cartItems();
+if(!items.length) location.href='gio-hang.html';
+let shipMethod='std';
+function calc(){
+  const sub=cartSubtotal();
+  const code=localStorage.getItem('nv_voucher')||'';
+  const v=VOUCHERS[code];
+  const disc=v&&v.type==='pct'?Math.round(sub*v.val/100):0;
+  let ship=shipFee(sub,shipMethod);
+  if(v&&v.type==='ship')ship=0;
+  return {sub,disc,ship,total:sub-disc+ship,code};
+}
+function renderSum(){
+  const c=calc();
+  document.getElementById('sumBox').innerHTML=`
+    <h3>${t('co.order')} (${items.reduce((a,i)=>a+i.qty,0)} ${t('ct.items')})</h3>
+    ${items.map(i=>`<div class="oi"><img src="${prodImg(i.slug)}" alt=""/><span>${prodName(i)}<br/><span class="q">${t('co.qty')}: ${i.qty}</span></span><span class="p">${fmt(i.price*i.qty)}</span></div>`).join('')}
+    <div style="height:10px"></div>
+    <div class="row"><span>${t('ct.subtotal')}</span><b>${fmt(c.sub)}</b></div>
+    <div class="row"><span>${t('ct.discount')} ${c.code?`(${c.code})`:''}</span><b>${c.disc?'-'+fmt(c.disc):'0₫'}</b></div>
+    <div class="row"><span>${t('ct.shipping')}</span><b>${c.ship===0?t('ct.free'):fmt(c.ship)}</b></div>
+    <div class="row total"><span>${t('ct.total')}</span><span class="v">${fmt(c.total)}</span></div>
+    <button class="btn btn-primary btn-block" style="margin-top:16px" id="placeBtn">${t('co.place')}</button>
+    <p style="font-size:11.5px;color:var(--stone);margin-top:12px;text-align:center">${t('co.agree')}</p>`;
+  document.getElementById('placeBtn').onclick=placeOrder;
+  const s=cartSubtotal();
+  document.getElementById('fee-std').textContent = shipFee(s,'std')===0?t('ct.free'):fmt(shipFee(s,'std'));
+  document.getElementById('fee-fast').textContent = shipFee(s,'fast')===0?t('ct.free'):fmt(shipFee(s,'fast'));
+}
+document.querySelectorAll('input[name=ship]').forEach(r=>r.addEventListener('change',e=>{
+  shipMethod=e.target.value;
+  document.querySelectorAll('input[name=ship]').forEach(x=>x.closest('.opt').classList.toggle('on',x.checked));
+  renderSum();
+}));
+document.querySelectorAll('input[name=pay]').forEach(r=>r.addEventListener('change',e=>{
+  document.querySelectorAll('input[name=pay]').forEach(x=>x.closest('.opt').classList.toggle('on',x.checked));
+  document.getElementById('bankInfo').style.display = e.target.value==='bank'?'block':'none';
+}));
+function placeOrder(){
+  let ok=true;
+  const req={'f-name':v=>v.length>=2,'f-phone':v=>/^0\d{8,10}$/.test(v.replace(/\s/g,'')),'f-city':v=>!!v,'f-district':v=>v.length>=2,'f-addr':v=>v.length>=3};
+  for(const [id,test] of Object.entries(req)){
+    const el=document.getElementById(id), f=el.closest('.field');
+    const good=test(el.value.trim()); f.classList.toggle('invalid',!good);
+    if(!good) ok=false;
+  }
+  if(!ok){showToast(t('co.fix'));window.scrollTo({top:0,behavior:'smooth'});return;}
+  const c=calc();
+  const o={
+    ...c, voucher:c.code,
+    code:orderCode(), ts:Date.now(), date:new Date().toLocaleString('vi-VN'),
+    items:items.map(i=>({slug:i.slug,name:i.name,qty:i.qty,price:i.price})),
+    ship_method:shipMethod,
+    pay:document.querySelector('input[name=pay]:checked').value,
+    addr:{name:val('f-name'),phone:val('f-phone'),email:val('f-email'),city:val('f-city'),district:val('f-district'),addr:val('f-addr'),note:val('f-note')},
+    status:'pending'
+  };
+  saveOrder(o); clearCart(); localStorage.removeItem('nv_voucher');
+  location.href='xac-nhan-don.html?ma='+o.code;
+}
+const val=id=>document.getElementById(id).value.trim();
+renderSum();
+</script>
+</body>
+</html>

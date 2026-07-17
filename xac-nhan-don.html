@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Đặt hàng thành công — Trà Nai Vàng</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css?v=170726">
+<script src="assets/i18n.js?v=170726"></script>
+<script src="assets/store.js?v=170726"></script>
+<style>
+  .okwrap{max-width:860px;margin:0 auto;padding:44px 0 30px;text-align:center}
+  .okball{width:84px;height:84px;border-radius:50%;background:var(--sage-100);display:grid;place-items:center;margin:0 auto 20px;color:var(--tea)}
+  .okwrap h1{font-weight:400;font-size:clamp(30px,4vw,44px)}
+  .okwrap .code{font-size:15px;color:var(--stone);margin:10px 0 4px}
+  .okwrap .code b{color:var(--tea);font-family:var(--serif);font-size:19px;letter-spacing:.06em}
+  /* timeline */
+  .tl{display:flex;justify-content:space-between;max-width:640px;margin:38px auto 8px;position:relative}
+  .tl::before{content:"";position:absolute;top:17px;left:9%;right:9%;height:2px;background:var(--line)}
+  .tl .s{position:relative;z-index:2;width:25%;text-align:center;font-size:12px;color:var(--stone)}
+  .tl .dot{width:34px;height:34px;border-radius:50%;background:var(--paper);border:2px solid var(--line);display:grid;place-items:center;margin:0 auto 8px;color:var(--stone)}
+  .tl .s.on .dot{background:var(--tea);border-color:var(--tea);color:#fff}
+  .tl .s.on{color:var(--tea);font-weight:600}
+  .detail{display:grid;grid-template-columns:1.1fr .9fr;gap:22px;max-width:860px;margin:34px auto 0;text-align:left}
+  .oi{display:flex;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line-soft);font-size:13.5px}
+  .oi img{width:52px;height:52px;border-radius:10px;object-fit:cover;border:1px solid var(--line-soft)}
+  .oi .p{margin-left:auto;font-family:var(--serif);color:var(--tea)}
+  .row{display:flex;justify-content:space-between;font-size:14px;padding:6px 0;color:var(--stone)}
+  .row.total{border-top:1px solid var(--line);margin-top:8px;padding-top:12px}
+  .row.total .v{font-family:var(--serif);font-size:22px;color:var(--tea)}
+  .addr p{font-size:14px;color:var(--stone);padding:3px 0}
+  .addr b{color:var(--ink)}
+  .ctas{display:flex;gap:14px;justify-content:center;margin-top:36px;flex-wrap:wrap}
+  .cxbanner{max-width:640px;margin:32px auto 0;background:#FBE3E0;color:#a33025;padding:14px 20px;border-radius:14px;font-weight:600;font-size:14.5px}
+  .cxnote{font-size:12px;color:var(--stone);margin-top:14px}
+  @media(max-width:760px){.detail{grid-template-columns:1fr}}
+</style>
+</head>
+<body data-page="xacnhan">
+<main class="wrap">
+  <div class="okwrap" id="box"></div>
+</main>
+
+<script src="assets/layout.js?v=170726"></script>
+<script>
+const code = new URLSearchParams(location.search).get('ma');
+const o = orders().find(x=>x.code===code) || orders()[0];
+const st = o ? orderStatus(o) : null;
+const idx = ({pending:0,confirm:1,shipping:2,done:3})[st] ?? 0;
+const box = document.getElementById('box');
+if(!o){
+  box.innerHTML = `<h1>${t('ok.notFound')}</h1><p style="color:var(--stone);margin:12px 0 24px">${t('ok.notFoundS')}</p><a class="btn btn-primary" href="san-pham.html">${t('ok.continue')}</a>`;
+}else{
+  const PAY={cod:t('pay.cod'),bank:t('pay.bank'),wallet:t('pay.wallet')};
+  box.innerHTML = `
+  <div class="okball"><svg width="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg></div>
+  <h1>${t('ok.title')}</h1>
+  <p class="code">${t('ok.code')} <b>${o.code}</b></p>
+  <p style="color:var(--stone);font-size:14px">${t('ok.at')} ${o.date} · ${o.addr.email?`${t('ok.mailto')} <b>${o.addr.email}</b>`:t('ok.call')}</p>
+  ${st==='cancelled'
+    ? `<div class="cxbanner">✕ ${t('od.cancelledBanner')}${o.cancelReason?` — ${t('od.reason')}: ${o.cancelReason}`:''}</div>`
+    : `<div class="tl">${[t('ok.s1'),t('ok.s2'),t('ok.s3'),t('ok.s4')].map((lb,i)=>`<div class="s ${i<=idx?'on':''}"><div class="dot">${i<=idx?'<svg width="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg>':i+1}</div>${lb}</div>`).join('')}</div>`}
+  <div class="detail">
+    <div class="panel">
+      <h3>${t('ok.items')}</h3>
+      ${o.items.map(i=>`<div class="oi"><img src="${prodImg(i.slug)}" alt=""/><span>${prodName(i)}<br/><span style="color:var(--stone)">${t('co.qty')}: ${i.qty}</span></span><span class="p">${fmt(i.price*i.qty)}</span></div>`).join('')}
+      <div style="height:8px"></div>
+      <div class="row"><span>${t('ct.subtotal')}</span><b>${fmt(o.sub)}</b></div>
+      <div class="row"><span>${t('ct.discount')}</span><b>${o.disc?'-'+fmt(o.disc):'0₫'}</b></div>
+      <div class="row"><span>${t('co.ship')} (${o.ship_method==='fast'?t('ship.fast'):t('ship.std')})</span><b>${o.ship===0?t('ct.free'):fmt(o.ship)}</b></div>
+      <div class="row total"><span>${t('ct.total')}</span><span class="v">${fmt(o.total)}</span></div>
+    </div>
+    <div class="panel addr">
+      <h3>${t('ok.to')}</h3>
+      <p><b>${o.addr.name}</b> · ${o.addr.phone}</p>
+      <p>${o.addr.addr}, ${o.addr.district}, ${o.addr.city}</p>
+      ${o.addr.note?`<p>${t('ok.note')}: ${o.addr.note}</p>`:''}
+      <h3 style="margin-top:22px">${t('ok.payment')}</h3>
+      <p>${PAY[o.pay]||o.pay}</p>
+      ${o.pay==='bank'?`<p style="background:var(--sage-100);border-radius:10px;padding:10px 12px;color:var(--forest);font-size:13px;margin-top:8px">Vietcombank CN Bảo Lộc · CÔNG TY TNHH TRÀ NAI VÀNG · STK 0123 456 789<br/>Nội dung: <b>${o.addr.phone}</b></p>`:''}
+    </div>
+  </div>
+  <div class="ctas">
+    <a class="btn btn-ghost" href="tai-khoan.html#orders">${t('ok.track')}</a>
+    ${canCancel(o)?`<button class="btn btn-danger" id="cxBtn">${t('od.cancelBtn')}</button>`:''}
+    <a class="btn btn-primary" href="san-pham.html">${t('ok.continue')}</a>
+  </div>
+  ${canCancel(o)?`<p class="cxnote">${t('od.cancelWindow')}</p>`:''}`;
+  const cxb=document.getElementById('cxBtn');
+  if(cxb) cxb.onclick=()=>openCancelModal(o.code,()=>location.reload());
+}
+</script>
+</body>
+</html>

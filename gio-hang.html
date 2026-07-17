@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Giỏ hàng — Trà Nai Vàng</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css?v=170726">
+<script src="assets/i18n.js?v=170726"></script>
+<script src="assets/store.js?v=170726"></script>
+<style>
+  .cartgrid{display:grid;grid-template-columns:1.5fr .8fr;gap:30px;padding:34px 0 40px;align-items:start}
+  .citem{display:grid;grid-template-columns:92px 1fr auto;gap:18px;align-items:center;padding:18px 0;border-bottom:1px solid var(--line-soft)}
+  .citem img{width:92px;height:92px;object-fit:cover;border-radius:14px;border:1px solid var(--line-soft)}
+  .citem .n{font-family:var(--serif);font-size:17px;font-weight:500}
+  .citem .n:hover{color:var(--tea)}
+  .citem .c{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-2);font-weight:600}
+  .citem .u{font-size:13px;color:var(--stone);margin-top:3px}
+  .citem .right{display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+  .citem .lt{font-family:var(--serif);font-size:17px;color:var(--tea)}
+  .rm{background:none;border:none;color:var(--stone);font-size:12.5px;cursor:pointer;display:inline-flex;gap:5px;align-items:center}
+  .rm:hover{color:var(--red)}
+  .sum .row{display:flex;justify-content:space-between;font-size:14px;padding:8px 0;color:var(--stone)}
+  .sum .row b{color:var(--ink)}
+  .sum .total{border-top:1px solid var(--line);margin-top:10px;padding-top:16px;font-size:15px}
+  .sum .total .v{font-family:var(--serif);font-size:26px;color:var(--tea)}
+  .voucher{display:flex;gap:8px;margin:14px 0 4px}
+  .voucher input{flex:1;padding:12px 15px;border:1px solid var(--line);border-radius:40px;font-family:var(--sans);font-size:13px;text-transform:uppercase}
+  .voucher input:focus{outline:none;border-color:var(--tea)}
+  .voucher .btn{padding:12px 20px;font-size:13px}
+  .vok{font-size:12.5px;color:var(--tea);display:none;margin-bottom:6px}
+  .free-hint{font-size:12.5px;background:var(--sage-100);color:var(--forest);border-radius:12px;padding:10px 14px;margin-bottom:12px}
+  .empty{text-align:center;padding:80px 20px}
+  .empty h2{font-weight:400;font-size:28px;margin:16px 0 10px}
+  .empty p{color:var(--stone);margin-bottom:24px}
+  @media(max-width:900px){.cartgrid{grid-template-columns:1fr}}
+  @media(max-width:520px){.citem{grid-template-columns:72px 1fr}.citem .right{grid-column:1/-1;flex-direction:row;justify-content:space-between;align-items:center}}
+</style>
+</head>
+<body data-page="gio-hang">
+<main class="wrap">
+  <div class="crumb" style="margin-top:22px"><a href="index.html" data-i18n="crumb.home">Trang chủ</a> › <b data-i18n="ct.crumb">Giỏ hàng</b></div>
+  <h1 style="font-weight:400;font-size:clamp(28px,3.6vw,40px);margin-top:6px" data-i18n="ct.title">Giỏ hàng của bạn</h1>
+  <div id="content"></div>
+</main>
+
+<script src="assets/layout.js?v=170726"></script>
+<script>
+function voucherState(){ return localStorage.getItem('nv_voucher')||''; }
+function render(){
+  const items = cartItems();
+  const box = document.getElementById('content');
+  if(!items.length){
+    localStorage.removeItem('nv_voucher');
+    box.innerHTML = `<div class="empty">
+      <svg width="64" viewBox="0 0 24 24" fill="none" stroke="#7E9B54" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" style="margin:0 auto"><path d="M2.4 3.2h2.3l1.75 10a1.7 1.7 0 0 0 1.68 1.4h8.75a1.7 1.7 0 0 0 1.66-1.32L20.6 6H5.3"/><circle cx="9.3" cy="19.1" r="1.75"/><circle cx="16.7" cy="19.1" r="1.75"/></svg>
+      <h2>${t('ct.emptyT')}</h2><p>${t('ct.emptyS')}</p>
+      <a class="btn btn-primary" href="san-pham.html">${t('ct.browse')}</a></div>`;
+    return;
+  }
+  const sub = cartSubtotal();
+  const code = voucherState();
+  const v = VOUCHERS[code];
+  const disc = v && v.type==='pct' ? Math.round(sub*v.val/100) : 0;
+  let ship = shipFee(sub,'std');
+  if(v && v.type==='ship') ship = 0;
+  const total = sub - disc + ship;
+  const need = 500000 - sub;
+  box.innerHTML = `<div class="cartgrid">
+    <div class="panel">
+      ${need>0?`<div class="free-hint">${t('ct.freeA')} <b>${fmt(need)}</b> ${t('ct.freeB')}</div>`:`<div class="free-hint">${t('ct.freeOk')}</div>`}
+      ${items.map(i=>`
+      <div class="citem">
+        <a href="chi-tiet-san-pham.html?sp=${i.slug}"><img src="${prodImg(i.slug)}" alt="${prodName(i)}"/></a>
+        <div>
+          <span class="c">${catName(i.cat)}</span>
+          <a class="n" href="chi-tiet-san-pham.html?sp=${i.slug}">${prodName(i)}</a>
+          <div class="u">${fmt(i.price)} ${t('ct.unit')}</div>
+          <div style="margin-top:9px" class="qty">
+            <button data-q="${i.slug}|-1" aria-label="Giảm">−</button><input value="${i.qty}" readonly/><button data-q="${i.slug}|1" aria-label="Tăng">+</button>
+          </div>
+        </div>
+        <div class="right">
+          <span class="lt">${fmt(i.price*i.qty)}</span>
+          <button class="rm" data-rm="${i.slug}"><svg width="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg> ${t('ct.remove')}</button>
+        </div>
+      </div>`).join('')}
+      <div style="margin-top:18px"><a href="san-pham.html" style="color:var(--tea);font-size:13.5px">${t('ct.continue')}</a></div>
+    </div>
+    <div class="panel sum">
+      <h3>${t('ct.summary')}</h3>
+      <div class="voucher"><input id="vin" placeholder="${t('ct.voucherPh')}" value="${code}"/><button class="btn btn-gold" id="vbtn">${t('ct.apply')}</button></div>
+      <div class="vok" id="vok"></div>
+      <div class="row"><span>${t('ct.subtotal')} (${items.reduce((a,i)=>a+i.qty,0)} ${t('ct.items')})</span><b>${fmt(sub)}</b></div>
+      <div class="row"><span>${t('ct.discount')}</span><b style="color:${disc?'var(--tea)':'inherit'}">${disc?'-'+fmt(disc):'0₫'}</b></div>
+      <div class="row"><span>${t('ct.shipping')}</span><b>${ship===0?t('ct.free'):fmt(ship)}</b></div>
+      <div class="row total"><span>${t('ct.total')}</span><span class="v">${fmt(total)}</span></div>
+      <a class="btn btn-primary btn-block" style="margin-top:16px" href="thanh-toan.html">${t('ct.checkout')}</a>
+      <p style="font-size:12px;color:var(--stone);margin-top:12px;text-align:center">${t('ct.secure')}</p>
+      <p style="text-align:center;margin-top:6px"><a href="tai-khoan.html#orders" style="color:var(--tea);font-size:13px;font-weight:600">${t('od.manage')} →</a></p>
+    </div>
+  </div>`;
+  const vokEl=document.getElementById('vok');
+  if(v){vokEl.style.display='block';vokEl.textContent=`✓ ${t('ct.applied')} "${code}" — ${v.label}`;}
+  document.getElementById('vbtn').onclick=()=>{
+    const val=document.getElementById('vin').value.trim().toUpperCase();
+    if(VOUCHERS[val]){localStorage.setItem('nv_voucher',val);showToast(t('ct.vOk')+': '+val);}
+    else{localStorage.removeItem('nv_voucher');showToast(t('ct.vBad'));}
+    render();
+  };
+}
+document.getElementById('content').addEventListener('click',e=>{
+  const q=e.target.closest('[data-q]');
+  if(q){const [s,d]=q.dataset.q.split('|');const c=cartItems().find(x=>x.slug===s);setQty(s,c.qty+parseInt(d));render();return;}
+  const rm=e.target.closest('[data-rm]');
+  if(rm){removeItem(rm.dataset.rm);showToast(t('ts.removed'));render();}
+});
+render();
+</script>
+</body>
+</html>

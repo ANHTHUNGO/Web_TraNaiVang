@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 800">
+    <defs>
+      <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FBFCF7"/><stop offset="1" stop-color="#EFF2E7"/></linearGradient>
+      <linearGradient id="bd" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#EDE6D0"/><stop offset="1" stop-color="#D6C9A4"/></linearGradient>
+      <linearGradient id="sh" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffffff" stop-opacity="0.30"/><stop offset="0.5" stop-color="#ffffff" stop-opacity="0"/><stop offset="1" stop-color="#000000" stop-opacity="0.14"/></linearGradient>
+      <linearGradient id="lid" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#C9AE6A"/><stop offset="1" stop-color="#A98F45"/></linearGradient>
+    </defs>
+    <rect width="640" height="800" fill="url(#bg)"/>
+    <ellipse cx="320" cy="722" rx="188" ry="28" fill="#20301a" opacity="0.10"/>
+    <rect x="150" y="188" width="340" height="500" rx="30" fill="url(#bd)"/>
+    <rect x="150" y="188" width="340" height="500" rx="30" fill="url(#sh)"/>
+    <rect x="176" y="120" width="288" height="92" rx="20" fill="url(#lid)"/>
+    <rect x="176" y="120" width="288" height="92" rx="20" fill="#000" opacity="0.04"/>
+    <rect x="150" y="196" width="340" height="12" fill="#000" opacity="0.08"/>
+    <rect x="150" y="404" width="340" height="150" fill="#FBFCF7" opacity="0.95"/>
+    <rect x="150" y="404" width="340" height="150" fill="none" stroke="#A98F45" stroke-width="2" opacity="0.4"/>
+    <g transform="translate(320,360)">
+      <polygon points="0,-46 40,-23 40,23 0,46 -40,23 -40,-23" fill="none" stroke="#A98F45" stroke-width="4"/>
+      <path d="M0,-6 C-14,-2 -16,14 0,26 C16,14 14,-2 0,-6 Z" fill="#A98F45"/>
+      <path d="M0,-6 C0,-16 -4,-22 -9,-26 M0,-6 C0,-16 4,-22 9,-26" stroke="#A98F45" stroke-width="3" fill="none" stroke-linecap="round"/>
+    </g>
+    <text x="320" y="470" text-anchor="middle" font-family="Georgia, serif" font-size="30" fill="#4a4128" letter-spacing="3">NAI VÀNG</text>
+    <text x="320" y="505" text-anchor="middle" font-family="Georgia, serif" font-size="15" fill="#A98F45" letter-spacing="4">SINCE 1982</text>
+    <text x="320" y="600" text-anchor="middle" font-family="Georgia, serif" font-size="15" fill="#7a6a3a" opacity="0.9" letter-spacing="6">PREMIUM TEA</text>
+  </svg>

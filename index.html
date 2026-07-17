@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Trà Nai Vàng — Tinh hoa trà Việt từ 1982</title>
+<meta name="description" content="Trà Nai Vàng — nhà trà Việt từ cao nguyên Bảo Lộc, Lâm Đồng. Trà ướp hương thủ công, thuần khiết, tự nhiên. Since 1982." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="assets/i18n.js?v=170726"></script>
+<style>
+  :root{
+    --forest:#2F4A24;
+    --pine:#38562A;
+    --tea:#5E7C3E;
+    --tea-2:#4A6B2F;
+    --sage:#7E9B54;
+    --sage-soft:#AEC38A;
+    --sage-100:#E7EEDA;
+    --gold:#B39247;
+    --gold-2:#977A38;
+    --gold-light:#D9BE7E;
+    --cream:#FBFCF7;
+    --off:#F2F5EA;
+    --paper:#FFFFFF;
+    --ink:#28321F;
+    --stone:#6E7563;
+    --line:rgba(40,50,31,.13);
+    --line-soft:rgba(40,50,31,.07);
+    --shadow:0 34px 70px -34px rgba(40,60,26,.35);
+    --shadow-soft:0 20px 44px -26px rgba(40,60,26,.28);
+    --maxw:1260px;
+    --serif:'Fraunces',Georgia,serif;
+    --sans:'Be Vietnam Pro',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);color:var(--ink);background:var(--cream);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  h1,h2,h3,h4{font-family:var(--serif);font-weight:500;line-height:1.1;letter-spacing:-.01em}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+  .eyebrow{font-size:12px;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--tea);display:inline-flex;align-items:center;gap:12px}
+  .eyebrow::before{content:"";width:24px;height:1px;background:var(--gold);display:inline-block}
+  .btn{display:inline-flex;align-items:center;gap:9px;cursor:pointer;border:none;font-family:var(--sans);font-weight:600;font-size:14px;letter-spacing:.02em;padding:15px 30px;border-radius:40px;transition:all .3s cubic-bezier(.2,.7,.2,1)}
+  .btn-primary{background:var(--tea);color:#fff}
+  .btn-primary:hover{background:var(--tea-2);transform:translateY(-2px);box-shadow:0 16px 30px -12px rgba(94,124,62,.6)}
+  .btn-gold{background:var(--gold-light);color:#4a3d16}
+  .btn-gold:hover{background:#e7cf94;transform:translateY(-2px)}
+  .btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+  .btn-ghost:hover{border-color:var(--tea);color:var(--tea)}
+  .btn-outline-light{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.45)}
+  .btn-outline-light:hover{background:rgba(255,255,255,.12);border-color:#fff}
+
+  .announce{background:var(--sage-100);color:var(--forest);font-size:12.5px;letter-spacing:.03em;text-align:center;padding:9px 16px}
+  .announce b{color:var(--gold-2);font-weight:600}
+
+  header{position:sticky;top:0;z-index:60;background:rgba(251,252,247,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line-soft);transition:box-shadow .3s}
+  header.scrolled{box-shadow:0 8px 30px -20px rgba(40,60,26,.35)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:82px}
+  .brand{display:flex;align-items:center;gap:13px}
+  .brand img{height:56px;width:auto}
+  .brand .wm{display:flex;flex-direction:column;line-height:1}
+  .brand .wm b{font-family:var(--serif);font-weight:600;font-size:19px;letter-spacing:.03em;color:var(--forest)}
+  .brand .wm span{font-size:9px;letter-spacing:.4em;color:var(--gold-2);text-transform:uppercase;margin-top:4px}
+  .menu{display:flex;gap:32px;list-style:none}
+  .menu a{font-size:14px;font-weight:500;color:var(--ink);position:relative;padding:6px 0;opacity:.85;transition:opacity .2s}
+  .menu a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1.5px;background:var(--tea);transition:width .3s}
+  .menu a:hover{opacity:1}
+  .menu a:hover::after{width:100%}
+  .nav-actions{display:flex;align-items:center;gap:18px}
+  .icon-btn{width:22px;height:22px;color:var(--ink);opacity:.8;cursor:pointer}
+  .icon-btn:hover{opacity:1;color:var(--tea)}
+  .cart-wrap{position:relative;display:grid;place-items:center;width:42px;height:42px;border-radius:50%;background:var(--tea);color:#fff;transition:all .25s;box-shadow:0 6px 16px -6px rgba(94,124,62,.55)}
+  .cart-wrap:hover{background:var(--tea-2);transform:scale(1.06)}
+  .cart-wrap .icon-btn{color:#fff;opacity:1;width:21px;height:21px}
+  .cart-badge{position:absolute;top:-5px;right:-6px;min-width:19px;height:19px;border-radius:10px;background:#F2A93B;color:#3a2606;font-size:11px;font-weight:800;display:grid;place-items:center;padding:0 5px;border:2px solid var(--cream)}
+  .toast{position:fixed;left:50%;bottom:30px;transform:translate(-50%,20px);background:var(--forest);color:#fff;padding:13px 26px;border-radius:40px;font-size:14px;box-shadow:0 16px 40px -12px rgba(0,0,0,.4);opacity:0;pointer-events:none;transition:all .35s;z-index:99;display:flex;align-items:center;gap:9px}
+  .toast.show{opacity:1;transform:translate(-50%,0)}
+  .toast svg{width:17px;color:var(--gold-light)}
+  .langsw{border:1px solid var(--line);background:var(--paper);border-radius:40px;padding:7px 14px;font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--tea);cursor:pointer;transition:all .25s}
+  .langsw:hover{background:var(--tea);color:#fff;border-color:var(--tea)}
+  .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;width:26px}
+  .burger span{height:1.6px;background:var(--ink);width:100%}
+
+  /* HERO */
+  .hero{position:relative;padding:clamp(44px,6vw,80px) 0 clamp(60px,8vw,100px);overflow:hidden}
+  .hero .blob{position:absolute;z-index:0;border-radius:50%;pointer-events:none}
+  .hero .b1{width:520px;height:520px;background:radial-gradient(circle,rgba(174,195,138,.4),transparent 68%);top:-120px;right:-80px}
+  .hero .b2{width:360px;height:360px;background:radial-gradient(circle,rgba(217,190,126,.28),transparent 68%);bottom:-60px;left:-120px}
+  .hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1.04fr;gap:60px;align-items:center}
+  .hero-copy .eyebrow{margin-bottom:22px}
+  .hero-copy h1{font-size:clamp(40px,5.4vw,74px);font-weight:400;letter-spacing:-.02em}
+  .hero-copy h1 em{font-style:italic;color:var(--tea)}
+  .hero-copy p.lead{font-size:clamp(16px,1.4vw,18.5px);color:var(--stone);max-width:480px;margin-top:24px;font-weight:300}
+  .hero-cta{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap}
+  .hero-trust{display:flex;gap:34px;margin-top:46px;padding-top:28px;border-top:1px solid var(--line);flex-wrap:wrap}
+  .hero-trust .t b{font-family:var(--serif);font-size:26px;font-weight:500;color:var(--tea);display:block}
+  .hero-trust .t span{font-size:12px;letter-spacing:.04em;color:var(--stone)}
+  .hero-art{position:relative}
+  .hero-art::before{content:"";position:absolute;inset:24px -20px -22px 26px;background:var(--sage-100);border-radius:26px;z-index:0}
+  .hero-frame{position:relative;z-index:1;border-radius:22px;overflow:hidden;border:1px solid rgba(179,146,71,.5);box-shadow:var(--shadow);aspect-ratio:4/5}
+  .hero-frame img{width:100%;height:100%;object-fit:cover}
+  .hero-badge{position:absolute;left:-24px;bottom:38px;z-index:5;width:112px;height:112px;border-radius:50%;background:var(--forest);color:var(--gold-light);display:grid;place-items:center;text-align:center;box-shadow:0 20px 40px -16px rgba(40,60,26,.6);border:1px solid var(--gold)}
+  .hero-badge b{font-family:var(--serif);font-size:25px;font-weight:500;line-height:1;color:#fff}
+  .hero-badge span{font-size:8.5px;letter-spacing:.22em;text-transform:uppercase;margin-top:5px;display:block}
+  .hero-float{position:absolute;right:-22px;top:22px;z-index:5;width:120px;filter:drop-shadow(0 22px 30px rgba(40,60,26,.32));border-radius:12px}
+
+  /* banner slider */
+  .bslider{position:relative;overflow:hidden;background:var(--forest)}
+  .btrack{display:flex;transition:transform .65s cubic-bezier(.2,.7,.2,1)}
+  .bslide{min-width:100%;position:relative;display:block;height:clamp(300px,40vw,520px)}
+  .bslide img{width:100%;height:100%;object-fit:cover}
+  .bslide::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(15,25,10,.62) 0%,rgba(15,25,10,.25) 45%,transparent 70%)}
+  .bcap{position:absolute;left:clamp(20px,7vw,90px);top:50%;transform:translateY(-50%);z-index:2;max-width:520px;color:#fff}
+  .bcap h2{font-size:clamp(26px,4.2vw,52px);font-weight:400;color:#fff;margin-bottom:10px}
+  .bcap p{font-size:clamp(13px,1.4vw,16.5px);color:rgba(255,255,255,.9);font-weight:300;margin-bottom:20px}
+  .bcap p b{color:var(--gold-light)}
+  .bcap .btn{pointer-events:none}
+  .bnav{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:44px;height:44px;border-radius:50%;border:none;background:rgba(255,255,255,.85);color:var(--forest);font-size:24px;cursor:pointer;display:grid;place-items:center;transition:background .2s;line-height:1}
+  .bnav:hover{background:#fff}
+  .bprev{left:36px}.bnext{right:36px}
+  .bdots{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);z-index:3;display:flex;gap:8px}
+  .bdots button{width:9px;height:9px;border-radius:50%;border:none;background:rgba(255,255,255,.5);cursor:pointer;transition:all .25s;padding:0}
+  .bdots button.on{background:#fff;width:26px;border-radius:5px}
+  @media(max-width:640px){
+    .bnav{display:none}
+    .bslide{height:clamp(340px,90vw,420px)}
+    .bslide::after{background:linear-gradient(0deg,rgba(15,25,10,.68),transparent 65%)}
+    .bcap{top:auto;bottom:40px;transform:none;right:20px}
+  }
+
+  /* strip */
+  .strip{background:var(--off);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)}
+  .strip .wrap{display:flex;align-items:center;gap:44px;flex-wrap:wrap;justify-content:center;padding:18px 28px}
+  .strip span{font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:500;white-space:nowrap;color:var(--stone)}
+  .strip span b{color:var(--tea);font-weight:700}
+  .strip .dot{width:5px;height:5px;border-radius:50%;background:var(--gold);opacity:.6}
+
+  section{position:relative}
+  .pad{padding:clamp(74px,9vw,128px) 0}
+  .sec-head{max-width:680px;margin-bottom:56px}
+  .sec-head.center{margin-left:auto;margin-right:auto;text-align:center}
+  .sec-head.center .eyebrow{justify-content:center}
+  .sec-head h2{font-size:clamp(30px,4vw,50px);margin:18px 0 16px;font-weight:400}
+  .sec-head p{color:var(--stone);font-size:16.5px;max-width:560px}
+  .sec-head.center p{margin-left:auto;margin-right:auto}
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  /* pillars */
+  .pillar-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .pillar{background:var(--paper);padding:44px 36px;border:1px solid var(--line-soft);border-radius:16px;transition:transform .4s,box-shadow .4s}
+  .pillar:hover{transform:translateY(-6px);box-shadow:var(--shadow-soft)}
+  .pillar .ic{width:56px;height:56px;border-radius:50%;background:var(--sage-100);display:grid;place-items:center;margin-bottom:24px;color:var(--tea)}
+  .pillar h3{font-size:22px;margin-bottom:12px;font-weight:500}
+  .pillar p{color:var(--stone);font-size:14.5px}
+  .pillar .no{font-family:var(--serif);font-style:italic;font-size:15px;color:var(--gold);display:block;margin-bottom:16px}
+
+  /* products */
+  .prod-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:26px}
+  .card{background:var(--paper);border:1px solid var(--line-soft);border-radius:16px;overflow:hidden;transition:transform .4s cubic-bezier(.2,.7,.2,1),box-shadow .4s}
+  .card:hover{transform:translateY(-7px);box-shadow:var(--shadow-soft)}
+  .card .thumb{position:relative;background:var(--off);overflow:hidden}
+  .card .thumb img{width:100%;aspect-ratio:1/1;object-fit:cover;transition:transform .6s}
+  .card:hover .thumb img{transform:scale(1.05)}
+  .tag{position:absolute;top:14px;left:14px;z-index:2;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;background:var(--tea);color:#fff;font-weight:600;padding:5px 11px;border-radius:20px}
+  .tag.gold{background:var(--gold-light);color:#4a3d16}
+  .card .body{padding:22px 22px 26px}
+  .card .cat{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-2);font-weight:600}
+  .card h3{font-size:20px;margin:8px 0 14px;font-weight:500}
+  .card .row{display:flex;align-items:center;justify-content:space-between}
+  .card .price{font-family:var(--serif);font-size:19px;font-weight:500;color:var(--tea)}
+  .card .price s{color:var(--stone);font-size:14px;font-weight:400;margin-right:8px}
+  .card .add{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;cursor:pointer;transition:all .25s;color:var(--tea)}
+  .card .add:hover{background:var(--tea);color:#fff;border-color:var(--tea)}
+  .prod-cta{text-align:center;margin-top:52px}
+
+  /* heritage - deep forest */
+  .heritage{background:linear-gradient(150deg,#2c4622,#38562a 55%,#28401f);color:#eef2e2;position:relative;overflow:hidden}
+  .heritage .leafwm{position:absolute;right:-70px;top:50%;transform:translateY(-50%);width:460px;opacity:.08;color:var(--gold-light)}
+  .heritage .grid{position:relative;z-index:2;display:grid;grid-template-columns:.9fr 1.1fr;gap:64px;align-items:center}
+  .heritage .figure{text-align:center}
+  .heritage .figure .big{font-family:var(--serif);font-size:clamp(80px,12vw,150px);font-weight:500;color:var(--gold-light);line-height:.9}
+  .heritage .figure .lbl{font-size:13px;letter-spacing:.32em;text-transform:uppercase;color:rgba(238,242,226,.7);margin-top:10px}
+  .heritage .figure .divider{width:70px;height:1px;background:var(--gold-light);margin:26px auto;opacity:.6}
+  .heritage .figure img{width:118px;margin:0 auto;filter:drop-shadow(0 12px 22px rgba(0,0,0,.4))}
+  .heritage h2{font-size:clamp(28px,3.6vw,46px);color:#fff;font-weight:400;margin:22px 0 22px}
+  .heritage .eyebrow{color:var(--gold-light)}
+  .heritage .eyebrow::before{background:var(--gold-light)}
+  .heritage p{color:rgba(238,242,226,.82);font-size:16px;font-weight:300;margin-bottom:18px;max-width:540px}
+  .heritage .sign{margin-top:28px;font-family:var(--serif);font-style:italic;font-size:20px;color:var(--gold-light)}
+
+  /* terroir */
+  .terroir{position:relative;padding:0}
+  .terroir .bg{position:absolute;inset:0;z-index:0}
+  .terroir .bg img{width:100%;height:100%;object-fit:cover}
+  .terroir .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(251,252,247,.97) 0%,rgba(251,252,247,.88) 34%,rgba(251,252,247,.1) 72%,transparent)}
+  .terroir .inner{position:relative;z-index:2;padding:clamp(74px,9vw,128px) 0}
+  .terroir .card-t{max-width:520px}
+  .terroir h2{font-size:clamp(30px,4vw,48px);font-weight:400;margin:18px 0 18px}
+  .terroir p{color:var(--stone);font-size:16.5px;margin-bottom:32px}
+  .terroir .stats{display:flex;gap:40px;flex-wrap:wrap}
+  .terroir .stats .s b{font-family:var(--serif);font-size:38px;color:var(--tea);font-weight:500;display:block}
+  .terroir .stats .s span{font-size:13px;color:var(--stone)}
+
+  /* commitment */
+  .commit{background:var(--off);text-align:center}
+  .cert-strip{display:flex;justify-content:center;gap:30px;flex-wrap:wrap;margin-bottom:52px}
+  .cert-strip .cc{background:var(--paper);border:1px solid var(--line-soft);border-radius:12px;padding:14px 14px 12px;box-shadow:var(--shadow-soft);transition:transform .35s}
+  .cert-strip .cc:hover{transform:translateY(-5px)}
+  .cert-strip .cc img{height:230px;width:auto;border-radius:6px;display:block;margin:0 auto}
+  .cert-strip .cc b{display:block;margin-top:10px;font-size:12.5px;letter-spacing:.08em;color:var(--forest);text-transform:uppercase}
+  .commit-row{display:flex;justify-content:center;gap:clamp(24px,5vw,66px);flex-wrap:wrap;margin-top:12px}
+  .commit .c{display:flex;flex-direction:column;align-items:center;gap:14px;max-width:180px}
+  .commit .c .badge{width:66px;height:66px;border:1px solid var(--gold);border-radius:50%;display:grid;place-items:center;color:var(--tea);background:var(--paper)}
+  .commit .c b{font-size:15px;font-weight:600}
+  .commit .c span{font-size:13px;color:var(--stone)}
+
+  /* b2b */
+  .b2b{background:linear-gradient(120deg,#26401d,#38562a);color:#eef2e2;position:relative;overflow:hidden}
+  .b2b .leafwm{position:absolute;right:-60px;bottom:-70px;width:360px;opacity:.1;color:var(--gold-light)}
+  .b2b .grid{position:relative;z-index:2;display:grid;grid-template-columns:1.2fr .8fr;gap:44px;align-items:center}
+  .b2b .eyebrow{color:var(--gold-light)}
+  .b2b .eyebrow::before{background:var(--gold-light)}
+  .b2b h2{font-size:clamp(28px,3.6vw,44px);color:#fff;font-weight:400;margin:18px 0 16px}
+  .b2b p{color:rgba(238,242,226,.8);max-width:520px;font-weight:300}
+  .b2b .stat{display:flex;gap:38px;margin-top:30px;flex-wrap:wrap}
+  .b2b .stat .s b{font-family:var(--serif);font-size:34px;color:var(--gold-light);font-weight:500;display:block}
+  .b2b .stat .s span{font-size:12.5px;color:rgba(238,242,226,.65)}
+  .b2b .actions{display:flex;flex-direction:column;gap:14px;align-items:flex-end}
+
+  /* knowledge */
+  .know-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+  .art{background:var(--paper);border:1px solid var(--line-soft);border-radius:16px;overflow:hidden;transition:transform .4s,box-shadow .4s}
+  .art:hover{transform:translateY(-6px);box-shadow:var(--shadow-soft)}
+  .art .cover{aspect-ratio:16/10;overflow:hidden}
+  .art .cover img{width:100%;height:100%;object-fit:cover}
+  .art .b{padding:24px}
+  .art .meta{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-2);font-weight:600}
+  .art h3{font-size:19px;margin:10px 0 10px;font-weight:500;line-height:1.28}
+  .art p{color:var(--stone);font-size:14px}
+
+  /* newsletter */
+  .news{background:var(--sage-100);text-align:center}
+  .news .inner{max-width:600px;margin:0 auto}
+  .news h2{font-size:clamp(28px,3.6vw,42px);margin:14px 0 14px;font-weight:400}
+  .news p{color:var(--stone);margin-bottom:28px}
+  .news form{display:flex;gap:10px;max-width:460px;margin:0 auto}
+  .news input{flex:1;padding:15px 18px;border:1px solid var(--line);border-radius:40px;font-family:var(--sans);font-size:14px;background:var(--paper)}
+  .news input:focus{outline:2px solid var(--tea);outline-offset:1px;border-color:transparent}
+
+  /* footer */
+  footer{background:#1E2E16;color:rgba(238,242,226,.72);padding:78px 0 28px}
+  .foot-grid{display:grid;grid-template-columns:1.7fr 1fr 1fr 1.2fr;gap:40px;padding-bottom:52px;border-bottom:1px solid rgba(255,255,255,.09)}
+  .foot-brand img{height:70px;margin-bottom:20px}
+  .foot-brand p{font-size:14px;margin-bottom:20px;max-width:320px;font-weight:300}
+  .foot-brand .socials{display:flex;gap:12px}
+  .foot-brand .socials a{width:38px;height:38px;border:1px solid rgba(255,255,255,.16);border-radius:50%;display:grid;place-items:center;color:rgba(238,242,226,.8);transition:all .25s}
+  .foot-brand .socials a:hover{background:var(--gold-light);color:#2a3316;border-color:var(--gold-light)}
+  .fcol h4{font-family:var(--sans);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-light);margin-bottom:20px;font-weight:600}
+  .fcol a,.fcol p{display:block;font-size:13.5px;padding:6px 0;color:rgba(238,242,226,.7);font-weight:300;transition:color .2s}
+  .fcol a:hover{color:#fff}
+  .fcol .lbl{color:var(--gold-light);font-weight:500;padding-bottom:1px}
+  .foot-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;padding-top:26px;font-size:12.5px;color:rgba(238,242,226,.5)}
+
+  /* fab */
+  .fab{position:fixed;right:20px;bottom:22px;z-index:80;display:flex;flex-direction:column;gap:12px}
+  .fab a,.fab button{width:52px;height:52px;border-radius:50%;border:none;cursor:pointer;display:grid;place-items:center;box-shadow:0 10px 24px -8px rgba(0,0,0,.4);transition:transform .25s;color:#fff}
+  .fab a:hover,.fab button:hover{transform:scale(1.08)}
+  .fab .zalo{background:#0068ff;font-family:var(--sans);font-weight:700;font-size:13px}
+  .fab .phone{background:var(--tea)}
+  .fab .mess{background:linear-gradient(45deg,#00b2ff,#a033ff)}
+  .fab .top{background:var(--gold-light);color:#4a3d16}
+
+  @media(max-width:1080px){
+    .prod-grid{grid-template-columns:repeat(2,1fr)}
+    .foot-grid{grid-template-columns:1fr 1fr}
+    .foot-brand{grid-column:1/-1}
+  }
+  @media(max-width:860px){
+    .menu,.nav-actions .btn{display:none}
+    .burger{display:flex}
+    .hero-grid{grid-template-columns:1fr;gap:48px}
+    .hero-art{max-width:440px;margin:0 auto}
+    .pillar-grid{grid-template-columns:1fr}
+    .heritage .grid{grid-template-columns:1fr;gap:40px}
+    .b2b .grid{grid-template-columns:1fr}
+    .b2b .actions{align-items:flex-start}
+    .know-grid{grid-template-columns:1fr}
+    .terroir .bg::after{background:linear-gradient(180deg,rgba(251,252,247,.92),rgba(251,252,247,.92))}
+  }
+  @media(max-width:520px){
+    .prod-grid{grid-template-columns:1fr 1fr;gap:14px}
+    .news form{flex-direction:column}
+    .hero-trust{gap:22px}
+    .hero-float{width:90px;right:-8px}
+    .hero-badge{width:92px;height:92px;left:-12px}
+  }
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="leaf" viewBox="0 0 100 100">
+    <path d="M50 8 C24 26 22 62 50 92 C78 62 76 26 50 8Z" fill="none" stroke="currentColor" stroke-width="3"/>
+    <path d="M50 18 L50 84 M50 38 L33 30 M50 38 L67 30 M50 56 L31 46 M50 56 L69 46" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+  </symbol>
+</svg>
+
+<div class="announce" data-i18n="announce">Giao hàng toàn quốc · Đặt trà biếu Tết &amp; quà doanh nghiệp — Hotline <b>0855 256 512</b></div>
+
+<header id="top">
+  <div class="wrap nav">
+    <a class="brand" href="#top" aria-label="Trà Nai Vàng">
+      <img src="assets/logo-full.png" alt="Logo Trà Nai Vàng" />
+      <span class="wm"><b>TRÀ NAI VÀNG</b><span>Since 1982 · Bảo Lộc</span></span>
+    </a>
+    <nav aria-label="Chính">
+      <ul class="menu">
+        <li><a href="san-pham.html" data-i18n="nav.products">Sản phẩm</a></li>
+        <li><a href="#heritage" data-i18n="nav.story">Câu chuyện</a></li>
+        <li><a href="#terroir" data-i18n="nav.terroir">Vùng trà</a></li>
+        <li><a href="#b2b" data-i18n="nav.agents">Đại lý</a></li>
+        <li><a href="#know" data-i18n="nav.know">Kiến thức</a></li>
+        <li><a href="#contact" data-i18n="nav.contact">Liên hệ</a></li>
+      </ul>
+    </nav>
+    <div class="nav-actions">
+      <button class="langsw" id="langSw" aria-label="Language">EN</button>
+      <a href="tai-khoan.html" aria-label="Tài khoản"><svg class="icon-btn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-3.5 4.5-5 8-5s6.5 1.5 8 5"/></svg></a>
+      <a class="cart-wrap" href="gio-hang.html" aria-label="Giỏ hàng">
+        <svg class="icon-btn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2.4 3.2h2.3l1.75 10a1.7 1.7 0 0 0 1.68 1.4h8.75a1.7 1.7 0 0 0 1.66-1.32L20.6 6H5.3"/><path d="M8.9 7.6l.5 4.5M13 7.6v4.5M17.1 7.6l-.5 4.5"/><circle cx="9.3" cy="19.1" r="1.75"/><circle cx="16.7" cy="19.1" r="1.75"/></svg>
+        <span class="cart-badge" id="cartBadge">0</span>
+      </a>
+      <a class="btn btn-primary" href="san-pham.html" data-i18n="btn.buy">Mua trà</a>
+      <div class="burger" aria-label="Menu" role="button" tabindex="0"><span></span><span></span><span></span></div>
+    </div>
+  </div>
+</header>
+
+<!-- BANNER SLIDER (quảng cáo / sự kiện / sale — thay ảnh trong assets/real) -->
+<section class="bslider" id="bslider">
+  <div class="btrack" id="btrack">
+    <a class="bslide" href="san-pham.html">
+      <img src="assets/real/hero.jpg" alt="Ưu đãi Trà Tết Nai Vàng" fetchpriority="high"/>
+      <div class="bcap"><h2 data-i18n="bn.1t">Ưu đãi Trà Tết 2026</h2><p data-i18n="bn.1s">Giảm 10% mọi đơn với mã <b>NAIVANG10</b> · Freeship từ 500k</p><span class="btn btn-gold" data-i18n="bn.1c">Mua ngay</span></div>
+    </a>
+    <a class="bslide" href="#heritage">
+      <img src="assets/real/terroir.jpg" alt="Đồi trà Bảo Lộc" loading="lazy"/>
+      <div class="bcap"><h2 data-i18n="bn.2t">Tinh hoa từ thiên nhiên</h2><p data-i18n="bn.2s">Trà cao nguyên Bảo Lộc — ướp hương thủ công từ 1982</p><span class="btn btn-gold" data-i18n="bn.2c">Câu chuyện Nai Vàng</span></div>
+    </a>
+    <a class="bslide" href="san-pham.html">
+      <img src="assets/real/banner-organic.jpg" alt="Trà hữu cơ Nai Vàng" loading="lazy"/>
+      <div class="bcap"><h2 data-i18n="bn.3t">100% hữu cơ &amp; an toàn</h2><p data-i18n="bn.3s">FSSC 22000 · OCOP 3 sao · Không hương liệu tổng hợp</p><span class="btn btn-gold" data-i18n="bn.3c">Xem sản phẩm</span></div>
+    </a>
+    <a class="bslide" href="#b2b">
+      <img src="assets/real/banner-teaset.jpg" alt="Quà tặng doanh nghiệp" loading="lazy"/>
+      <div class="bcap"><h2 data-i18n="bn.4t">Quà tặng doanh nghiệp</h2><p data-i18n="bn.4s">Bộ quà trà sang trọng cho đối tác &amp; nhân viên — chiết khấu theo số lượng</p><span class="btn btn-gold" data-i18n="bn.4c">Nhận tư vấn</span></div>
+    </a>
+  </div>
+  <button class="bnav bprev" id="bprev" aria-label="Banner trước">&#8249;</button>
+  <button class="bnav bnext" id="bnext" aria-label="Banner sau">&#8250;</button>
+  <div class="bdots" id="bdots"></div>
+</section>
+
+<div class="strip">
+  <div class="wrap">
+    <span data-i18n="hm.s1">Trà ướp hương <b>thủ công</b></span><i class="dot"></i>
+    <span data-i18n="hm.s2">Chứng nhận <b>FSSC 22000</b></span><i class="dot"></i>
+    <span data-i18n="hm.s3"><b>OCOP 3 sao</b></span><i class="dot"></i>
+    <span data-i18n="hm.s4"><b>Không</b> hương liệu tổng hợp</span><i class="dot"></i>
+    <span data-i18n="hm.s5">Giao <b>toàn quốc</b></span>
+  </div>
+</div>
+
+<!-- PRODUCTS -->
+<section class="pad" id="products" style="background:var(--off)">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow" data-i18n="hm.prodEye">Bộ sưu tập tuyển chọn</span>
+      <h2 data-i18n="hm.feat">Sản phẩm nổi bật</h2>
+      <p data-i18n="hm.featP">Chọn ngay hương vị của bạn — giao toàn quốc, freeship từ 500.000₫.</p>
+    </div>
+    <div class="prod-grid" id="featGrid"></div>
+    <div class="prod-cta"><a class="btn btn-ghost" href="san-pham.html" data-i18n="hm.viewAll">Xem tất cả sản phẩm →</a></div>
+  </div>
+</section>
+
+<!-- B2B -->
+<section class="pad b2b" id="b2b">
+  <svg class="leafwm"><use href="#leaf"/></svg>
+  <div class="wrap">
+    <div class="grid">
+      <div class="reveal">
+        <span class="eyebrow" data-i18n="hm.b2bEye">Hợp tác kinh doanh</span>
+        <h2 data-i18n="hm.b2bH2">Trở thành đại lý Trà Nai Vàng</h2>
+        <p data-i18n="hm.b2bP">Chính sách chiết khấu hấp dẫn, hỗ trợ trưng bày, đào tạo sản phẩm và đồng hành marketing. Mở rộng cùng một thương hiệu trà hơn 40 năm uy tín.</p>
+        <div class="stat">
+          <div class="s"><b>63</b><span data-i18n="hm.b2b1">Tỉnh thành phủ sóng</span></div>
+          <div class="s"><b>500+</b><span data-i18n="hm.b2b2">Điểm bán</span></div>
+          <div class="s"><b>24h</b><span data-i18n="hm.b2b3">Phản hồi đăng ký</span></div>
+        </div>
+      </div>
+      <div class="actions reveal">
+        <a class="btn btn-gold" href="#" data-i18n="hm.b2bBtn1">Đăng ký làm đại lý</a>
+        <a class="btn btn-outline-light" href="#" data-i18n="hm.b2bBtn2">Nhận bảng giá sỉ</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PILLARS -->
+<section class="pad">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow" data-i18n="hm.pillarsEye">Giá trị cốt lõi</span>
+      <h2 data-i18n="hm.pillarsH2">Ba điều làm nên một tách trà Nai Vàng</h2>
+      <p data-i18n="hm.pillarsP">Chúng tôi giữ lại điều tinh túy nhất của nghề trà truyền thống và nâng nó lên chuẩn mực hôm nay.</p>
+    </div>
+    <div class="pillar-grid">
+      <div class="pillar reveal">
+        <span class="no" data-i18n="hm.p1">Chương một</span>
+        <div class="ic"><svg viewBox="0 0 24 24" width="28" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3c4 3 6 6 6 10a6 6 0 0 1-12 0c0-4 2-7 6-10Z"/><path d="M12 21v-8"/></svg></div>
+        <h3 data-i18n="hm.p1t">Vùng nguyên liệu Bảo Lộc</h3>
+        <p data-i18n="hm.p1x">Trà tuyển từ những đồi chè cao nguyên Lâm Đồng — nơi khí hậu mát lành cho búp trà dày hương, đậm vị.</p>
+      </div>
+      <div class="pillar reveal">
+        <span class="no" data-i18n="hm.p2">Chương hai</span>
+        <div class="ic"><svg viewBox="0 0 24 24" width="28" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 20c4-2 6-6 6-10M20 20c-4-2-6-6-6-10"/><circle cx="12" cy="6" r="2.4"/></svg></div>
+        <h3 data-i18n="hm.p2t">Ướp hương thủ công</h3>
+        <p data-i18n="hm.p2x">Nghệ nhân ướp trà với hoa lài, sói, ngâu, sâm dứa theo bí quyết gia truyền — hương quyện tự nhiên, không phụ gia.</p>
+      </div>
+      <div class="pillar reveal">
+        <span class="no" data-i18n="hm.p3">Chương ba</span>
+        <div class="ic"><svg viewBox="0 0 24 24" width="28" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 2l2.6 5.6L20 8.4l-4 4.2.9 6.4L12 16l-4.9 3 .9-6.4-4-4.2 5.4-.8Z"/></svg></div>
+        <h3 data-i18n="hm.p3t">Tận tâm trong từng lô</h3>
+        <p data-i18n="hm.p3x">Kiểm soát chất lượng chặt chẽ, hương vị ổn định — để mỗi lần thưởng trà đều trọn vẹn như lần đầu.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HERITAGE -->
+<section class="pad heritage" id="heritage">
+  <svg class="leafwm"><use href="#leaf"/></svg>
+  <div class="wrap">
+    <div class="grid">
+      <div class="figure reveal">
+        <div class="big">1982</div>
+        <div class="lbl" data-i18n="hm.herLbl">Khởi nguồn tại Bảo Lộc</div>
+        <div class="divider"></div>
+        <img src="assets/logo-full.png" alt="Nai Vàng" />
+      </div>
+      <div class="txt reveal">
+        <span class="eyebrow" data-i18n="hm.herEye">Câu chuyện thương hiệu</span>
+        <h2 data-i18n="hm.herH2">Hơn bốn thập kỷ giữ lửa nghề trà</h2>
+        <p data-i18n="hm.herP1">Bắt đầu từ một xưởng trà nhỏ nơi vùng đất Bảo Lộc, Trà Nai Vàng lớn lên cùng biết bao thế hệ người Việt. Con nai vàng — biểu tượng của sự thanh cao và bền bỉ — trở thành lời cam kết về một nhà trà tử tế.</p>
+        <p data-i18n="hm.herP2">Chúng tôi tin rằng một tách trà ngon không đến từ sự vội vàng. Nó đến từ đất, từ nắng, từ đôi bàn tay nghệ nhân, và từ thời gian.</p>
+        <div class="sign" data-i18n="hm.herSign">— Nhà Trà Nai Vàng</div>
+        <div style="margin-top:28px"><a class="btn btn-gold" href="#" data-i18n="hm.herBtn">Tìm hiểu di sản</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TERROIR -->
+<section class="terroir" id="terroir">
+  <div class="bg"><img src="assets/real/terroir.jpg" alt="Đồi trà Bảo Lộc trong sương sớm"/></div>
+  <div class="wrap">
+    <div class="inner">
+      <div class="card-t reveal">
+        <span class="eyebrow" data-i18n="hm.terEye">Vùng trà · Terroir</span>
+        <h2 data-i18n="hm.terH2">Cao nguyên Bảo Lộc, Lâm Đồng</h2>
+        <p data-i18n="hm.terP">Độ cao 800–1.000m, sương phủ quanh năm, thổ nhưỡng bazan màu mỡ — điều kiện lý tưởng cho những búp trà giàu hương, đậm hậu ngọt.</p>
+        <div class="stats">
+          <div class="s"><b>800m+</b><span data-i18n="hm.ter1">Độ cao vùng trồng</span></div>
+          <div class="s"><b>100%</b><span data-i18n="hm.ter2">Nguyên liệu Lâm Đồng</span></div>
+          <div class="s"><b>0</b><span data-i18n="hm.ter3">Hương liệu tổng hợp</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMMITMENT -->
+<section class="pad commit">
+  <div class="wrap">
+    <div class="sec-head center reveal" style="margin-bottom:44px">
+      <span class="eyebrow" data-i18n="hm.certEye">Chứng nhận &amp; cam kết</span>
+      <h2 data-i18n="hm.certH2">Trà sạch, tự nhiên, được chứng nhận</h2>
+      <p data-i18n="hm.certP">Chất lượng Nai Vàng được bảo chứng bởi các chứng nhận uy tín và cam kết của nhà trà hơn 40 năm.</p>
+    </div>
+    <div class="cert-strip reveal">
+      <div class="cc"><img src="assets/real/cert-fssc.jpg" alt="FSSC 22000" loading="lazy"/><b data-i18n="hm.certF">FSSC 22000 — An toàn thực phẩm</b></div>
+      <div class="cc"><img src="assets/real/cert-ocop.jpg" alt="OCOP 3 sao" loading="lazy"/><b data-i18n="hm.certO">OCOP 3 sao — Sản phẩm tiêu biểu</b></div>
+    </div>
+    <div class="commit-row reveal">
+      <div class="c"><div class="badge"><svg viewBox="0 0 24 24" width="26" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3c4 3 6 6 6 10a6 6 0 0 1-12 0c0-4 2-7 6-10Z"/></svg></div><b data-i18n="hm.c1">Nguyên liệu tự nhiên</b><span data-i18n="hm.c1x">Tuyển chọn từ vùng chè cao nguyên</span></div>
+      <div class="c"><div class="badge"><svg viewBox="0 0 24 24" width="26" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M20 6L9 17l-5-5"/></svg></div><b data-i18n="hm.c2">Không chất bảo quản</b><span data-i18n="hm.c2x">Không hương liệu tổng hợp</span></div>
+      <div class="c"><div class="badge"><svg viewBox="0 0 24 24" width="26" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg></div><b data-i18n="hm.c3">Kiểm soát chất lượng</b><span data-i18n="hm.c3x">Ổn định trong từng lô sản xuất</span></div>
+      <div class="c"><div class="badge"><svg viewBox="0 0 24 24" width="26" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2 4 4 0 0 1 7 2c0 5.5-7 10-7 10Z"/></svg></div><b data-i18n="hm.c4">Nghề gia truyền</b><span data-i18n="hm.c4x">Bí quyết ướp hương hơn 40 năm</span></div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- KNOWLEDGE -->
+<section class="pad" id="know">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow" data-i18n="hm.knowEye">Kiến thức trà</span>
+      <h2 data-i18n="hm.knowH2">Thưởng trà đúng điệu</h2>
+      <p data-i18n="hm.knowP">Những câu chuyện, mẹo pha và văn hóa trà Việt — để mỗi tách trà thêm trọn vẹn.</p>
+    </div>
+    <div class="know-grid">
+      <article class="art reveal"><div class="cover"><img src="assets/real/know-3.jpg" alt="Bộ ấm trà và trà khô" loading="lazy"/></div><div class="b"><span class="meta">Nghệ thuật pha trà</span><h3>Pha trà oolong đúng cách để giữ trọn hương</h3><p>Nhiệt độ, thời gian, tỉ lệ — ba yếu tố quyết định một ấm trà ngon.</p></div></article>
+      <article class="art reveal"><div class="cover"><img src="assets/real/know-1.jpg" alt="Bàn tay nâng niu búp trà tươi" loading="lazy"/></div><div class="b"><span class="meta">Sức khỏe</span><h3>Cà gai leo tía tô và câu chuyện chăm gan</h3><p>Vì sao thảo mộc Việt ngày càng được ưa chuộng trong lối sống lành mạnh.</p></div></article>
+      <article class="art reveal"><div class="cover"><img src="assets/real/know-2.jpg" alt="Nhành trà tươi bên tách trà" loading="lazy"/></div><div class="b"><span class="meta">Văn hóa</span><h3>Trà sâm dứa — hương vị ký ức của người Việt</h3><p>Từ ly trà đá vỉa hè đến bàn tiệc sang trọng, một hương vị đi cùng năm tháng.</p></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="pad news">
+  <div class="wrap">
+    <div class="inner reveal">
+      <svg style="width:48px;color:var(--tea);margin:0 auto"><use href="#leaf"/></svg>
+      <h2 data-i18n="hm.newsH2">Nhận ưu đãi &amp; câu chuyện trà</h2>
+      <p data-i18n="hm.newsP">Đăng ký để nhận ưu đãi thành viên, quà tặng và những chia sẻ về nghệ thuật thưởng trà.</p>
+      <form onsubmit="return false">
+        <input type="email" data-i18n-ph="hm.newsPh" placeholder="Email của bạn" aria-label="Email" />
+        <button class="btn btn-primary" type="submit" data-i18n="hm.newsBtn">Đăng ký</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <img src="assets/logo-full.png" alt="Trà Nai Vàng" />
+        <p data-i18n="foot.desc">Công ty TNHH Trà Nai Vàng — di sản trà Việt từ cao nguyên Bảo Lộc, Lâm Đồng. Since 1982.</p>
+        <div class="socials">
+          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" width="17" fill="currentColor"><path d="M13 22v-8h3l1-4h-4V8c0-1.1.3-2 2-2h2V2.2C18.4 2.1 17.2 2 15.8 2 12.9 2 11 3.7 11 7v3H8v4h3v8h2Z"/></svg></a>
+          <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" width="17" fill="currentColor"><path d="M23 12s0-3.3-.4-4.8a2.5 2.5 0 0 0-1.8-1.8C19.3 5 12 5 12 5s-7.3 0-8.8.4A2.5 2.5 0 0 0 1.4 7.2C1 8.7 1 12 1 12s0 3.3.4 4.8a2.5 2.5 0 0 0 1.8 1.8C4.7 19 12 19 12 19s7.3 0 8.8-.4a2.5 2.5 0 0 0 1.8-1.8C23 15.3 23 12 23 12ZM10 15V9l5 3-5 3Z"/></svg></a>
+          <a href="#" aria-label="TikTok"><svg viewBox="0 0 24 24" width="16" fill="currentColor"><path d="M16 3c.3 2.2 1.6 3.9 3.8 4.2v3c-1.4 0-2.7-.4-3.8-1.1V15a6 6 0 1 1-6-6c.3 0 .7 0 1 .1v3.1a3 3 0 1 0 2 2.8V3h3Z"/></svg></a>
+          <a href="#" aria-label="Zalo"><svg viewBox="0 0 24 24" width="16" fill="currentColor"><path d="M12 3C6.5 3 2 6.8 2 11.5c0 2.6 1.4 4.9 3.6 6.4-.1.9-.5 2.1-1.1 3 .1.1.3.2.5.1 1.5-.5 2.7-1.2 3.5-1.7 1.1.3 2.2.5 3.5.5 5.5 0 10-3.8 10-8.8S17.5 3 12 3Z"/></svg></a>
+        </div>
+      </div>
+      <div class="fcol"><h4 data-i18n="foot.shop">Mua hàng</h4><a href="san-pham.html" data-i18n="foot.all">Tất cả sản phẩm</a><a href="gio-hang.html" data-i18n="foot.cart">Giỏ hàng</a><a href="tai-khoan.html" data-i18n="foot.account">Tài khoản</a><a href="tai-khoan.html#orders" data-i18n="foot.track">Theo dõi đơn hàng</a></div>
+      <div class="fcol"><h4 data-i18n="foot.brand">Thương hiệu</h4><a href="#heritage" data-i18n="nav.story">Câu chuyện</a><a href="#terroir" data-i18n="nav.terroir">Vùng nguyên liệu</a><a href="#b2b" data-i18n="nav.agents">Đăng ký đại lý</a><a href="#know" data-i18n="nav.know">Kiến thức trà</a></div>
+      <div class="fcol"><h4 data-i18n="nav.contact">Liên hệ</h4>
+        <p class="lbl" data-i18n="foot.company">CÔNG TY TNHH TRÀ NAI VÀNG</p>
+        <p data-i18n="foot.addr">Lô CN7, KCN Lộc Sơn, P. Lộc Sơn, TP. Bảo Lộc, Lâm Đồng</p>
+        <a href="tel:0855256512">Hotline: 0855 256 512</a>
+        <a href="mailto:info@tranaivang.com">info@tranaivang.com</a>
+        <p data-i18n="foot.hours">Giờ làm việc: Thứ 2 – CN (7h30 – 21h00)</p>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span data-i18n="foot.rights">© 2026 Công ty TNHH Trà Nai Vàng. Bảo lưu mọi quyền.</span>
+      <span data-i18n="foot.policies">Chính sách bảo mật · Điều khoản · Đổi trả</span>
+    </div>
+  </div>
+</footer>
+
+<div class="fab">
+  <a class="phone" href="tel:0855256512" aria-label="Gọi điện"><svg viewBox="0 0 24 24" width="22" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 4h3l2 5-2.5 1.5a12 12 0 0 0 5 5L14 13l5 2v3a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1Z"/></svg></a>
+  <a class="zalo" href="#" aria-label="Chat Zalo">Zalo</a>
+  <a class="mess" href="#" aria-label="Messenger"><svg viewBox="0 0 24 24" width="22" fill="currentColor"><path d="M12 2C6.2 2 2 6.3 2 11.6c0 2.9 1.3 5.5 3.5 7.2V22l3.1-1.7c.9.2 1.8.4 2.4.4 5.8 0 10-4.3 10-9.6C21 6.3 17.8 2 12 2Zm.9 12.3-2.6-2.7-4.9 2.7 5.4-5.7 2.6 2.7 4.8-2.7-5.3 5.7Z"/></svg></a>
+  <button class="top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Lên đầu"><svg viewBox="0 0 24 24" width="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V6M6 12l6-6 6 6"/></svg></button>
+</div>
+
+<script src="assets/store.js?v=170726"></script>
+<script>
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.14});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  const hd=document.getElementById('top');
+  addEventListener('scroll',()=>hd.classList.toggle('scrolled',scrollY>10));
+  /* song ngữ */
+  document.getElementById('langSw').textContent = getLang()==='vi'?'EN':'VI';
+  document.getElementById('langSw').onclick = () => setLang(getLang()==='vi'?'en':'vi');
+  /* banner slider */
+  const btrack=document.getElementById('btrack');
+  const bN=btrack.children.length; let bCur=0, bTimer;
+  const bdots=document.getElementById('bdots');
+  for(let i=0;i<bN;i++){const d=document.createElement('button');d.setAttribute('aria-label','Banner '+(i+1));d.onclick=()=>bGo(i);bdots.appendChild(d);}
+  function bGo(i){bCur=(i+bN)%bN;btrack.style.transform='translateX(-'+(bCur*100)+'%)';[...bdots.children].forEach((d,j)=>d.classList.toggle('on',j===bCur));bRestart();}
+  function bRestart(){clearInterval(bTimer);if(!matchMedia('(prefers-reduced-motion: reduce)').matches)bTimer=setInterval(()=>bGo(bCur+1),5000);}
+  document.getElementById('bprev').onclick=e=>{e.preventDefault();bGo(bCur-1);};
+  document.getElementById('bnext').onclick=e=>{e.preventDefault();bGo(bCur+1);};
+  document.getElementById('bslider').addEventListener('mouseenter',()=>clearInterval(bTimer));
+  document.getElementById('bslider').addEventListener('mouseleave',bRestart);
+  bGo(0);
+  /* san pham noi bat (render dong, song ngu) */
+  const FEAT=['tra-sam-dua','oolong-tu-quy','tra-xanh-hoa-lai','ca-gai-leo-tia-to','bach-tra','pho-nhi-vien','tra-xanh-thai-nguyen','hong-tra-shan-tien'];
+  const CARTMINI='<svg viewBox="0 0 24 24" width="18" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2.4 3.2h2.3l1.75 10a1.7 1.7 0 0 0 1.68 1.4h8.75a1.7 1.7 0 0 0 1.66-1.32L20.6 6H5.3"/><circle cx="9.3" cy="19.1" r="1.75"/><circle cx="16.7" cy="19.1" r="1.75"/></svg>';
+  document.getElementById('featGrid').innerHTML=FEAT.map(function(sl){var p=prodBySlug(sl);return '\
+   <article class="card reveal in">\
+    <div class="thumb">'+(p.tag?'<span class="tag '+(p.tag==='Cao cấp'?'gold':'')+'">'+tagName(p.tag)+'</span>':'')+'\
+      <a href="chi-tiet-san-pham.html?sp='+p.slug+'"><img src="'+prodImg(p.slug)+'" alt="'+prodName(p)+'" loading="lazy"/></a></div>\
+    <div class="body"><span class="cat">'+catName(p.cat)+'</span>\
+      <h3><a href="chi-tiet-san-pham.html?sp='+p.slug+'">'+prodName(p)+'</a></h3>\
+      <div class="row"><div class="price">'+(p.old?'<s>'+fmt(p.old)+'</s>':'')+fmt(p.price)+'</div>\
+      <button class="add" onclick="addCart(\''+p.slug+'\')" aria-label="'+t('pd.addCart')+'">'+CARTMINI+'</button></div></div>\
+   </article>';}).join('');
+</script>
+</body>
+</html>
