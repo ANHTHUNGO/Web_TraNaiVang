@@ -1,5 +1,14 @@
 # CHANGELOG — Trà Nai Vàng Website
 
+## 2026-07-17 — EMAIL TỰ ĐỘNG CHO MỌI SỰ KIỆN ✅
+- `store.js`: hệ email mô phỏng (outbox localStorage `nv_emails`, tối đa 60): `sendEmail()`, `syncOrderEmails()` chạy mỗi lần tải trang — phát hiện đơn CHUYỂN TRẠNG THÁI và gửi email tương ứng (đặt hàng → xác nhận → đang giao → giao xong → hủy, theo `nv_email_stage`).
+- Email tự gửi tại: đăng ký (chào mừng + xác nhận quyền đã đồng ý), đặt hàng (chi tiết đơn), mỗi bước tiến trình đơn, hủy đơn (kèm lý do), chiến dịch khuyến mãi (1 lần/tài khoản), cập nhật chính sách (1 lần/tài khoản — mô phỏng thông báo thay đổi chính sách theo NĐ 13/2023).
+- `tai-khoan.html`: tab mới **"Email đã nhận"** (badge số lượng) — danh sách email có phân loại (Đơn hàng/Khuyến mãi/Chính sách/Hệ thống), bấm mở đọc nội dung; ghi chú rõ đây là mô phỏng, bản thật gửi qua máy chủ email.
+- i18n +16 khóa (em.*). Cache-bust ?v=170728.
+- Verify: đăng ký → email chào mừng; reload → email chính sách + khuyến mãi (1 lần); đặt đơn NV60229160 → email xác nhận; hủy → email hủy kèm lý do; tab Email hiện 4 thư, mở đọc được chi tiết.
+- GHI CHÚ backend: khi vào Next.js thay outbox bằng dịch vụ email thật (Resend/SendGrid) — cùng các điểm gọi sendEmail() này.
+
+
 ## 2026-07-17 — CHUÔNG THÔNG BÁO + XIN QUYỀN KHI ĐĂNG KÝ ✅
 - **Chuông cạnh giỏ hàng** (mọi trang, tự gắn qua store.js `mountBell()`): badge đỏ số chưa đọc; dropdown liệt kê thông báo theo tài khoản — cập nhật tiến trình đơn (đặt/xác nhận/vận chuyển/giao xong/hủy) + ưu đãi; nút "Đánh dấu đã đọc" (localStorage `nv_noti_read`); chưa đăng nhập → mời Đăng nhập/Đăng ký.
 - **Bước xin quyền khi đăng ký** (modal sau khi bấm Đăng ký, theo chính sách sàn TMĐT + Nghị định 13/2023/NĐ-CP): ① Bật chuông thông báo — BẮT BUỘC mọi tài khoản (checked+disabled); ② Truy cập vị trí (tuỳ chọn, gọi Geolocation thật nếu tick); ③ Cookie & cá nhân hoá (tuỳ chọn). Đồng ý → lưu `user.consent{noti,loc,track,at}` + gọi Notification.requestPermission (guarded).

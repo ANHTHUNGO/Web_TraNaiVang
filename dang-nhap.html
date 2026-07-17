@@ -5,9 +5,9 @@
 <title>Đăng nhập / Đăng ký — Trà Nai Vàng</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css?v=170727">
-<script src="assets/i18n.js?v=170727"></script>
-<script src="assets/store.js?v=170727"></script>
+<link rel="stylesheet" href="assets/site.css?v=170728">
+<script src="assets/i18n.js?v=170728"></script>
+<script src="assets/store.js?v=170728"></script>
 <style>
   .auth{min-height:calc(100vh - 240px);display:grid;place-items:center;padding:50px 20px;position:relative}
   .auth::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,var(--sage-100),transparent 60%);z-index:0}
@@ -80,7 +80,7 @@
   </div>
 </main>
 
-<script src="assets/layout.js?v=170727"></script>
+<script src="assets/layout.js?v=170728"></script>
 <script>
 /* nếu đã đăng nhập → vào thẳng tài khoản */
 if(currentUser()) location.href='tai-khoan.html';
@@ -137,6 +137,7 @@ function openConsentModal(v){
     try{ if('Notification' in window && Notification.permission==='default') Notification.requestPermission(); }catch(e){}
     try{ if(consent.loc && navigator.geolocation) navigator.geolocation.getCurrentPosition(()=>{},()=>{},{timeout:3000}); }catch(e){}
     setUser({name:v('r-name'),phone:v('r-phone'),email:v('r-email'),dob:v('r-dob'),sex:v('r-sex'),points:100,consent});
+    try{ sendEmail(t('em.sWelcome'), `<p>Chào ${v('r-name')},</p><p>Tài khoản Trà Nai Vàng của bạn đã sẵn sàng. Tặng bạn <b>100 điểm thưởng</b> và mã <b>NAIVANG10</b> giảm 10% cho đơn đầu tiên 🎁</p><p>Chuông thông báo đã bật: bạn sẽ nhận cập nhật đơn hàng, ưu đãi và các thông báo quan trọng qua email này (${v('r-email')}).</p><p>Quyền đã đồng ý lúc ${consent.at}: thông báo ✓${consent.loc?' · vị trí ✓':''}${consent.track?' · cookie ✓':''}</p>`, 'system', true); }catch(e){}
     w.remove();
     showToast('Tạo tài khoản thành công! Chuông thông báo đã bật 🔔');
     setTimeout(()=>location.href='tai-khoan.html',800);

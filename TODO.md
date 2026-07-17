@@ -24,7 +24,7 @@
 - [ ] Phiên 11: Giới thiệu + Nhà máy + Vùng nguyên liệu · Phiên 12: Đại lý (marketing) + Liên hệ · Phiên 13: Blog/Kiến thức
 - [ ] Home bổ sung (phiên chỉnh Home gần nhất): **Top Banner khuyến mãi** 40–60px bật/tắt, đổi nội dung/màu/link, slider/marquee
 **Triển khai:**
-- [ ] Phiên 14: Next.js + TS + Tailwind + backend (PostgreSQL/Prisma) + CMS; auth, order, voucher, wishlist, notification, email đơn hàng; cổng thanh toán chừa sẵn VNPay/MoMo
+- [ ] Phiên 14: Next.js + TS + Tailwind + backend (PostgreSQL/Prisma) + CMS; auth, order, voucher, wishlist, notification; **email thật qua Resend/SendGrid tại các điểm gọi sendEmail() sẵn có**; cổng thanh toán chừa sẵn VNPay/MoMo
 - [ ] Phiên 15: SEO Technical · Phiên 16: Performance · Phiên 17: A11y · Phiên 18: Test toàn site
 
 ## 🟡 P2 — Nợ kỹ thuật của Home (làm ở P12–P14 hoặc khi vào Next.js)

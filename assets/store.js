@@ -100,7 +100,11 @@ function cancelOrder(code,reason){
   const os=orders(); const o=os.find(x=>x.code===code);
   if(!o||!canCancel(o)) return false;
   o.status='cancelled'; o.cancelReason=reason; o.cancelledAt=new Date().toLocaleString('vi-VN');
-  localStorage.setItem('nv_orders',JSON.stringify(os)); return true;
+  localStorage.setItem('nv_orders',JSON.stringify(os));
+  try{ sendEmail(`${_t('em.sCancel')} — ${o.code}`, _orderBody(o)+`<p>Lý do hủy: ${reason}</p>`, 'order', true);
+       const st=JSON.parse(localStorage.getItem('nv_email_stage')||'{}'); st[o.code]='cancelled';
+       localStorage.setItem('nv_email_stage',JSON.stringify(st)); }catch(e){}
+  return true;
 }
 function openCancelModal(code, cb){
   const w=document.createElement('div'); w.className='modal-wrap';
@@ -128,6 +132,49 @@ function openCancelModal(code, cb){
 function currentUser(){ return JSON.parse(localStorage.getItem('nv_user')||'null'); }
 function setUser(u){ localStorage.setItem('nv_user',JSON.stringify(u)); }
 function logout(){ localStorage.removeItem('nv_user'); }
+
+/* ---- EMAIL TỰ ĐỘNG (mô phỏng outbox — backend thật sẽ gửi qua SMTP/Resend) ---- */
+function sendEmail(subject, body, kind, quiet){
+  const u=currentUser(); if(!u||!u.email) return false;
+  const box=JSON.parse(localStorage.getItem('nv_emails')||'[]');
+  box.unshift({id:Date.now()+''+Math.floor(Math.random()*999), to:u.email, subject, body, kind:kind||'system', at:new Date().toLocaleString('vi-VN')});
+  localStorage.setItem('nv_emails', JSON.stringify(box.slice(0,60)));
+  if(!quiet) showToast('📧 '+(_t('em.sent')||'Đã gửi email tới')+' '+u.email);
+  return true;
+}
+function emails(){ return JSON.parse(localStorage.getItem('nv_emails')||'[]'); }
+function _orderBody(o){
+  return `<p>Mã đơn: <b>${o.code}</b> · ${o.date}</p>`
+   + o.items.map(i=>`<p>• ${i.name} × ${i.qty} — ${fmt(i.price*i.qty)}</p>`).join('')
+   + `<p>Tổng cộng: <b>${fmt(o.total)}</b></p>`
+   + (o.addr?`<p>Giao tới: ${o.addr.name} · ${o.addr.phone}<br/>${o.addr.addr}, ${o.addr.district}, ${o.addr.city}</p>`:'')
+   + `<p>Theo dõi đơn tại mục Tài khoản → Đơn hàng của tôi.</p>`;
+}
+/* gửi email khi đơn chuyển trạng thái (xác nhận → vận chuyển → giao xong) */
+function syncOrderEmails(){
+  const u=currentUser(); if(!u||!u.email) return;
+  const stage=JSON.parse(localStorage.getItem('nv_email_stage')||'{}');
+  const SUBJ={pending:'em.sOrder',confirm:'em.sConfirm',shipping:'em.sShip',done:'em.sDone',cancelled:'em.sCancel'};
+  let dirty=false;
+  orders().forEach(o=>{
+    const s=orderStatus(o);
+    if(stage[o.code]!==s){
+      sendEmail(`${_t(SUBJ[s])} — ${o.code}`, _orderBody(o), 'order', true);
+      stage[o.code]=s; dirty=true;
+    }
+  });
+  if(dirty) localStorage.setItem('nv_email_stage', JSON.stringify(stage));
+  /* email chính sách + khuyến mãi (mỗi tài khoản nhận 1 lần — mô phỏng chiến dịch) */
+  if(!localStorage.getItem('nv_email_policy')){
+    sendEmail(_t('em.sPolicy'), `<p>Kính gửi ${u.name||'quý khách'},</p><p>Trà Nai Vàng cập nhật Chính sách bảo mật & Điều khoản sử dụng theo Nghị định 13/2023/NĐ-CP về bảo vệ dữ liệu cá nhân, hiệu lực từ 01/08/2026.</p><p>Những thay đổi chính: quyền của chủ thể dữ liệu, thời gian lưu trữ, và cơ chế rút lại sự đồng ý.</p><p>Xem chi tiết trong mục Chính sách trên website.</p>`, 'policy', true);
+    localStorage.setItem('nv_email_policy','1');
+  }
+  if(!localStorage.getItem('nv_email_promo')){
+    sendEmail(_t('em.sPromo'), `<p>Chào ${u.name||'bạn'},</p><p>Tháng này Nai Vàng gửi tặng bạn:</p><p>• Mã <b>NAIVANG10</b> — giảm 10% mọi đơn hàng<br/>• <b>Freeship</b> toàn quốc cho đơn từ 500.000₫</p><p>Ghé bộ sưu tập trà và chọn hương vị của bạn nhé 🍃</p>`, 'promo', true);
+    localStorage.setItem('nv_email_promo','1');
+  }
+}
+document.addEventListener('DOMContentLoaded', syncOrderEmails);
 
 /* ---- CHUÔNG THÔNG BÁO (gắn tài khoản đăng ký) ---- */
 function notiList(){
