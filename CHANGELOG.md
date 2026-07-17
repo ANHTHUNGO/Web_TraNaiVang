@@ -1,5 +1,11 @@
 # CHANGELOG — Trà Nai Vàng Website
 
+## 2026-07-17 — Đưa dự án lên Git + GitHub ✅
+- `git init` (branch main), .gitignore, commit đầu 144 files.
+- Remote: https://github.com/ANHTHUNGO/Web_TraNaiVang.git — push thành công (3b58282).
+- Quy trình mới (BRIEF §8.6): cuối mỗi phiên commit + push để không mất phiên bản.
+
+
 ## 2026-07-17 (sáng, theo feedback user xem trên Cốc Cốc)
 - **Fix "lỗi font" banner (bn.1t/hm.feat hiện khóa thô):** nguyên nhân trình duyệt user cache `i18n.js` cũ → gắn version `?v=170726` cho i18n/store/layout.js + site.css trên cả 8 trang (từ nay đổi asset phải tăng version).
 - **Mũi tên banner đẩy vào trong** (16px → 36px).
