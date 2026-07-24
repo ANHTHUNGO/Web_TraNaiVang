@@ -158,3 +158,10 @@ Người dùng giao 100% tự làm hết. Bổ sung toàn bộ nhóm trang nội
 - `dang-nhap.html`: thêm 2 LỐI ĐĂNG KÝ đẹp (Khách hàng lẻ / Đại lý-Doanh nghiệp) + link "Đăng nhập cổng đại lý".
 - `tai-khoan.html`: thêm bộ lọc trạng thái đơn (Tất cả/Đang xử lý/Đang giao/Đã giao/Đã hủy) — phân biệt đã mua vs đang dở.
 - Cache-bust v170736 (24 trang). Admin B2B (Phần F–J: duyệt đại lý, cấu hình giá/chiết khấu, công nợ toàn hệ thống, kho, phân quyền, nhật ký) để lại cho giai đoạn backend.
+
+## [v170737] 2026-07-24 — Cổng đại lý nâng cấp + Cổng Admin + GG Sheet chuẩn + CMS
+- ĐẠI LÝ (dashboard-dai-ly): (1) Đăng ký chi tiết → CẤP MÃ TỰ ĐỘNG → đăng nhập bằng mã đó (nv_dealer_accounts). (2) Bảng đơn theo NĂM/THÁNG + tải phiếu lưu trữ (CSV chuẩn cột GG Sheet + In/PDF read-only) + xuất Excel theo kỳ; mỗi đơn ĐỒNG BỘ GG Sheets (mô phỏng nv_ggsync). (3) KHUNG CHAT ĐẶT HÀNG có auto-chatbot: chọn SP → số thùng → áp mã → chốt đơn → tạo đơn kênh "Chatbot" + đồng bộ sản xuất. (4) Mã giảm giá riêng: đại lý tự THÊM mã + áp vào giỏ/chat. (5) Cách ly dữ liệu: mỗi đại lý chỉ thấy đơn của mình (o.dealer===code); cảnh báo theo dữ liệu thật.
+- ADMIN (MỚI): dang-nhap-admin (admin/admin123) + dashboard-admin: Dashboard KPI, Đại lý (DANH SÁCH TẤT CẢ MÃ + duyệt/gán cấp), Đơn đại lý (sỉ) + Đơn khách lẻ (đọc nv_orders), Công nợ toàn hệ thống, Sản phẩm & bảng giá theo cấp, KẾT NỐI GOOGLE DRIVE/SHEETS (dán link 4 sheet: ĐL in/out + lẻ in/out, kiểm tra định dạng), Cấu hình chatbot (bot ĐL & bot lẻ training KHÁC nhau).
+- CMS: mục "Nội dung website" trong admin sửa câu chữ + ẢNH banner (upload) → lưu nv_cms → assets/cms.js áp NGAY lên trang chủ (freeship, hotline, banner title/sub/ảnh, footer). Verify end-to-end OK.
+- GG SHEET CHUẨN RIÊNG ĐẠI LÝ: assets/templates/GG-SHEET-DAI-LY-INPUT.xlsx (training bot ĐL: sản phẩm sỉ, giá theo cấp, chính sách, mã, template chatbot ĐL, FAQ) + GG-SHEET-DAI-LY-OUTPUT.xlsx (Đại lý [mọi mã] · Đơn hàng sỉ · Công nợ · Lead · Log AI · Báo cáo). Tách biệt với sheet khách lẻ.
+- index: link "Cổng đại lý · Quản trị" ở footer. Cache-bust v170737.

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Admin — Quản trị Trà Nai Vàng</title>
+<meta name="robots" content="noindex"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css?v=170737">
+<script src="assets/store.js?v=170737"></script>
+<style>
+  body{background:var(--off)}
+  .dwrap{display:grid;grid-template-columns:246px 1fr;min-height:100vh;align-items:start}
+  .dside{background:linear-gradient(180deg,#22301a,#16210f);color:#eaf0e0;min-height:100vh;position:sticky;top:0;display:flex;flex-direction:column}
+  .dside .brand{display:flex;gap:11px;align-items:center;padding:18px 20px;border-bottom:1px solid rgba(255,255,255,.1)}
+  .dside .brand img{width:38px;height:38px;border-radius:9px;background:#fff;padding:3px}
+  .dside .brand b{font-family:var(--serif);font-size:15px;color:#fff;line-height:1.15}
+  .dside .brand small{font-size:10.5px;color:var(--gold-light);letter-spacing:.04em}
+  .dnav{flex:1;overflow-y:auto;padding:10px 0 20px}
+  .dnav .grp{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(234,240,224,.5);padding:14px 22px 6px}
+  .dnav button{display:flex;align-items:center;gap:11px;width:100%;padding:10px 22px;border:none;background:none;color:#dfe8d2;font-family:var(--sans);font-size:13.5px;font-weight:500;cursor:pointer;text-align:left;border-left:3px solid transparent;transition:.18s}
+  .dnav button:hover{background:rgba(255,255,255,.07)}
+  .dnav button.on{background:rgba(255,255,255,.12);border-color:var(--gold-light);color:#fff}
+  .dnav button svg{width:17px;flex:none;opacity:.85}
+  .dnav .bdg{margin-left:auto;background:var(--gold-light);color:#4a3d16;font-size:10px;font-weight:700;min-width:18px;height:18px;border-radius:9px;display:grid;place-items:center;padding:0 5px}
+  .dmain{padding:0 0 50px}
+  .dtop{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:15px 30px;background:var(--paper);border-bottom:1px solid var(--line-soft);position:sticky;top:0;z-index:20}
+  .dtop h1{font-size:19px;font-weight:600}
+  .dtop .who{display:flex;align-items:center;gap:12px;font-size:13px}
+  .dtop .who .ava{width:38px;height:38px;border-radius:50%;background:#22301a;color:#fff;display:grid;place-items:center;font-family:var(--serif);font-size:17px}
+  .dbody{padding:26px 30px}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .kpi{background:var(--paper);border:1px solid var(--line-soft);border-radius:15px;padding:17px 18px}
+  .kpi .lb{font-size:12px;color:var(--stone)}
+  .kpi .vl{font-family:var(--serif);font-size:25px;margin-top:7px;color:var(--forest);line-height:1.1}
+  .kpi .sub{font-size:11.5px;color:var(--stone);margin-top:4px}
+  .card{background:var(--paper);border:1px solid var(--line-soft);border-radius:16px;padding:22px;margin-bottom:18px}
+  .card h3{font-size:15.5px;font-weight:600;margin-bottom:4px}
+  .card .cdesc{font-size:12.5px;color:var(--stone);margin-bottom:16px}
+  .tbl{width:100%;border-collapse:collapse;font-size:13px}
+  .tbl th{text-align:left;padding:11px 12px;background:var(--off);color:var(--stone);font-weight:600;font-size:11.5px;text-transform:uppercase;letter-spacing:.03em;white-space:nowrap}
+  .tbl td{padding:12px;border-bottom:1px solid var(--line-soft);vertical-align:middle}
+  .tbl tr:hover td{background:var(--cream)}
+  .tbl .tr{text-align:right}
+  .badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;white-space:nowrap}
+  .b-green{background:#E3F0DC;color:#3c6b28}.b-blue{background:#E0EBF6;color:#2c5f8a}.b-amber{background:#FBF0D5;color:#8a6d1a}.b-red{background:#F8DDD8;color:#b23b2a}.b-gray{background:#ececea;color:#666}
+  .empty{text-align:center;color:var(--stone);padding:36px}
+  .btn-sm{padding:6px 12px;font-size:12px}
+  .conn{border:1.5px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:14px}
+  .conn.ok{border-color:#3c6b28;background:#F3F8EF}
+  .conn label{font-size:12.5px;font-weight:600;display:block;margin-bottom:6px}
+  .conn .row{display:flex;gap:8px}
+  .conn input{flex:1;border:1px solid var(--line);border-radius:9px;padding:9px 12px;font-family:var(--sans);font-size:12.5px}
+  .conn .st{font-size:12px;margin-top:8px}
+  .alert{display:flex;gap:11px;padding:13px 15px;border-radius:12px;margin-bottom:10px;font-size:13px;align-items:flex-start}
+  .alert.warn{background:#FBF0D5}.alert.info{background:#E0EBF6}.alert.ok{background:#E3F0DC}
+  @media(max-width:1050px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:820px){.dwrap{grid-template-columns:1fr}.dside{position:static;min-height:auto}.dnav{display:flex;flex-wrap:wrap;padding:8px}.dnav .grp{width:100%}.dnav button{width:auto;border-left:none;border-radius:20px;padding:8px 14px}}
+</style>
+</head>
+<body data-page="dashboard-admin">
+<div class="dwrap">
+  <aside class="dside">
+    <div class="brand"><img src="assets/logo-full.png" alt="Nai Vàng"/><div><b>NAI VÀNG</b><br/><small>Quản trị công ty · Admin</small></div></div>
+    <nav class="dnav" id="dnav">
+      <div class="grp">Tổng quan</div>
+      <button data-p="overview" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>Dashboard</button>
+      <div class="grp">Kinh doanh</div>
+      <button data-p="dealers"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c1-3.5 3.5-5 6-5s5 1.5 6 5"/><circle cx="18" cy="9" r="2.5"/><path d="M16 20c.6-2 1.8-3.2 3.4-3.6"/></svg>Đại lý (mã & duyệt)<span class="bdg" id="bDealers">0</span></button>
+      <button data-p="orders"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 3h9l4 4v14H6Z"/><path d="M9 8h6M9 12h6M9 16h4"/></svg>Đơn hàng đại lý (sỉ)</button>
+      <button data-p="retail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 3h2l2 12h11l2-8H6"/><circle cx="9" cy="20" r="1.4"/><circle cx="17" cy="20" r="1.4"/></svg>Đơn khách lẻ</button>
+      <button data-p="debt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>Công nợ</button>
+      <button data-p="products"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 9l9-6 9 6v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg>Sản phẩm &amp; giá</button>
+      <div class="grp">Nội dung website</div>
+      <button data-p="content"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 5h16v14H4Z"/><path d="M4 9h16M9 9v10"/></svg>Chỉnh sửa nội dung &amp; ảnh</button>
+      <div class="grp">Hệ thống</div>
+      <button data-p="connect"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 12a3 3 0 0 1 3-3h3a3 3 0 0 1 0 6h-1"/><path d="M15 12a3 3 0 0 1-3 3H9a3 3 0 0 1 0-6h1"/></svg>Kết nối Google Drive<span class="bdg" id="bConn">!</span></button>
+      <button data-p="bots"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="7" width="16" height="12" rx="3"/><path d="M12 7V4M9 13h.01M15 13h.01"/></svg>Cấu hình chatbot</button>
+      <button id="aLogout" style="color:#ffd9d0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>Đăng xuất</button>
+    </nav>
+  </aside>
+  <div class="dmain">
+    <div class="dtop"><h1 id="paneTitle">Dashboard</h1><div class="who"><div style="text-align:right"><b>Admin công ty</b><small style="color:var(--stone)">Trà Nai Vàng</small></div><div class="ava">A</div></div></div>
+    <div class="dbody" id="dbody"></div>
+  </div>
+</div>
+<script>
+if(!sessionStorage.getItem('nv_admin') && !localStorage.getItem('nv_admin')) location.href='dang-nhap-admin.html';
+const $=(s,r=document)=>r.querySelector(s);
+function fmtN(n){return (n||0).toLocaleString('vi-VN')+'₫';}
+function toast(m){let t=document.createElement('div');t.textContent=m;t.style.cssText='position:fixed;left:50%;bottom:30px;transform:translateX(-50%);background:#28321f;color:#fff;padding:12px 22px;border-radius:30px;font-size:13.5px;z-index:999';document.body.appendChild(t);setTimeout(()=>t.remove(),2600);}
+
+/* ---- data ---- */
+const DEMO_DEALER={code:'TNV-HCM-BT-00125',name:'Đại lý Trà Việt An',rep:'Nguyễn Văn An',phone:'0908 123 456',email:'vietan.tra@gmail.com',city:'TP. Hồ Chí Minh',district:'Quận 3',tier:'Đại lý cấp 1',discount:0.35,staff:'Trần B',joined:'12/03/2024',status:'Đã duyệt'};
+function dealers(){
+  const reg=JSON.parse(localStorage.getItem('nv_dealer_accounts')||'{}');
+  const seen={}, out=[DEMO_DEALER]; seen[DEMO_DEALER.code]=1;
+  Object.keys(reg).forEach(k=>{const a=reg[k];if(a&&a.code&&!seen[a.code]){seen[a.code]=1;out.push(a);}});
+  return out;
+}
+function allOrders(){try{return JSON.parse(localStorage.getItem('nv_dorders'))||[]}catch(e){return []}}
+function drive(){try{return JSON.parse(localStorage.getItem('nv_admin_drive'))||{}}catch(e){return {}}}
+function saveDrive(d){localStorage.setItem('nv_admin_drive',JSON.stringify(d));}
+
+/* ---- panes ---- */
+const P={};
+P.overview=()=>{
+  const ds=dealers(), os=allOrders();
+  const rev=os.reduce((a,o)=>a+(o.total||0),0), paid=os.reduce((a,o)=>a+(o.paid||0),0);
+  const dv=drive(); const connected=dv.dealerOut||dv.dealerIn;
+  const pending=ds.filter(d=>d.status==='Chờ duyệt').length;
+  return `<div class="kpis">
+    <div class="kpi"><div class="lb">Tổng đại lý</div><div class="vl">${ds.length}</div><div class="sub">${pending} chờ duyệt</div></div>
+    <div class="kpi"><div class="lb">Tổng đơn đại lý</div><div class="vl">${os.length}</div><div class="sub">${os.filter(o=>o.status==='pending').length} chờ duyệt</div></div>
+    <div class="kpi"><div class="lb">Giá trị đơn</div><div class="vl">${fmtN(rev)}</div><div class="sub">Đã thu ${fmtN(paid)}</div></div>
+    <div class="kpi"><div class="lb">Công nợ</div><div class="vl" style="color:#b23b2a">${fmtN(rev-paid)}</div><div class="sub">Còn phải thu</div></div>
+  </div>
+  ${!connected?`<div class="card" style="border:1.5px solid #e0b84a;background:#FFFBEF;margin-top:18px"><div class="alert warn" style="margin:0"><span>🔌</span><div><b>Chưa kết nối Google Drive/Sheets.</b> Vào mục <b>Kết nối Google Drive</b> để dán link Sheet đại lý — dữ liệu đơn hàng &amp; danh sách mã đại lý sẽ đồng bộ về đó cho sản xuất theo dõi.</div></div></div>`:`<div class="card" style="margin-top:18px"><div class="alert ok" style="margin:0"><span>✅</span><div><b>Đã kết nối Google Sheets.</b> Đơn hàng &amp; đại lý mới tự động ghi về sheet công ty.</div></div></div>`}
+  <div class="card"><h3>Cảnh báo cần xử lý</h3><div class="cdesc">Tự động theo dữ liệu hệ thống.</div>
+    ${pending?`<div class="alert warn"><span>🆕</span><div><b>${pending} đại lý chờ duyệt</b> — vào mục Đại lý để xác minh &amp; gán cấp.</div></div>`:''}
+    <div class="alert info"><span>💳</span><div><b>Công nợ quá hạn:</b> theo dõi tại mục Công nợ (tuổi nợ >30 ngày cần thu hồi).</div></div>
+    <div class="alert info"><span>📦</span><div><b>${os.filter(o=>o.status==='pending').length} đơn chờ duyệt</b> — vào Đơn hàng để duyệt &amp; chuyển kho.</div></div>
+  </div>`;
+};
+
+P.dealers=()=>{
+  const ds=dealers();
+  return `<div class="card"><h3>Danh sách đại lý &amp; mã (GG Sheet "Đại lý")</h3><div class="cdesc">Mỗi đại lý đăng ký được cấp <b>mã duy nhất</b>, lưu tại đây để tra cứu đăng nhập &amp; gắn đơn hàng. Đồng bộ Google Sheets.</div>
+  <div style="overflow-x:auto"><table class="tbl"><thead><tr><th>Mã đại lý</th><th>Tên / Người ĐD</th><th>Liên hệ</th><th>Khu vực</th><th>Cấp</th><th>Trạng thái</th><th>Thao tác</th></tr></thead><tbody>
+  ${ds.map(d=>`<tr><td><b style="color:var(--tea)">${d.code}</b><br/><small style="color:var(--stone)">${d.joined||''}</small></td>
+    <td><b>${d.name||''}</b><br/><small style="color:var(--stone)">${d.rep||''}</small></td>
+    <td><small>${d.phone||''}<br/>${d.email||''}</small></td>
+    <td><small>${d.city||''}${d.district?' · '+d.district:''}</small></td>
+    <td><span class="badge b-blue">${d.tier||'—'}</span><br/><small style="color:var(--stone)">CK ${Math.round((d.discount||0)*100)}%</small></td>
+    <td><span class="badge ${d.status==='Đã duyệt'?'b-green':(d.status==='Chờ duyệt'?'b-amber':'b-gray')}">${d.status||'—'}</span></td>
+    <td>${d.status==='Chờ duyệt'?`<button class="btn btn-primary btn-sm" onclick="approveDealer('${d.code}')">Duyệt</button>`:`<button class="btn btn-ghost btn-sm" onclick="viewDealer('${d.code}')">Xem</button>`}</td></tr>`).join('')}
+  </tbody></table></div>
+  <div class="alert ok" style="margin-top:14px"><span>🤖</span><div>Khi có đại lý mới đăng ký, hệ thống <b>tự thêm 1 dòng</b> vào GG Sheet "Đại lý" gồm đầy đủ thông tin &amp; mã — dùng để tra cứu đăng nhập/đơn hàng sau này.</div></div>
+  </div>`;
+};
+
+P.orders=()=>{
+  const os=allOrders(), ds=dealers(); const nameOf=c=>{const d=ds.find(x=>x.code===c);return d?d.name:c;};
+  const OST={pending:['Chờ duyệt','b-amber'],confirm:['Đã xác nhận','b-blue'],shipping:['Đang giao','b-blue'],done:['Hoàn tất','b-green'],debt:['Công nợ quá hạn','b-red'],cancelled:['Đã hủy','b-gray']};
+  return `<div class="card"><h3>Đơn hàng đại lý (toàn hệ thống)</h3><div class="cdesc">Mọi đơn từ cổng đại lý &amp; chatbot. Admin duyệt → chuyển kho → sản xuất xuất hàng.</div>
+  <div style="overflow-x:auto"><table class="tbl"><thead><tr><th>Mã đơn</th><th>Đại lý</th><th>Kênh</th><th>Ngày</th><th class="tr">Giá trị</th><th class="tr">Còn nợ</th><th>Trạng thái</th><th></th></tr></thead><tbody>
+  ${os.length?os.map(o=>`<tr><td><b>${o.code}</b></td><td>${nameOf(o.dealer)}<br/><small style="color:var(--stone)">${o.dealer||''}</small></td><td><span class="badge ${o.channel==='Chatbot'?'b-green':'b-blue'}">${o.channel||''}</span></td><td>${o.date}</td><td class="tr">${fmtN(o.total)}</td><td class="tr" style="color:${o.total-o.paid>0?'#b23b2a':'#3c6b28'}">${fmtN(o.total-o.paid)}</td><td><span class="badge ${(OST[o.status]||['','b-gray'])[1]}">${(OST[o.status]||[o.status])[0]}</span></td><td>${o.status==='pending'?`<button class="btn btn-primary btn-sm" onclick="approveOrder('${o.code}')">Duyệt đơn</button>`:''}</td></tr>`).join(''):`<tr><td colspan="8" class="empty">Chưa có đơn nào.</td></tr>`}
+  </tbody></table></div></div>`;
+};
+
+P.debt=()=>{
+  const os=allOrders().filter(o=>o.total-o.paid>0), ds=dealers(); const nameOf=c=>{const d=ds.find(x=>x.code===c);return d?d.name:c;};
+  const tot=os.reduce((a,o)=>a+(o.total-o.paid),0);
+  return `<div class="kpis" style="grid-template-columns:repeat(3,1fr)"><div class="kpi"><div class="lb">Tổng công nợ</div><div class="vl" style="color:#b23b2a">${fmtN(tot)}</div></div><div class="kpi"><div class="lb">Số đơn còn nợ</div><div class="vl">${os.length}</div></div><div class="kpi"><div class="lb">Đại lý có nợ</div><div class="vl">${new Set(os.map(o=>o.dealer)).size}</div></div></div>
+  <div class="card" style="margin-top:18px"><h3>Công nợ theo đơn</h3><div class="cdesc">Tuổi nợ: 0–7 · 8–15 · 16–30 · >30 ngày. Quá hạn cần thu hồi.</div>
+  <div style="overflow-x:auto"><table class="tbl"><thead><tr><th>Đại lý</th><th>Mã đơn</th><th class="tr">Còn nợ</th><th>Ngày đặt</th><th>Tình trạng</th></tr></thead><tbody>
+  ${os.length?os.map(o=>`<tr><td>${nameOf(o.dealer)}<br/><small style="color:var(--stone)">${o.dealer}</small></td><td>${o.code}</td><td class="tr" style="color:#b23b2a">${fmtN(o.total-o.paid)}</td><td>${o.date}</td><td><span class="badge ${o.status==='debt'?'b-red':'b-amber'}">${o.status==='debt'?'Quá hạn':'Đang theo dõi'}</span></td></tr>`).join(''):`<tr><td colspan="5" class="empty">Không có công nợ.</td></tr>`}
+  </tbody></table></div></div>`;
+};
+
+P.products=()=>{
+  return `<div class="card"><h3>Sản phẩm &amp; bảng giá theo cấp</h3><div class="cdesc">Cấu hình giá lẻ đề xuất &amp; giá sỉ từng cấp (mô phỏng). Thứ tự ưu tiên áp giá: giá riêng ĐL → giá theo cấp → chiết khấu SL → chương trình → mã.</div>
+  <div style="overflow-x:auto"><table class="tbl"><thead><tr><th>Sản phẩm</th><th class="tr">Giá lẻ đề xuất</th><th class="tr">Sỉ Tiêu chuẩn (−25%)</th><th class="tr">Cấp 1 (−35%)</th><th class="tr">NPP (−40%)</th></tr></thead><tbody>
+  ${RETAIL.map(p=>`<tr><td>${p.name}</td><td class="tr">${fmtN(p.price)}</td><td class="tr">${fmtN(Math.round(p.price*0.75/500)*500)}</td><td class="tr"><b style="color:var(--tea)">${fmtN(Math.round(p.price*0.65/500)*500)}</b></td><td class="tr">${fmtN(Math.round(p.price*0.60/500)*500)}</td></tr>`).join('')}
+  </tbody></table></div></div>`;
+};
+
+P.connect=()=>{
+  const dv=drive();
+  const field=(key,label,hint)=>{const v=dv[key]||'';const ok=v&&/docs\.google\.com|drive\.google\.com/.test(v);return `<div class="conn ${ok?'ok':''}"><label>${label}</label><div class="row"><input id="in-${key}" value="${v}" placeholder="Dán link Google Sheets/Drive…"/><button class="btn btn-primary btn-sm" onclick="saveConn('${key}')">Kết nối</button></div><div class="st">${ok?'<span class="badge b-green">✔ Đã kết nối</span>':'<span class="badge b-gray">Chưa kết nối</span>'} <small style="color:var(--stone)">${hint}</small></div></div>`;};
+  return `<div class="card"><h3>Kết nối Google Drive / Google Sheets</h3><div class="cdesc">Dán link Google Sheets của công ty vào đây. Hệ thống sẽ ĐỌC dữ liệu training (đầu vào) &amp; GHI dữ liệu đơn hàng/đại lý (đầu ra). Có 2 luồng tách biệt: <b>Đại lý (B2B)</b> và <b>Khách lẻ</b>.</div>
+    <h3 style="font-size:14px;margin-top:6px">🤝 Luồng ĐẠI LÝ (B2B)</h3>
+    ${field('dealerIn','Sheet ĐẦU VÀO — training bot đại lý (sản phẩm sỉ, giá theo cấp, chính sách, template)','Dùng file mẫu GG-SHEET-DAI-LY-INPUT')}
+    ${field('dealerOut','Sheet ĐẦU RA — đơn hàng sỉ, danh sách mã đại lý, công nợ','Dùng file mẫu GG-SHEET-DAI-LY-OUTPUT')}
+    <h3 style="font-size:14px;margin-top:14px">🛍️ Luồng KHÁCH LẺ</h3>
+    ${field('retailIn','Sheet ĐẦU VÀO — training bot khách lẻ (sản phẩm, FAQ, khuyến mãi)','File mẫu FILE-MAU-CHUAN-GG-SHEET-DAU-VAO')}
+    ${field('retailOut','Sheet ĐẦU RA — đơn khách lẻ, lead, log AI','File output khách lẻ')}
+    <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">
+      <a class="btn btn-ghost btn-sm" href="assets/templates/GG-SHEET-DAI-LY-INPUT.xlsx" download>⤓ Tải mẫu ĐẦU VÀO đại lý</a>
+      <a class="btn btn-ghost btn-sm" href="assets/templates/GG-SHEET-DAI-LY-OUTPUT.xlsx" download>⤓ Tải mẫu ĐẦU RA đại lý</a>
+    </div>
+    <div class="alert info" style="margin-top:14px"><span>ℹ️</span><div>Bản demo: link được lưu &amp; kiểm tra định dạng. Việc đọc/ghi Google Sheets thực tế sẽ chạy qua Google API (Apps Script / service account) ở giai đoạn backend.</div></div>
+  </div>`;
+};
+
+P.bots=()=>`<div class="card"><h3>Cấu hình chatbot</h3><div class="cdesc">Bot đại lý &amp; bot khách lẻ dùng nguồn training KHÁC nhau (2 sheet đầu vào riêng).</div>
+  <div style="overflow-x:auto"><table class="tbl"><thead><tr><th>Bot</th><th>Nguồn training</th><th>Nhiệm vụ</th><th>Trạng thái</th></tr></thead><tbody>
+  <tr><td><b>Bot Đại lý (B2B)</b></td><td>Sheet đầu vào ĐẠI LÝ</td><td>Báo giá sỉ theo cấp, MOQ, công nợ, chốt đơn sỉ → GG Sheet</td><td><span class="badge b-green">Đang chạy (demo)</span></td></tr>
+  <tr><td><b>Bot Khách lẻ</b></td><td>Sheet đầu vào KHÁCH LẺ</td><td>Tư vấn sản phẩm, giá lẻ, khuyến mãi, chốt đơn lẻ</td><td><span class="badge b-green">Đang chạy (demo)</span></td></tr>
+  </tbody></table></div>
+  <div class="alert info" style="margin-top:14px"><span>🧠</span><div>Vì đại lý &amp; khách lẻ mua khác nhau (sỉ/lẻ, giá, công nợ), <b>dữ liệu training tách riêng</b> để bot trả lời đúng ngữ cảnh.</div></div></div>`;
+
+P.retail=()=>{
+  let os=[];try{os=JSON.parse(localStorage.getItem('nv_orders'))||[]}catch(e){}
+  const SL={pending:['Chờ xử lý','b-amber'],confirm:['Đã xác nhận','b-blue'],shipping:['Đang giao','b-blue'],done:['Hoàn tất','b-green'],cancelled:['Đã hủy','b-gray']};
+  const rev=os.reduce((a,o)=>a+(o.total||0),0);
+  return `<div class="kpis" style="grid-template-columns:repeat(3,1fr)"><div class="kpi"><div class="lb">Tổng đơn lẻ</div><div class="vl">${os.length}</div></div><div class="kpi"><div class="lb">Doanh thu lẻ</div><div class="vl">${fmtN(rev)}</div></div><div class="kpi"><div class="lb">Đơn đang xử lý</div><div class="vl">${os.filter(o=>['pending','confirm'].includes(typeof orderStatus==='function'?orderStatus(o):'pending')).length}</div></div></div>
+  <div class="card" style="margin-top:18px"><h3>Đơn hàng khách lẻ</h3><div class="cdesc">Đơn từ website bán lẻ. Đồng bộ sheet ĐẦU RA khách lẻ (Thời gian · Tên khách · SĐT · Địa chỉ · Sản phẩm · Số lượng · Trạng thái).</div>
+  <div style="overflow-x:auto"><table class="tbl"><thead><tr><th>Mã đơn</th><th>Khách</th><th>SĐT</th><th>Ngày</th><th class="tr">Tổng</th><th>Trạng thái</th></tr></thead><tbody>
+  ${os.length?os.map(o=>{const s=typeof orderStatus==='function'?orderStatus(o):'pending';const a=o.addr||{};return `<tr><td><b>${o.code}</b></td><td>${a.name||'—'}</td><td>${a.phone||'—'}</td><td>${o.date||new Date(o.ts||Date.now()).toLocaleDateString('vi-VN')}</td><td class="tr">${fmtN(o.total)}</td><td><span class="badge ${(SL[s]||['','b-gray'])[1]}">${(SL[s]||[s])[0]}</span></td></tr>`}).join(''):`<tr><td colspan="6" class="empty">Chưa có đơn khách lẻ nào. (Khách đặt trên website → hiện tại đây)</td></tr>`}
+  </tbody></table></div></div>`;
+};
+
+function cms(){try{return JSON.parse(localStorage.getItem('nv_cms'))||{}}catch(e){return {}}}
+const BAN_DEF=[['Ưu đãi Trà Tết 2026','Giảm 10% mọi đơn với mã NAIVANG10 · Freeship từ 500k'],['Tinh hoa từ thiên nhiên','Trà cao nguyên Bảo Lộc — ướp hương thủ công từ 1982'],['100% hữu cơ & an toàn','FSSC 22000 · OCOP 3 sao · Không hương liệu tổng hợp'],['Quà tặng doanh nghiệp','Bộ quà trà sang trọng cho đối tác & nhân viên']];
+P.content=()=>{
+  const c=cms(), b=c.banners||[];
+  const bannerCard=i=>{const x=b[i]||{};return `<div class="conn"><label>Banner ${i+1}</label>
+    <input id="bt-${i}" value="${(x.title||'').replace(/"/g,'&quot;')}" placeholder="${BAN_DEF[i][0]}" style="margin-bottom:6px"/>
+    <input id="bs-${i}" value="${(x.sub||'').replace(/"/g,'&quot;')}" placeholder="${BAN_DEF[i][1]}"/>
+    <div class="row" style="margin-top:8px;align-items:center"><input type="file" accept="image/*" onchange="cmsUpload(this,${i})" style="flex:1;border:none;font-size:12px"/>${x.img?`<img src="${x.img}" style="width:60px;height:40px;object-fit:cover;border-radius:6px;border:1px solid var(--line)"/>`:'<span class="badge b-gray">Ảnh mặc định</span>'}</div></div>`;};
+  return `<div class="card"><h3>Chỉnh sửa nội dung &amp; hình ảnh trang chủ</h3><div class="cdesc">Sửa câu chữ &amp; thay ảnh banner. Bấm <b>Lưu &amp; xuất bản</b> rồi <b>Xem trước</b> để thấy thay đổi thật trên trang chủ.</div>
+    <div class="conn"><label>Dòng thông báo trên cùng (freeship)</label><input id="cms-freeship" value="${(c.freeship||'').replace(/"/g,'&quot;')}" placeholder="Giao hàng toàn quốc · Hotline 0855 256 512"/></div>
+    <div class="conn"><label>Hotline hiển thị</label><input id="cms-hotline" value="${(c.hotline||'').replace(/"/g,'&quot;')}" placeholder="0855 256 512"/></div>
+    <div class="conn"><label>Mô tả chân trang</label><input id="cms-footerDesc" value="${(c.footerDesc||'').replace(/"/g,'&quot;')}" placeholder="Công ty TNHH Trà Nai Vàng — di sản trà Việt…"/></div>
+    <div class="conn"><label>Địa chỉ chân trang</label><input id="cms-address" value="${(c.address||'').replace(/"/g,'&quot;')}" placeholder="Lô CN7, KCN Lộc Sơn, Bảo Lộc, Lâm Đồng"/></div>
+    <h3 style="font-size:14px;margin:8px 0 4px">Banner trang chủ (tiêu đề · mô tả · ảnh)</h3>
+    ${[0,1,2,3].map(bannerCard).join('')}
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px"><button class="btn btn-primary" id="cmsSave">💾 Lưu &amp; xuất bản</button><a class="btn btn-ghost" href="index.html" target="_blank">👁 Xem trước trang chủ</a><button class="btn btn-ghost" onclick="if(confirm('Khôi phục nội dung mặc định?')){localStorage.removeItem('nv_cms');go('content');toast('Đã khôi phục mặc định');}">Khôi phục mặc định</button></div>
+    <div class="alert info" style="margin-top:14px"><span>ℹ️</span><div>Nội dung lưu vào cấu hình site &amp; áp ngay lên trang chủ (bản demo). Khi có backend CMS, nút này sẽ xuất bản cho toàn bộ khách truy cập.</div></div>
+  </div>`;
+};
+function cmsUpload(input,idx){const f=input.files[0];if(!f)return;if(f.size>1200000){toast('Ảnh nên < 1.2MB');return;}const r=new FileReader();r.onload=e=>{const c=cms();c.banners=c.banners||[];c.banners[idx]=Object.assign({},c.banners[idx],{img:e.target.result});localStorage.setItem('nv_cms',JSON.stringify(c));toast('Đã tải ảnh banner '+(idx+1));go('content');};r.readAsDataURL(f);}
+function saveCMS(){const c=cms();c.freeship=$('#cms-freeship').value.trim();c.hotline=$('#cms-hotline').value.trim();c.footerDesc=$('#cms-footerDesc').value.trim();c.address=$('#cms-address').value.trim();c.banners=c.banners||[];[0,1,2,3].forEach(i=>{c.banners[i]=Object.assign({},c.banners[i],{title:$('#bt-'+i).value.trim(),sub:$('#bs-'+i).value.trim()});});localStorage.setItem('nv_cms',JSON.stringify(c));toast('Đã lưu & xuất bản nội dung ✓');}
+
+/* ---- render ---- */
+const T={overview:'Dashboard',dealers:'Đại lý (mã & duyệt)',orders:'Đơn hàng đại lý',retail:'Đơn khách lẻ',debt:'Công nợ',products:'Sản phẩm & giá',content:'Nội dung website',connect:'Kết nối Google Drive',bots:'Cấu hình chatbot'};
+function go(p){document.querySelectorAll('#dnav button[data-p]').forEach(b=>b.classList.toggle('on',b.dataset.p===p));$('#paneTitle').textContent=T[p];$('#dbody').innerHTML=P[p]();if(p==='content'){const s=$('#cmsSave');if(s)s.onclick=saveCMS;}window.scrollTo(0,0);}
+function approveDealer(code){const reg=JSON.parse(localStorage.getItem('nv_dealer_accounts')||'{}');Object.keys(reg).forEach(k=>{if(reg[k]&&reg[k].code===code){reg[k].status='Đã duyệt';reg[k].tier='Đại lý cấp 1';reg[k].discount=0.35;reg[k].creditLimit=50000000;}});localStorage.setItem('nv_dealer_accounts',JSON.stringify(reg));toast('Đã duyệt '+code+' → Đại lý cấp 1');go('dealers');refreshBadges();}
+function viewDealer(code){const d=dealers().find(x=>x.code===code);alert('Đại lý '+code+'\n'+d.name+' · '+d.rep+'\n'+(d.phone||'')+' · '+(d.email||'')+'\nKhu vực: '+(d.city||'')+'\nCấp: '+d.tier+' (CK '+Math.round((d.discount||0)*100)+'%)\nTrạng thái: '+d.status);}
+function approveOrder(code){const os=allOrders();const o=os.find(x=>x.code===code);if(o){o.status='confirm';o.ship='Đang chuẩn bị hàng';localStorage.setItem('nv_dorders',JSON.stringify(os));toast('Đã duyệt đơn '+code+' → chuyển kho sản xuất');go('orders');}}
+function saveConn(key){const v=$('#in-'+key).value.trim();if(v&&!/docs\.google\.com|drive\.google\.com/.test(v)){toast('Link không phải Google Sheets/Drive');return;}const d=drive();d[key]=v;saveDrive(d);toast(v?'Đã kết nối '+key:'Đã xoá link');go('connect');refreshBadges();}
+function refreshBadges(){$('#bDealers').textContent=dealers().length;const dv=drive();$('#bConn').textContent=(dv.dealerOut||dv.dealerIn)?'✓':'!';$('#bConn').style.background=(dv.dealerOut||dv.dealerIn)?'#5fd07a':'var(--gold-light)';}
+$('#aLogout').onclick=()=>{sessionStorage.removeItem('nv_admin');localStorage.removeItem('nv_admin');location.href='dang-nhap-admin.html';};
+$('#dnav').addEventListener('click',e=>{const b=e.target.closest('button[data-p]');if(b)go(b.dataset.p);});
+refreshBadges();go('overview');
+</script>
+</body>
+</html>
