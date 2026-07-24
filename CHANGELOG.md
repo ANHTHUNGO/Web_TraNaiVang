@@ -150,3 +150,11 @@ Người dùng giao 100% tự làm hết. Bổ sung toàn bộ nhóm trang nội
 - BẢN ĐỒ ĐỊNH VỊ: nhúng Google Maps thật (nhà máy KCN Lộc Sơn, Bảo Lộc) vào Liên hệ, Dây chuyền, Hệ thống đại lý và Trang chủ (khối "Vị trí nhà máy").
 - SEO ĐỊA PHƯƠNG: chèn **JSON-LD LocalBusiness/Store** (NAP + toạ độ 11.5241,107.8419 + giờ mở cửa + logo/ảnh nhà máy) vào **toàn bộ 24 trang** để Google hiển thị đúng địa điểm Trà Nai Vàng.
 - Kiểm thử: 24/24 trang HTTP 200; 31/31 ảnh máy 200; render động 31 máy đúng thứ tự + 22 gia công; giỏ hàng/voucher WELCOME15/tìm kiếm song ngữ/email/đơn hàng chạy OK; không ảnh vỡ. Cache-bust v170733.
+
+## [v170736] 2026-07-24 — Cổng đại lý B2B + 2 lối đăng ký + lọc trạng thái đơn
+- MỚI: `dashboard-dai-ly.html` — CỔNG QUẢN LÝ ĐẠI LÝ B2B (mock localStorage, chạy được): Tổng quan (KPI doanh số/công nợ/hạn mức/chiết khấu + tiến độ mục tiêu + biểu đồ 6 tháng + cảnh báo), Đặt hàng sỉ (giá sỉ theo cấp, SKU, quy cách thùng, MOQ, tồn, KM), Giỏ sỉ (tự tính chiết khấu sản lượng + VAT + ship + công nợ khả dụng), Đơn hàng (14 trạng thái, lọc), Thanh toán & công nợ (hạn mức + aging màu xanh/vàng/đỏ), Ưu đãi & mã riêng, Mục tiêu & thưởng, Báo cáo mua hàng, Hồ sơ đại lý, Hỗ trợ & khiếu nại (ticket). Sidebar theo cấu trúc menu đề xuất. Trang noindex.
+- `dang-nhap-dai-ly.html`: đấu nối đăng nhập (demo DL0001/123456 hoặc "Đăng nhập nhanh") → seed dealer → vào dashboard.
+- `dang-ky-dai-ly.html`: bổ sung Người đại diện, Quận/Huyện, NV KD phụ trách; sinh MÃ ĐẠI LÝ TNV-<KV>-xxxxx + trạng thái "Chờ duyệt"; email xác nhận hồ sơ.
+- `dang-nhap.html`: thêm 2 LỐI ĐĂNG KÝ đẹp (Khách hàng lẻ / Đại lý-Doanh nghiệp) + link "Đăng nhập cổng đại lý".
+- `tai-khoan.html`: thêm bộ lọc trạng thái đơn (Tất cả/Đang xử lý/Đang giao/Đã giao/Đã hủy) — phân biệt đã mua vs đang dở.
+- Cache-bust v170736 (24 trang). Admin B2B (Phần F–J: duyệt đại lý, cấu hình giá/chiết khấu, công nợ toàn hệ thống, kho, phân quyền, nhật ký) để lại cho giai đoạn backend.

@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Cổng đại lý — Hệ thống quản lý đại lý Trà Nai Vàng</title>
+<meta name="robots" content="noindex"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css?v=170736">
+<script src="assets/store.js?v=170736"></script>
+<style>
+  body{background:var(--off)}
+  .dwrap{display:grid;grid-template-columns:246px 1fr;min-height:100vh;align-items:start}
+  /* SIDEBAR */
+  .dside{background:linear-gradient(180deg,var(--forest),var(--pine));color:#eaf0e0;min-height:100vh;position:sticky;top:0;display:flex;flex-direction:column}
+  .dside .brand{display:flex;gap:11px;align-items:center;padding:18px 20px;border-bottom:1px solid rgba(255,255,255,.1)}
+  .dside .brand img{width:38px;height:38px;border-radius:9px;background:#fff;padding:3px}
+  .dside .brand b{font-family:var(--serif);font-size:15px;color:#fff;line-height:1.15}
+  .dside .brand small{font-size:10.5px;color:var(--gold-light);letter-spacing:.04em}
+  .dnav{flex:1;overflow-y:auto;padding:10px 0 20px}
+  .dnav .grp{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(234,240,224,.5);padding:14px 22px 6px}
+  .dnav button{display:flex;align-items:center;gap:11px;width:100%;padding:10px 22px;border:none;background:none;color:#dfe8d2;font-family:var(--sans);font-size:13.5px;font-weight:500;cursor:pointer;text-align:left;border-left:3px solid transparent;transition:.18s}
+  .dnav button:hover{background:rgba(255,255,255,.07)}
+  .dnav button.on{background:rgba(255,255,255,.12);border-color:var(--gold-light);color:#fff}
+  .dnav button svg{width:17px;flex:none;opacity:.85}
+  .dnav .bdg{margin-left:auto;background:var(--gold-light);color:#4a3d16;font-size:10px;font-weight:700;min-width:18px;height:18px;border-radius:9px;display:grid;place-items:center;padding:0 5px}
+  /* MAIN */
+  .dmain{padding:0 0 50px}
+  .dtop{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:15px 30px;background:var(--paper);border-bottom:1px solid var(--line-soft);position:sticky;top:0;z-index:20}
+  .dtop h1{font-size:19px;font-weight:600}
+  .dtop .who{display:flex;align-items:center;gap:12px;font-size:13px}
+  .dtop .who .ava{width:38px;height:38px;border-radius:50%;background:var(--tea);color:#fff;display:grid;place-items:center;font-family:var(--serif);font-size:17px}
+  .dtop .who b{display:block;font-size:13.5px}.dtop .who small{color:var(--stone);font-size:11.5px}
+  .dbody{padding:26px 30px}
+  .dpane{display:none}.dpane.on{display:block}
+  /* KPI */
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .kpi{background:var(--paper);border:1px solid var(--line-soft);border-radius:15px;padding:17px 18px}
+  .kpi .lb{font-size:12px;color:var(--stone);display:flex;align-items:center;gap:7px}
+  .kpi .vl{font-family:var(--serif);font-size:25px;margin-top:7px;color:var(--forest);line-height:1.1}
+  .kpi .sub{font-size:11.5px;color:var(--stone);margin-top:4px}
+  .kpi.acc{background:linear-gradient(135deg,var(--forest),var(--pine));color:#fff;border:none}
+  .kpi.acc .lb,.kpi.acc .sub{color:rgba(255,255,255,.8)}.kpi.acc .vl{color:var(--gold-light)}
+  .card{background:var(--paper);border:1px solid var(--line-soft);border-radius:16px;padding:22px}
+  .card h3{font-size:15.5px;font-weight:600;margin-bottom:4px}
+  .card .cdesc{font-size:12.5px;color:var(--stone);margin-bottom:16px}
+  .grid2{display:grid;grid-template-columns:1.4fr 1fr;gap:18px}
+  .prog{height:12px;border-radius:8px;background:var(--sage-100);overflow:hidden;margin:10px 0 6px}
+  .prog i{display:block;height:100%;background:linear-gradient(90deg,var(--tea),var(--gold-light));border-radius:8px}
+  .bars{display:flex;align-items:flex-end;gap:12px;height:150px;padding-top:10px}
+  .bars .b{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:flex-end}
+  .bars .b i{width:100%;max-width:34px;background:linear-gradient(180deg,var(--sage),var(--tea));border-radius:6px 6px 0 0;transition:.4s}
+  .bars .b span{font-size:11px;color:var(--stone)}
+  /* TABLE */
+  .tbl{width:100%;border-collapse:collapse;font-size:13px}
+  .tbl th{text-align:left;padding:11px 12px;background:var(--off);color:var(--stone);font-weight:600;font-size:11.5px;text-transform:uppercase;letter-spacing:.03em;white-space:nowrap}
+  .tbl td{padding:12px;border-bottom:1px solid var(--line-soft);vertical-align:middle}
+  .tbl tr:hover td{background:var(--cream)}
+  .tbl .tr{text-align:right}
+  .badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;white-space:nowrap}
+  .b-green{background:#E3F0DC;color:#3c6b28}.b-blue{background:#E0EBF6;color:#2c5f8a}.b-amber{background:#FBF0D5;color:#8a6d1a}
+  .b-orange{background:#FBE6D2;color:#9a5a1a}.b-red{background:#F8DDD8;color:#b23b2a}.b-gray{background:#ececea;color:#666}
+  .wp{display:flex;gap:13px;align-items:center}
+  .wp img{width:52px;height:52px;border-radius:9px;object-fit:cover;border:1px solid var(--line-soft)}
+  .wp b{display:block;font-size:13.5px}.wp small{color:var(--stone);font-size:11.5px}
+  .qty{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+  .qty button{width:28px;height:30px;border:none;background:var(--off);cursor:pointer;font-size:15px;color:var(--tea)}
+  .qty input{width:42px;height:30px;border:none;text-align:center;font-family:var(--sans);font-size:13px}
+  .filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+  .filters button{border:1px solid var(--line);background:var(--paper);padding:8px 15px;border-radius:30px;font-family:var(--sans);font-size:12.5px;cursor:pointer;color:var(--stone)}
+  .filters button.on{background:var(--tea);color:#fff;border-color:var(--tea)}
+  .sumrow{display:flex;justify-content:space-between;padding:8px 0;font-size:13.5px;border-bottom:1px dashed var(--line-soft)}
+  .sumrow.tot{border:none;padding-top:14px;font-size:16px}.sumrow.tot b{font-family:var(--serif);font-size:22px;color:var(--tea)}
+  .alert{display:flex;gap:11px;padding:13px 15px;border-radius:12px;margin-bottom:10px;font-size:13px;align-items:flex-start}
+  .alert.warn{background:#FBF0D5}.alert.dang{background:#F8DDD8}.alert.info{background:#E0EBF6}
+  .vcard2{border:1.5px dashed var(--gold);border-radius:14px;background:#FFFDF5;padding:15px 17px}
+  .vcard2 .code{font-family:var(--serif);font-size:20px;color:var(--tea)}
+  .empty{text-align:center;color:var(--stone);padding:40px}
+  @media(max-width:1050px){.kpis{grid-template-columns:repeat(2,1fr)}.grid2{grid-template-columns:1fr}}
+  @media(max-width:820px){.dwrap{grid-template-columns:1fr}.dside{position:static;min-height:auto}.dnav{display:flex;flex-wrap:wrap;padding:8px}.dnav .grp{width:100%}.dnav button{width:auto;border-left:none;border-radius:20px;padding:8px 14px}}
+</style>
+</head>
+<body data-page="dashboard-dai-ly">
+<div class="dwrap">
+  <!-- SIDEBAR -->
+  <aside class="dside">
+    <div class="brand"><img src="assets/logo-full.png" alt="Nai Vàng"/><div><b>NAI VÀNG</b><br/><small>Cổng đại lý B2B</small></div></div>
+    <nav class="dnav" id="dnav">
+      <div class="grp">Vận hành</div>
+      <button data-p="overview" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>Tổng quan</button>
+      <button data-p="products"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 9l9-6 9 6v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/><path d="M3 9l9 6 9-6"/></svg>Đặt hàng sỉ</button>
+      <button data-p="cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 3h2l2 12h11l2-8H6"/><circle cx="9" cy="20" r="1.4"/><circle cx="17" cy="20" r="1.4"/></svg>Giỏ hàng sỉ<span class="bdg" id="cartN">0</span></button>
+      <button data-p="orders"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 3h9l4 4v14H6Z"/><path d="M9 8h6M9 12h6M9 16h4"/></svg>Đơn hàng</button>
+      <button data-p="debt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>Thanh toán & công nợ</button>
+      <div class="grp">Kinh doanh</div>
+      <button data-p="vouchers"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2a2 2 0 1 0 0 4v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2a2 2 0 1 0 0-4Z"/></svg>Ưu đãi & mã của tôi</button>
+      <button data-p="target"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/></svg>Mục tiêu & thưởng</button>
+      <button data-p="reports"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 20V4M4 20h16M8 16v-5M13 16V8M18 16v-9"/></svg>Báo cáo mua hàng</button>
+      <div class="grp">Tài khoản</div>
+      <button data-p="profile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-3.5 4.5-5 8-5s6.5 1.5 8 5"/></svg>Hồ sơ đại lý</button>
+      <button data-p="support"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 5 .2c0 1.6-2.5 2.1-2.5 3.3M12 17h.01"/></svg>Hỗ trợ & khiếu nại</button>
+      <button id="dLogout" style="color:#ffd9d0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>Đăng xuất</button>
+    </nav>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="dmain">
+    <div class="dtop">
+      <h1 id="paneTitle">Tổng quan</h1>
+      <div class="who"><div style="text-align:right"><b id="dName">—</b><small id="dCode">—</small></div><div class="ava" id="dAva">A</div></div>
+    </div>
+    <div class="dbody" id="dbody"></div>
+  </div>
+</div>
+
+<script>
+/* ===================== MOCK DATA (localStorage) ===================== */
+const DKEY='nv_dealer';
+function dealer(){try{return JSON.parse(localStorage.getItem(DKEY))}catch(e){return null}}
+function saveDealer(d){localStorage.setItem(DKEY,JSON.stringify(d))}
+/* seed demo dealer neu chua co / neu login gui vao */
+function seedDealer(base){
+  const d = Object.assign({
+    code:'TNV-HCM-BT-00125', name:'Đại lý Trà Việt An', rep:'Nguyễn Văn An',
+    phone:'0908 123 456', email:'vietan.tra@gmail.com',
+    addr:'125 Lê Văn Sỹ, P.13, Q.3', city:'TP. Hồ Chí Minh', district:'Quận 3',
+    tax:'0312xxxxxx', biz:'Cửa hàng trà & quà tặng', channel:'Cả hai',
+    tier:'Đại lý cấp 1', discount:0.35, staff:'Trần B — KD khu vực HCM',
+    creditLimit:50000000, creditUsed:15000000,
+    salesMonth:72000000, salesYear:640000000, targetMonth:100000000,
+    orders:12, processing:2, shipping:1, points:1840, joined:'12/03/2024', status:'Đã duyệt'
+  }, base||{});
+  saveDealer(d); return d;
+}
+/* neu chua dang nhap -> ve trang dang nhap dai ly */
+let D = dealer();
+if(!D){ location.href='dang-nhap-dai-ly.html'; }
+
+/* ------- san pham si: dua tren RETAIL, tinh gia si theo chiet khau cap ------- */
+const PACK = {perBox:30, unit:'hộp'};
+function wprods(){
+  return RETAIL.map((p,idx)=>{
+    const retail=p.price, whole=Math.round(retail*(1-D.discount)/500)*500;
+    return {slug:p.slug, name:p.name, sku:'TNV-'+p.slug.toUpperCase().replace(/-/g,'').slice(0,8),
+      retail, whole, perBox:PACK.perBox, boxPrice:whole*PACK.perBox, moq:[5,5,10,5,8,5,5,6][idx]||5,
+      stock:[420,180,360,300,240,500,460,280][idx]||300, promo:[null,'Mua 20 thùng tặng 1',null,'Giảm thêm 2% từ 15 thùng',null,null,null,'Mua 10 tặng 1'][idx]};
+  });
+}
+/* ------- mock don hang si ------- */
+const DORD=[
+ {code:'DH-TNV-202607-00128', date:'22/07/2026', total:87750000, paid:70000000, ship:'Đang giao', pay:'Công nợ 15 ngày', status:'shipping', staff:'Trần B', items:6},
+ {code:'DH-TNV-202607-00121', date:'14/07/2026', total:52400000, paid:52400000, ship:'Đã giao', pay:'Chuyển khoản', status:'done', staff:'Trần B', items:4},
+ {code:'DH-TNV-202607-00110', date:'03/07/2026', total:96200000, paid:96200000, ship:'Đã giao', pay:'Chuyển khoản', status:'done', staff:'Trần B', items:8},
+ {code:'DH-TNV-202606-00098', date:'26/06/2026', total:41300000, paid:20000000, ship:'Chờ xử lý', pay:'Công nợ (quá hạn)', status:'debt', staff:'Trần B', items:3},
+ {code:'DH-TNV-202607-00131', date:'24/07/2026', total:18900000, paid:0, ship:'Chờ duyệt', pay:'Chờ thanh toán', status:'pending', staff:'Trần B', items:2},
+];
+const OST={pending:['Chờ công ty duyệt','b-amber'], confirm:['Đã xác nhận','b-blue'], preparing:['Đang chuẩn bị hàng','b-blue'],
+  shipping:['Đang giao hàng','b-blue'], done:['Hoàn tất','b-green'], debt:['Công nợ quá hạn','b-red'], cancelled:['Đã hủy','b-gray']};
+/* ------- mock cong no (aging) ------- */
+const DDEBT=[
+ {code:'DH-TNV-202607-00128', amount:17750000, due:'06/08/2026', days:13, tag:['Chưa đến hạn','b-green']},
+ {code:'DH-TNV-202606-00098', amount:21300000, due:'11/07/2026', days:-13, tag:['Quá hạn 13 ngày','b-red']},
+];
+/* ------- mock uu dai ------- */
+const DVOU=[
+ {code:'TNV-CAP1-HCM', val:'Giảm thêm 3%', cond:'Đơn từ 50 triệu · khu vực HCM', exp:'31/12/2026', left:'Không giới hạn', type:'Mã theo cấp đại lý'},
+ {code:'SALE-Q3-2026', val:'Giảm 5%', cond:'Đơn từ 20 thùng · chiến dịch Quý 3', exp:'30/09/2026', left:'Còn 3 lần', type:'Mã chiến dịch'},
+ {code:'TRANB-KD07', val:'Freeship', cond:'Mã của NV kinh doanh Trần B', exp:'31/08/2026', left:'Còn 5 lần', type:'Mã theo nhân viên'},
+];
+const VAT=0.08;
+
+/* ===================== HELPERS ===================== */
+const $=(s,r=document)=>r.querySelector(s);
+function pct(a,b){return Math.min(100,Math.round(a/b*100));}
+function cartD(){try{return JSON.parse(localStorage.getItem('nv_dcart'))||{}}catch(e){return {}}}
+function saveCart(c){localStorage.setItem('nv_dcart',JSON.stringify(c));updateCartN();}
+function updateCartN(){const c=cartD();const n=Object.values(c).reduce((a,b)=>a+(+b||0),0);$('#cartN').textContent=n;}
+
+/* ===================== PANES ===================== */
+const PANES={};
+PANES.overview=()=>{
+  const remain=D.targetMonth-D.salesMonth, prog=pct(D.salesMonth,D.targetMonth);
+  const creditLeft=D.creditLimit-D.creditUsed;
+  const months=[['T2',48],['T3',55],['T4',61],['T5',58],['T6',82],['T7',72]];
+  const mx=Math.max(...months.map(m=>m[1]));
+  return `
+  <div class="kpis">
+    <div class="kpi"><div class="lb">Doanh số mua tháng này</div><div class="vl">${fmt(D.salesMonth)}</div><div class="sub">Mục tiêu ${fmt(D.targetMonth)} · đạt ${prog}%</div></div>
+    <div class="kpi"><div class="lb">Doanh số năm ${new Date().getFullYear()}</div><div class="vl">${fmt(D.salesYear)}</div><div class="sub">${D.orders} đơn tích lũy</div></div>
+    <div class="kpi"><div class="lb">Công nợ hiện tại</div><div class="vl">${fmt(D.creditUsed)}</div><div class="sub">Hạn mức còn lại ${fmt(creditLeft)}</div></div>
+    <div class="kpi acc"><div class="lb">Cấp đại lý</div><div class="vl" style="font-size:21px">${D.tier}</div><div class="sub">Chiết khấu ${Math.round(D.discount*100)}% · ${D.points.toLocaleString('vi-VN')} điểm</div></div>
+  </div>
+  <div class="grid2" style="margin-top:18px">
+    <div class="card"><h3>Tiến độ mục tiêu tháng ${new Date().toLocaleDateString('vi-VN',{month:'2-digit',year:'numeric'})}</h3><div class="cdesc">Mua thêm để đạt mốc thưởng doanh số.</div>
+      <div style="display:flex;justify-content:space-between;font-size:13px"><span>Đã mua <b style="color:var(--tea)">${fmt(D.salesMonth)}</b></span><span>Mục tiêu ${fmt(D.targetMonth)}</span></div>
+      <div class="prog"><i style="width:${prog}%"></i></div>
+      <div style="font-size:12.5px;color:var(--stone)">Còn thiếu <b style="color:#b23b2a">${fmt(remain)}</b> để đạt mốc thưởng 2%. Đạt ${fmt(D.targetMonth*1.2)} → thưởng 3%.</div>
+      <div style="margin-top:18px"><div style="font-size:13px;font-weight:600;margin-bottom:6px">Doanh số 6 tháng gần nhất (triệu đ)</div>
+        <div class="bars">${months.map(m=>`<div class="b"><i style="height:${m[1]/mx*100}%"></i><span>${m[0]}</span></div>`).join('')}</div></div>
+    </div>
+    <div class="card"><h3>Cần chú ý</h3><div class="cdesc">Cảnh báo & việc cần xử lý.</div>
+      <div class="alert dang"><span>🔴</span><div><b>Công nợ quá hạn 13 ngày</b><br/><small>Đơn DH-...00098 còn ${fmt(21300000)}. Vui lòng thanh toán để tiếp tục đặt hàng.</small></div></div>
+      <div class="alert warn"><span>🎯</span><div><b>Sắp đạt mục tiêu tháng</b><br/><small>Còn ${fmt(remain)} để nhận thưởng 2% doanh số.</small></div></div>
+      <div class="alert info"><span>🚚</span><div><b>1 đơn đang giao</b><br/><small>DH-...00128 dự kiến giao 26/07/2026.</small></div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px">
+        <div style="text-align:center;background:var(--off);border-radius:12px;padding:14px"><div style="font-family:var(--serif);font-size:24px;color:var(--tea)">${D.processing}</div><div style="font-size:12px;color:var(--stone)">Đơn đang xử lý</div></div>
+        <div style="text-align:center;background:var(--off);border-radius:12px;padding:14px"><div style="font-family:var(--serif);font-size:24px;color:var(--tea)">${D.shipping}</div><div style="font-size:12px;color:var(--stone)">Đơn đang giao</div></div>
+      </div>
+    </div>
+  </div>`;
+};
+
+PANES.products=()=>{
+  const ps=wprods();
+  return `<div class="card"><h3>Bảng giá sỉ dành cho ${D.tier}</h3><div class="cdesc">Giá đã áp chiết khấu cấp đại lý ${Math.round(D.discount*100)}%. Nhập số thùng để thêm vào giỏ sỉ (1 thùng = ${PACK.perBox} ${PACK.unit}).</div>
+    <div style="overflow-x:auto"><table class="tbl"><thead><tr><th>Sản phẩm</th><th>SKU</th><th class="tr">Giá lẻ đề xuất</th><th class="tr">Giá sỉ/hộp</th><th class="tr">Giá/thùng</th><th class="tr">Tồn</th><th>Khuyến mãi</th><th class="tr">Số thùng</th></tr></thead><tbody>
+    ${ps.map(p=>`<tr>
+      <td><div class="wp"><img src="${prodImg(p.slug)}" alt=""/><div><b>${p.name}</b><small>${p.perBox} ${PACK.unit}/thùng · tối thiểu ${p.moq} thùng</small></div></div></td>
+      <td><code style="font-size:11.5px">${p.sku}</code></td>
+      <td class="tr" style="color:var(--stone)"><s>${fmt(p.retail)}</s></td>
+      <td class="tr"><b style="color:var(--tea)">${fmt(p.whole)}</b></td>
+      <td class="tr">${fmt(p.boxPrice)}</td>
+      <td class="tr">${p.stock}</td>
+      <td>${p.promo?`<span class="badge b-amber">${p.promo}</span>`:'<span style="color:var(--stone)">—</span>'}</td>
+      <td class="tr"><div class="qty"><button data-m="${p.slug}">−</button><input id="q-${p.slug}" value="${cartD()[p.slug]||0}" data-i="${p.slug}"/><button data-pl="${p.slug}">+</button></div></td>
+    </tr>`).join('')}
+    </tbody></table></div>
+    <div style="text-align:right;margin-top:16px"><button class="btn btn-primary" id="goCart">Xem giỏ hàng sỉ →</button></div>
+  </div>`;
+};
+
+PANES.cart=()=>{
+  const c=cartD(), ps=wprods().filter(p=>c[p.slug]>0);
+  if(!ps.length) return `<div class="card empty"><div style="font-size:40px">🧺</div><h3 style="margin:10px 0">Giỏ hàng sỉ trống</h3><p style="color:var(--stone)">Vào <b>Đặt hàng sỉ</b> để chọn sản phẩm theo thùng.</p><button class="btn btn-primary" style="margin-top:14px" onclick="go('products')">Đặt hàng ngay</button></div>`;
+  let sub=0, boxes=0; ps.forEach(p=>{sub+=p.boxPrice*c[p.slug];boxes+=+c[p.slug];});
+  const volDisc = boxes>=20?Math.round(sub*0.02):0;   // chiet khau san luong
+  const afterDisc=sub-volDisc;
+  const vat=Math.round(afterDisc*VAT);
+  const shipFee = afterDisc>=30000000?0:350000;
+  const creditLeft=D.creditLimit-D.creditUsed;
+  const grand=afterDisc+vat+shipFee;
+  const useCredit=Math.min(creditLeft, grand);
+  return `<div class="grid2">
+    <div class="card"><h3>Giỏ hàng sỉ (${boxes} thùng)</h3><div class="cdesc">Đơn giá đã theo cấp ${D.tier}. Bạn không thể tự sửa giá.</div>
+      <div style="overflow-x:auto"><table class="tbl"><thead><tr><th>Sản phẩm</th><th class="tr">Giá/thùng</th><th class="tr">Số thùng</th><th class="tr">Thành tiền</th><th></th></tr></thead><tbody>
+      ${ps.map(p=>`<tr><td><div class="wp"><img src="${prodImg(p.slug)}"/><div><b>${p.name}</b><small>${p.perBox} ${PACK.unit}/thùng</small></div></div></td>
+        <td class="tr">${fmt(p.boxPrice)}</td>
+        <td class="tr"><div class="qty"><button data-m="${p.slug}">−</button><input id="q-${p.slug}" value="${c[p.slug]}" data-i="${p.slug}"/><button data-pl="${p.slug}">+</button></div></td>
+        <td class="tr"><b>${fmt(p.boxPrice*c[p.slug])}</b></td>
+        <td class="tr"><button data-rm="${p.slug}" style="background:none;border:none;color:#b23b2a;cursor:pointer">✕</button></td></tr>`).join('')}
+      </tbody></table></div>
+    </div>
+    <div class="card" style="align-self:start">
+      <h3>Tính tiền tự động</h3>
+      <div class="sumrow"><span>Tạm tính (${boxes} thùng)</span><span>${fmt(sub)}</span></div>
+      <div class="sumrow"><span>Chiết khấu cấp đại lý</span><span style="color:#3c6b28">đã gồm trong giá sỉ</span></div>
+      <div class="sumrow"><span>Chiết khấu sản lượng ${boxes>=20?'(≥20 thùng −2%)':'(mua ≥20 thùng −2%)'}</span><span>${volDisc?'−'+fmt(volDisc):'—'}</span></div>
+      <div class="sumrow"><span>Thuế VAT (${VAT*100}%)</span><span>${fmt(vat)}</span></div>
+      <div class="sumrow"><span>Phí vận chuyển</span><span>${shipFee?fmt(shipFee):'Miễn phí'}</span></div>
+      <div class="sumrow tot"><span>Cần thanh toán</span><b>${fmt(grand)}</b></div>
+      <div style="background:var(--sage-100);border-radius:12px;padding:12px 14px;margin:14px 0;font-size:12.5px">Hạn mức công nợ khả dụng: <b>${fmt(creditLeft)}</b>. Có thể ghi công nợ tối đa <b>${fmt(useCredit)}</b> cho đơn này.</div>
+      <div class="field"><label style="font-size:12.5px">Ngày mong muốn giao</label><input type="date" id="wDate"/></div>
+      <div class="field"><label style="font-size:12.5px">Ghi chú đơn</label><textarea id="wNote" rows="2" placeholder="VD: giao giờ hành chính"></textarea></div>
+      <button class="btn btn-primary btn-block" id="placeOrder">Gửi đơn đặt hàng sỉ</button>
+      <p style="font-size:11.5px;color:var(--stone);text-align:center;margin-top:8px">Đơn sẽ chuyển trạng thái <b>Chờ công ty duyệt</b>.</p>
+    </div>
+  </div>`;
+};
+
+PANES.orders=()=>{
+  return `<div class="card"><h3>Đơn hàng của tôi</h3><div class="cdesc">Theo dõi trạng thái xử lý, giao hàng, thanh toán từng đơn.</div>
+    <div class="filters" id="oFilter"><button class="on" data-f="all">Tất cả</button><button data-f="pending">Đang xử lý</button><button data-f="shipping">Đang giao</button><button data-f="done">Hoàn tất</button><button data-f="debt">Công nợ</button></div>
+    <div style="overflow-x:auto"><table class="tbl"><thead><tr><th>Mã đơn</th><th>Ngày đặt</th><th class="tr">Giá trị</th><th class="tr">Đã trả</th><th class="tr">Còn nợ</th><th>Thanh toán</th><th>Trạng thái</th><th></th></tr></thead>
+    <tbody id="oBody"></tbody></table></div></div>`;
+};
+
+PANES.debt=()=>{
+  const left=D.creditLimit-D.creditUsed;
+  return `<div class="kpis" style="grid-template-columns:repeat(3,1fr)">
+    <div class="kpi"><div class="lb">Hạn mức công nợ</div><div class="vl">${fmt(D.creditLimit)}</div></div>
+    <div class="kpi"><div class="lb">Đã sử dụng</div><div class="vl" style="color:#b23b2a">${fmt(D.creditUsed)}</div></div>
+    <div class="kpi"><div class="lb">Còn lại</div><div class="vl" style="color:#3c6b28">${fmt(left)}</div></div>
+  </div>
+  <div class="card" style="margin-top:18px"><h3>Các khoản công nợ</h3><div class="cdesc">Màu cảnh báo: xanh chưa đến hạn · vàng sắp đến hạn · đỏ quá hạn.</div>
+    <div style="overflow-x:auto"><table class="tbl"><thead><tr><th>Đơn</th><th class="tr">Số tiền</th><th>Đến hạn</th><th>Tình trạng</th><th></th></tr></thead><tbody>
+    ${DDEBT.map(d=>`<tr><td><b>${d.code}</b></td><td class="tr">${fmt(d.amount)}</td><td>${d.due}</td><td><span class="badge ${d.tag[1]}">${d.tag[0]}</span></td><td class="tr"><button class="btn btn-ghost" style="padding:7px 14px;font-size:12px" onclick="payDebt('${d.code}',${d.amount})">Thanh toán</button></td></tr>`).join('')}
+    </tbody></table></div>
+    <div class="alert dang" style="margin-top:16px"><span>⚠️</span><div>Khi công nợ <b>vượt hạn mức</b> hoặc <b>quá hạn</b>, hệ thống sẽ tạm khóa đặt đơn mới và nhắc kế toán/NV kinh doanh.</div></div>
+  </div>
+  <div class="card" style="margin-top:18px"><h3>Hình thức thanh toán hỗ trợ</h3>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:6px">${['Chuyển khoản','Mã QR','Thẻ','COD (nếu duyệt)','Công nợ theo hạn mức','Thanh toán kết hợp'].map(x=>`<span class="badge b-blue">${x}</span>`).join('')}</div></div>`;
+};
+
+PANES.vouchers=()=>`<div class="card"><h3>Ưu đãi & mã giảm giá của tôi</h3><div class="cdesc">Mã áp cho riêng đại lý ${D.code}. Hệ thống kiểm soát điều kiện, không cộng dồn tùy ý.</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px">
+  ${DVOU.map(v=>`<div class="vcard2"><div style="display:flex;justify-content:space-between;align-items:center"><span class="code">${v.code}</span><span class="badge b-green">${v.val}</span></div>
+    <div style="font-size:12.5px;color:var(--stone);margin:8px 0 4px">${v.cond}</div>
+    <div style="font-size:11.5px;color:var(--stone)">${v.type} · HSD ${v.exp} · ${v.left}</div>
+    <button class="btn btn-ghost btn-block" style="margin-top:10px;padding:8px" onclick="copyCode('${v.code}')">Sao chép mã</button></div>`).join('')}
+  </div>
+  <div class="card" style="background:var(--off);margin-top:18px"><h3 style="font-size:14px">Chính sách áp dụng</h3>
+   <ul style="font-size:13px;color:var(--stone);line-height:1.9;margin-left:18px"><li>Chính sách vận chuyển: miễn phí cho đơn từ 30 triệu.</li><li>Chính sách đổi trả: đổi hàng lỗi trong 7 ngày kèm biên bản.</li><li>Chính sách công nợ: theo hạn mức cấp cho ${D.tier}.</li><li>Thưởng doanh số: đạt mục tiêu tháng +2%, vượt 20% +3%.</li></ul></div></div>`;
+
+PANES.target=()=>{
+  const prog=pct(D.salesMonth,D.targetMonth), remain=D.targetMonth-D.salesMonth;
+  return `<div class="card"><h3>Mục tiêu & thưởng doanh số</h3><div class="cdesc">Chỉ tính trên đơn <b>hoàn tất</b>.</div>
+    <div class="grid2">
+      <div><div style="display:flex;justify-content:space-between;font-size:13px"><span>Tháng này</span><span>${prog}%</span></div>
+        <div class="prog"><i style="width:${prog}%"></i></div>
+        <table class="tbl" style="margin-top:14px"><tbody>
+          <tr><td>Mục tiêu tháng</td><td class="tr"><b>${fmt(D.targetMonth)}</b></td></tr>
+          <tr><td>Đã thực hiện</td><td class="tr">${fmt(D.salesMonth)}</td></tr>
+          <tr><td>Còn thiếu</td><td class="tr" style="color:#b23b2a">${fmt(remain)}</td></tr>
+          <tr><td>Thời gian còn lại</td><td class="tr">9 ngày</td></tr>
+        </tbody></table></div>
+      <div><h3 style="font-size:14px">Mốc thưởng</h3>
+        <div class="alert info"><span>🥈</span><div><b>Đạt ${fmt(D.targetMonth)}</b> → thưởng <b>2%</b> doanh số</div></div>
+        <div class="alert warn"><span>🥇</span><div><b>Đạt ${fmt(D.targetMonth*1.2)}</b> → thưởng <b>3%</b> doanh số</div></div>
+        <div class="alert" style="background:var(--sage-100)"><span>🎁</span><div>Điểm thưởng hiện có: <b>${D.points.toLocaleString('vi-VN')}</b> điểm — quy đổi ưu đãi đơn sau.</div></div>
+      </div>
+    </div></div>`;
+};
+
+PANES.reports=()=>{
+  const top=wprods().slice(0,5).map((p,i)=>({name:p.name, qty:[42,31,28,19,12][i], val:[122,86,74,55,33][i]}));
+  const mx=Math.max(...top.map(t=>t.val));
+  return `<div class="kpis"><div class="kpi"><div class="lb">Tổng giá trị đơn (năm)</div><div class="vl">${fmt(D.salesYear)}</div></div>
+    <div class="kpi"><div class="lb">Tổng chiết khấu nhận</div><div class="vl">${fmt(Math.round(D.salesYear*D.discount))}</div></div>
+    <div class="kpi"><div class="lb">Giá trị TB/đơn</div><div class="vl">${fmt(Math.round(D.salesYear/D.orders))}</div></div>
+    <div class="kpi"><div class="lb">Tần suất đặt hàng</div><div class="vl">~2/tháng</div></div></div>
+  <div class="card" style="margin-top:18px"><h3>Sản phẩm mua nhiều nhất</h3><div class="cdesc">Theo giá trị (triệu đ) trong năm.</div>
+    <table class="tbl"><thead><tr><th>Sản phẩm</th><th class="tr">Số thùng</th><th>Tỷ trọng</th><th class="tr">Giá trị</th></tr></thead><tbody>
+    ${top.map(t=>`<tr><td>${t.name}</td><td class="tr">${t.qty}</td><td><div class="prog" style="margin:0"><i style="width:${t.val/mx*100}%"></i></div></td><td class="tr"><b>${t.val} tr</b></td></tr>`).join('')}
+    </tbody></table>
+    <div class="cdesc" style="margin-top:14px">Có thể lọc theo ngày/tuần/tháng/quý/năm khi kết nối backend. Báo cáo tách rõ: đơn đã tạo · đã giao · doanh thu ghi nhận · đã thu · còn nợ.</div></div>`;
+};
+
+PANES.profile=()=>`<div class="card"><h3>Hồ sơ đại lý</h3><div class="cdesc">Mã đại lý <b style="color:var(--tea)">${D.code}</b> · Trạng thái <span class="badge b-green">${D.status}</span></div>
+  <div class="grid2"><div><table class="tbl"><tbody>
+    <tr><td>Tên đại lý</td><td><b>${D.name}</b></td></tr>
+    <tr><td>Người đại diện</td><td>${D.rep}</td></tr>
+    <tr><td>Điện thoại</td><td>${D.phone}</td></tr>
+    <tr><td>Email</td><td>${D.email}</td></tr>
+    <tr><td>Địa chỉ nhận hàng</td><td>${D.addr}, ${D.district}, ${D.city}</td></tr>
+    <tr><td>Mã số thuế</td><td>${D.tax}</td></tr>
+  </tbody></table></div>
+  <div><table class="tbl"><tbody>
+    <tr><td>Loại hình</td><td>${D.biz}</td></tr>
+    <tr><td>Kênh bán</td><td>${D.channel}</td></tr>
+    <tr><td>Cấp đại lý</td><td><b>${D.tier}</b> (chiết khấu ${Math.round(D.discount*100)}%)</td></tr>
+    <tr><td>NV kinh doanh phụ trách</td><td>${D.staff}</td></tr>
+    <tr><td>Ngày tham gia</td><td>${D.joined}</td></tr>
+    <tr><td>Hạn mức công nợ</td><td>${fmt(D.creditLimit)}</td></tr>
+  </tbody></table></div></div>
+  <div class="cdesc" style="margin-top:14px">Thay đổi cấp, giá riêng, hạn mức công nợ do Admin Trà Nai Vàng cấu hình và đều được lưu nhật ký.</div></div>`;
+
+PANES.support=()=>`<div class="card"><h3>Hỗ trợ & khiếu nại</h3><div class="cdesc">Tạo yêu cầu — mỗi yêu cầu có mã, mức ưu tiên, người phụ trách và trạng thái.</div>
+  <div class="grid2"><div>
+    <div class="field"><label>Loại yêu cầu</label><select id="sType"><option>Hỏi về đơn hàng</option><option>Hỏi về thanh toán / công nợ</option><option>Yêu cầu hóa đơn</option><option>Báo thiếu hàng</option><option>Báo hư hỏng</option><option>Yêu cầu đổi trả</option><option>Hỏi chính sách</option><option>Hỗ trợ bán hàng</option></select></div>
+    <div class="field"><label>Mã đơn liên quan (nếu có)</label><input id="sOrder" placeholder="DH-TNV-..."/></div>
+    <div class="field"><label>Nội dung</label><textarea id="sMsg" rows="4"></textarea></div>
+    <button class="btn btn-primary" id="sBtn">Gửi yêu cầu hỗ trợ</button>
+  </div>
+  <div><h3 style="font-size:14px">Kênh liên hệ nhanh</h3>
+    <p style="font-size:14px;line-height:2">📞 Hotline KD: <a href="tel:0855256512" style="color:var(--tea)">0855 256 512</a><br/>✉️ <a href="mailto:daily@tranaivang.com" style="color:var(--tea)">daily@tranaivang.com</a><br/>👤 NV phụ trách: <b>${D.staff}</b></p>
+    <div id="ticketList" style="margin-top:10px"></div>
+  </div></div></div>`;
+
+/* ===================== RENDER + EVENTS ===================== */
+const TITLES={overview:'Tổng quan',products:'Đặt hàng sỉ',cart:'Giỏ hàng sỉ',orders:'Đơn hàng',debt:'Thanh toán & công nợ',vouchers:'Ưu đãi & mã của tôi',target:'Mục tiêu & thưởng',reports:'Báo cáo mua hàng',profile:'Hồ sơ đại lý',support:'Hỗ trợ & khiếu nại'};
+let cur='overview';
+function go(p){
+  cur=p;
+  document.querySelectorAll('#dnav button[data-p]').forEach(b=>b.classList.toggle('on',b.dataset.p===p));
+  $('#paneTitle').textContent=TITLES[p];
+  $('#dbody').innerHTML=PANES[p]();
+  bindPane(p);
+  window.scrollTo(0,0);
+}
+function bindPane(p){
+  if(p==='products'||p==='cart'){
+    const gc=$('#goCart'); if(gc) gc.onclick=()=>go('cart');
+    const po=$('#placeOrder'); if(po) po.onclick=placeOrder;
+  }
+  if(p==='orders'){renderOrders('all'); $('#oFilter').onclick=e=>{const b=e.target.closest('[data-f]');if(!b)return;document.querySelectorAll('#oFilter button').forEach(x=>x.classList.toggle('on',x===b));renderOrders(b.dataset.f);};}
+  if(p==='support'){$('#sBtn').onclick=sendTicket;}
+}
+/* delegation gan 1 lan cho #dbody (tranh chong lap) */
+$('#dbody').addEventListener('click',e=>{
+  const pl=e.target.closest('[data-pl]'),m=e.target.closest('[data-m]'),rm=e.target.closest('[data-rm]');
+  if(pl){chg(pl.dataset.pl,1);} else if(m){chg(m.dataset.m,-1);} else if(rm){setQty(rm.dataset.rm,0);}
+});
+$('#dbody').addEventListener('change',e=>{const i=e.target.closest('[data-i]');if(i)setQty(i.dataset.i,Math.max(0,parseInt(i.value)||0));});
+function chg(slug,d){const c=cartD();const nv=Math.max(0,(+c[slug]||0)+d);setQty(slug,nv);}
+function setQty(slug,v){const c=cartD();if(v>0)c[slug]=v;else delete c[slug];saveCart(c);
+  const inp=document.getElementById('q-'+slug); if(inp)inp.value=v;
+  if(cur==='cart')go('cart');}
+function renderOrders(f){
+  const list = f==='all'?DORD : DORD.filter(o=> f==='pending'?['pending','confirm','preparing'].includes(o.status) : o.status===f);
+  $('#oBody').innerHTML = list.length? list.map(o=>`<tr><td><b>${o.code}</b><br/><small style="color:var(--stone)">${o.items} SP · ${o.staff}</small></td><td>${o.date}</td><td class="tr">${fmt(o.total)}</td><td class="tr">${fmt(o.paid)}</td><td class="tr" style="color:${o.total-o.paid>0?'#b23b2a':'#3c6b28'}">${fmt(o.total-o.paid)}</td><td><small>${o.pay}</small></td><td><span class="badge ${OST[o.status][1]}">${OST[o.status][0]}</span><br/><small style="color:var(--stone)">${o.ship}</small></td><td class="tr"><button class="btn btn-ghost" style="padding:6px 12px;font-size:12px" onclick="orderDetail('${o.code}')">Chi tiết</button></td></tr>`).join('') : `<tr><td colspan="8" class="empty">Không có đơn ở trạng thái này.</td></tr>`;
+}
+function placeOrder(){
+  const c=cartD(); const ps=wprods().filter(p=>c[p.slug]>0);
+  let sub=0,boxes=0; ps.forEach(p=>{sub+=p.boxPrice*c[p.slug];boxes+=+c[p.slug];});
+  const code='DH-TNV-'+new Date().toISOString().slice(0,7).replace('-','')+'-'+Math.floor(Math.random()*900+100);
+  DORD.unshift({code,date:new Date().toLocaleDateString('vi-VN'),total:Math.round(sub*1.08),paid:0,ship:'Chờ duyệt',pay:'Chờ thanh toán',status:'pending',staff:D.staff.split('—')[0].trim(),items:ps.length});
+  localStorage.removeItem('nv_dcart'); updateCartN();
+  alert('Đã gửi đơn '+code+' ('+boxes+' thùng). Trạng thái: Chờ công ty duyệt. Xác nhận đã gửi tới email '+D.email+'.');
+  go('orders');
+}
+function orderDetail(code){const o=DORD.find(x=>x.code===code);alert('Đơn '+code+'\nNgày: '+o.date+'\nGiá trị: '+fmt(o.total)+'\nĐã trả: '+fmt(o.paid)+'\nCòn nợ: '+fmt(o.total-o.paid)+'\nGiao: '+o.ship+'\nTT: '+OST[o.status][0]+'\nNV: '+o.staff+'\n\n(Bản demo — hóa đơn/phiếu giao/đối soát sẽ tải được khi có backend.)');}
+function payDebt(code,amt){if(confirm('Xác nhận thanh toán công nợ đơn '+code+' số tiền '+fmt(amt)+'?')){D.creditUsed=Math.max(0,D.creditUsed-amt);saveDealer(D);alert('Đã ghi nhận thanh toán '+fmt(amt)+'. Kế toán sẽ đối soát. Hạn mức được khôi phục.');go('debt');}}
+function copyCode(c){navigator.clipboard&&navigator.clipboard.writeText(c);alert('Đã sao chép mã '+c);}
+function sendTicket(){const t=$('#sType').value,m=$('#sMsg').value.trim();if(m.length<5){alert('Vui lòng nhập nội dung');return;}const id='HT-'+Math.floor(Math.random()*90000+10000);$('#ticketList').innerHTML=`<div class="alert info"><span>🎫</span><div><b>${id}</b> · ${t}<br/><small>Đã tiếp nhận · Ưu tiên thường · Phụ trách: ${D.staff}. Phản hồi trong 24h. Xác nhận gửi email ${D.email}.</small></div></div>`+$('#ticketList').innerHTML;$('#sMsg').value='';}
+
+/* header info */
+$('#dName').textContent=D.name; $('#dCode').textContent=D.code; $('#dAva').textContent=(D.rep||'A').trim()[0].toUpperCase();
+$('#dLogout').onclick=()=>{if(confirm('Đăng xuất cổng đại lý?')){/* giu du lieu demo, chi ve trang dang nhap */ location.href='dang-nhap-dai-ly.html';}};
+$('#dnav').addEventListener('click',e=>{const b=e.target.closest('button[data-p]');if(b)go(b.dataset.p);});
+updateCartN(); go('overview');
+</script>
+</body>
+</html>

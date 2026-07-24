@@ -5,9 +5,9 @@
 <title>Đăng nhập / Đăng ký — Trà Nai Vàng</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css?v=170734">
-<script src="assets/i18n.js?v=170734"></script>
-<script src="assets/store.js?v=170734"></script>
+<link rel="stylesheet" href="assets/site.css?v=170736">
+<script src="assets/i18n.js?v=170736"></script>
+<script src="assets/store.js?v=170736"></script>
 <style>
   .auth{min-height:calc(100vh - 240px);display:grid;place-items:center;padding:50px 20px;position:relative}
   .auth::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,var(--sage-100),transparent 60%);z-index:0}
@@ -29,6 +29,15 @@
   .socials button{display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;border:1px solid var(--line);border-radius:40px;background:var(--paper);font-family:var(--sans);font-size:13px;font-weight:600;cursor:pointer;transition:border .2s}
   .socials button:hover{border-color:var(--tea)}
   .frow2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .regtype{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+  .regtype .rt{display:block;text-align:center;border:1.5px solid var(--line);border-radius:14px;padding:14px 10px;cursor:pointer;text-decoration:none;color:var(--ink);transition:.2s}
+  .regtype .rt:hover{border-color:var(--tea)}
+  .regtype .rt.on{border-color:var(--tea);background:var(--sage-100)}
+  .regtype .rt .ic{font-size:22px;display:block;margin-bottom:5px}
+  .regtype .rt b{font-size:13.5px;display:block}
+  .regtype .rt small{font-size:11px;color:var(--stone);display:block;margin-top:3px;line-height:1.3}
+  .dealer-link{text-align:center;font-size:13px;color:var(--stone);margin-top:18px;padding-top:16px;border-top:1px solid var(--line-soft)}
+  .dealer-link a{color:var(--tea);font-weight:600}
   @media(max-width:440px){.frow2{grid-template-columns:1fr}}
 </style>
 <script type="application/ld+json">
@@ -57,10 +66,15 @@
         <button onclick="showToast('Đăng nhập Google sẽ kích hoạt khi có backend')"><svg width="16" viewBox="0 0 24 24"><path fill="#4285F4" d="M23 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.2a5.3 5.3 0 0 1-2.3 3.5v2.9h3.7c2.2-2 3.4-5 3.4-8.6z"/><path fill="#34A853" d="M12 24c3.1 0 5.7-1 7.6-2.8l-3.7-2.9c-1 .7-2.4 1.1-3.9 1.1-3 0-5.5-2-6.4-4.8H1.8v3A11.5 11.5 0 0 0 12 24z"/><path fill="#FBBC05" d="M5.6 14.6a7 7 0 0 1 0-4.4v-3H1.8a11.6 11.6 0 0 0 0 10.4l3.8-3z"/><path fill="#EA4335" d="M12 4.6c1.7 0 3.2.6 4.4 1.7l3.3-3.3A11.5 11.5 0 0 0 1.8 7.2l3.8 3c.9-2.8 3.4-5.6 6.4-5.6z"/></svg>Google</button>
         <button onclick="showToast('Đăng nhập Facebook sẽ kích hoạt khi có backend')"><svg width="16" viewBox="0 0 24 24" fill="#1877F2"><path d="M13 22v-8h3l1-4h-4V8c0-1.1.3-2 2-2h2V2.2C18.4 2.1 17.2 2 15.8 2 12.9 2 11 3.7 11 7v3H8v4h3v8h2Z"/></svg>Facebook</button>
       </div>
+      <div class="dealer-link">Bạn là đại lý / doanh nghiệp? <a href="dang-nhap-dai-ly.html">Đăng nhập cổng đại lý →</a></div>
     </div>
 
     <!-- REGISTER -->
     <div class="pane" id="pReg">
+      <div class="regtype">
+        <div class="rt on"><span class="ic">🛍️</span><b>Khách hàng lẻ</b><small>Mua lẻ, tích điểm, ưu đãi thành viên</small></div>
+        <a class="rt" href="dang-ky-dai-ly.html"><span class="ic">🤝</span><b>Đại lý / Doanh nghiệp</b><small>Mua sỉ, giá riêng, công nợ B2B</small></a>
+      </div>
       <div class="field"><label data-i18n="au.name">Họ và tên *</label><input id="r-name" placeholder="Nguyễn Văn A"/><div class="err">Vui lòng nhập họ tên</div></div>
       <div class="frow2">
         <div class="field"><label data-i18n="au.phone">Số điện thoại *</label><input id="r-phone" inputmode="tel" placeholder="09xxxxxxxx"/><div class="err">SĐT chưa đúng</div></div>
@@ -83,7 +97,7 @@
   </div>
 </main>
 
-<script src="assets/layout.js?v=170734"></script>
+<script src="assets/layout.js?v=170736"></script>
 <script>
 /* nếu đã đăng nhập → vào thẳng tài khoản */
 if(currentUser()) location.href='tai-khoan.html';
