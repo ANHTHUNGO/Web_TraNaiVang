@@ -27,18 +27,21 @@ function seedDemoDealer(){
   var d={code:'TNV-HCM-BT-00125',name:'Đại lý Trà Việt An',rep:'Nguyễn Văn An',phone:'0908 123 456',email:'vietan.tra@gmail.com',addr:'125 Lê Văn Sỹ, P.13, Q.3',city:'TP. Hồ Chí Minh',district:'Quận 3',tax:'0312xxxxxx',biz:'Cửa hàng trà & quà tặng',channel:'Cả hai',tier:'Đại lý cấp 1',discount:0.35,staff:'Trần B — KD khu vực HCM',creditLimit:50000000,creditUsed:15000000,salesMonth:72000000,salesYear:640000000,targetMonth:100000000,orders:12,processing:2,shipping:1,points:1840,joined:'12/03/2024',status:'Đã duyệt'};
   localStorage.setItem('nv_dealer',JSON.stringify(d));
 }
-function loginDealer(id){
+function loginDealer(id,pw){
   const reg=JSON.parse(localStorage.getItem('nv_dealer_accounts')||'{}');
   const acct=reg[id]||reg[id.toLowerCase()];
-  if(acct){localStorage.setItem('nv_dealer',JSON.stringify(acct));return true;}
-  if(id==='DL0001'||id==='TNV-HCM-BT-00125'){seedDemoDealer();return true;}
-  return false;
+  if(acct){ if(acct.pw && acct.pw!==pw) return 'wrongpw'; localStorage.setItem('nv_dealer',JSON.stringify(acct)); return 'ok'; }
+  if((id==='DL0001'||id==='TNV-HCM-BT-00125')&&pw==='123456'){seedDemoDealer();return 'ok';}
+  if(id==='DL0001'||id==='TNV-HCM-BT-00125') return 'wrongpw';
+  return 'notfound';
 }
 document.getElementById('dBtn').onclick=()=>{
   const id=document.getElementById('d-id').value.trim(), pw=document.getElementById('d-pw').value.trim();
   if(!id){showToast('Nhập mã đại lý hoặc email');return;}
   if(!pw){showToast('Nhập mật khẩu');return;}
-  if(loginDealer(id)){showToast('Đăng nhập thành công!');setTimeout(()=>location.href='dashboard-dai-ly.html',500);}
+  const r=loginDealer(id,pw);
+  if(r==='ok'){showToast('Đăng nhập thành công!');setTimeout(()=>location.href='dashboard-dai-ly.html',500);}
+  else if(r==='wrongpw')showToast('Mật khẩu không đúng.');
   else showToast('Không tìm thấy tài khoản. Vui lòng đăng ký đại lý trước.');
 };
 document.getElementById('dDemo').onclick=()=>{seedDemoDealer();location.href='dashboard-dai-ly.html';};

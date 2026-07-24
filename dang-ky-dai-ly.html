@@ -29,6 +29,10 @@
  <div class="field"><label>Nhóm sản phẩm quan tâm</label><input id="a-interest" placeholder="VD: trà ướp hương, oolong, thảo mộc"/></div>
  <div class="field"><label>Facebook / TikTok / Website <small>(nếu có)</small></label><input id="a-social"/></div>
  <div class="field"><label>Ghi chú</label><textarea id="a-note" rows="3"></textarea></div>
+ <h3 style="font-family:var(--serif);font-weight:500;font-size:19px;margin:22px 0 16px">Mật khẩu đăng nhập cổng đại lý</h3>
+ <div class="frow"><div class="field"><label>Mật khẩu *</label><input id="a-pw" type="password" placeholder="Tối thiểu 6 ký tự"/><div class="err">Mật khẩu tối thiểu 6 ký tự</div></div>
+   <div class="field"><label>Nhập lại mật khẩu *</label><input id="a-pw2" type="password" placeholder="Nhập lại"/><div class="err">Mật khẩu chưa khớp</div></div></div>
+ <p style="font-size:12px;color:var(--stone);margin:-4px 0 16px">Bạn sẽ đăng nhập cổng đại lý bằng <b>Mã đại lý</b> (được cấp sau khi gửi) và <b>mật khẩu</b> này.</p>
  <label class="check" style="margin-bottom:16px"><input type="checkbox" id="a-agree"/> <span>Tôi đồng ý với <a href="chinh-sach.html?p=dai-ly">Chính sách đại lý</a> và <a href="chinh-sach.html?p=bao-mat">Chính sách bảo mật</a>.</span></label>
  <button class="btn btn-primary btn-block" id="agBtn">Gửi đăng ký</button>
 </form></div></div>
@@ -36,20 +40,20 @@
 document.getElementById('agBtn').onclick=()=>{
  const v=id=>document.getElementById(id).value.trim();let ok=true;
  const bad=(id,c)=>{const f=document.getElementById(id).closest('.field');f.classList.toggle('invalid',c);if(c)ok=false;};
- bad('a-name',v('a-name').length<2);bad('a-phone',!/^0\d{8,10}$/.test(v('a-phone')));bad('a-email',!/^\S+@\S+\.\S+$/.test(v('a-email')));bad('a-shop',v('a-shop').length<2);bad('a-city',!v('a-city'));bad('a-district',v('a-district').length<2);bad('a-addr',v('a-addr').length<3);
+ bad('a-name',v('a-name').length<2);bad('a-phone',!/^0\d{8,10}$/.test(v('a-phone')));bad('a-email',!/^\S+@\S+\.\S+$/.test(v('a-email')));bad('a-shop',v('a-shop').length<2);bad('a-city',!v('a-city'));bad('a-district',v('a-district').length<2);bad('a-addr',v('a-addr').length<3);bad('a-pw',v('a-pw').length<6);bad('a-pw2',v('a-pw2')!==v('a-pw')||!v('a-pw2'));
  if(!document.getElementById('a-agree').checked){showToast('Vui lòng đồng ý chính sách');ok=false;}
  if(!ok){window.scrollTo({top:0,behavior:'smooth'});return;}
  const AB={'TP. Hồ Chí Minh':'HCM','Hà Nội':'HN','Lâm Đồng':'LD','Đà Nẵng':'DN','Cần Thơ':'CT'};
  const code='TNV-'+(AB[v('a-city')]||'VN')+'-'+Date.now().toString().slice(-5);
  /* tao tai khoan dai ly (mock) -> co the dang nhap bang ma nay */
  try{
-   const acct={code,name:v('a-shop'),rep:v('a-name'),phone:v('a-phone'),email:v('a-email'),addr:v('a-addr'),city:v('a-city'),district:v('a-district'),tax:v('a-tax'),biz:v('a-type'),channel:v('a-channel'),tier:'Đại lý tiêu chuẩn',discount:0.25,staff:(v('a-staff')||'Chưa phân công'),creditLimit:0,creditUsed:0,salesMonth:0,salesYear:0,targetMonth:30000000,orders:0,processing:0,shipping:0,points:0,joined:new Date().toLocaleDateString('vi-VN'),status:'Đã duyệt'};
+   const acct={code,pw:v('a-pw'),name:v('a-shop'),rep:v('a-name'),phone:v('a-phone'),email:v('a-email'),addr:v('a-addr'),city:v('a-city'),district:v('a-district'),tax:v('a-tax'),biz:v('a-type'),channel:v('a-channel'),tier:'Đại lý tiêu chuẩn',discount:0.25,staff:(v('a-staff')||'Chưa phân công'),creditLimit:0,creditUsed:0,salesMonth:0,salesYear:0,targetMonth:30000000,orders:0,processing:0,shipping:0,points:0,joined:new Date().toLocaleDateString('vi-VN'),status:'Đã duyệt'};
    const reg=JSON.parse(localStorage.getItem('nv_dealer_accounts')||'{}');
    reg[code]=acct; if(v('a-email'))reg[v('a-email').toLowerCase()]=acct; if(v('a-phone'))reg[v('a-phone')]=acct;
    localStorage.setItem('nv_dealer_accounts',JSON.stringify(reg));
  }catch(e){}
  try{ if(typeof sendEmail==='function'&&currentUser()) sendEmail('Đã nhận hồ sơ đăng ký đại lý '+code,`<p>Chào ${v('a-name')},</p><p>Nai Vàng đã nhận hồ sơ đăng ký <b>${v('a-type')||''}</b> của bạn.</p><p>Mã đại lý dự kiến: <b>${code}</b> · Trạng thái: <b>Chờ duyệt</b>.</p><p>Bộ phận kinh doanh sẽ liên hệ xác minh và gán cấp đại lý trong 24h làm việc. Sau khi được duyệt, bạn có thể đăng nhập cổng đại lý để xem giá sỉ và đặt hàng.</p>`,'system',true);}catch(e){}
- document.getElementById('agForm').innerHTML=`<div style="text-align:center;padding:30px 10px"><div style="width:70px;height:70px;border-radius:50%;background:var(--sage-100);display:grid;place-items:center;margin:0 auto 16px;font-size:32px">🎉</div><h3 style="font-family:var(--serif);font-weight:500;font-size:24px">Đăng ký thành công — tài khoản đã được tạo!</h3><p style="color:var(--stone);margin:10px 0">Mã đại lý của bạn: <b style="color:var(--tea);font-size:18px">${code}</b></p><div style="background:var(--sage-100);border-radius:14px;padding:14px 18px;max-width:460px;margin:0 auto 16px;font-size:13.5px;color:var(--ink)">🔑 Đăng nhập cổng đại lý bằng <b>mã ${code}</b> (mật khẩu tuỳ ý ở bản demo) để xem giá sỉ, đặt hàng &amp; theo dõi đơn.<br/><small style="color:var(--stone)">Cấp đại lý &amp; hạn mức công nợ chính thức sẽ do bộ phận kinh doanh xác minh &amp; gán trong 24h.</small></div><a class="btn btn-primary" href="dang-nhap-dai-ly.html?code=${encodeURIComponent(code)}">Đăng nhập cổng đại lý ngay →</a> <a class="btn btn-ghost" href="dai-ly.html">Về trang đại lý</a></div>`;
+ document.getElementById('agForm').innerHTML=`<div style="text-align:center;padding:30px 10px"><div style="width:70px;height:70px;border-radius:50%;background:var(--sage-100);display:grid;place-items:center;margin:0 auto 16px;font-size:32px">🎉</div><h3 style="font-family:var(--serif);font-weight:500;font-size:24px">Đăng ký thành công — tài khoản đã được tạo!</h3><p style="color:var(--stone);margin:10px 0">Mã đại lý của bạn: <b style="color:var(--tea);font-size:18px">${code}</b></p><div style="background:var(--sage-100);border-radius:14px;padding:14px 18px;max-width:460px;margin:0 auto 16px;font-size:13.5px;color:var(--ink)">🔑 Đăng nhập cổng đại lý bằng <b>mã ${code}</b> và <b>mật khẩu bạn vừa tạo</b> để xem giá sỉ, đặt hàng &amp; theo dõi đơn.<br/><small style="color:var(--stone)">Cấp đại lý &amp; hạn mức công nợ chính thức sẽ do bộ phận kinh doanh xác minh &amp; gán trong 24h.</small></div><a class="btn btn-primary" href="dang-nhap-dai-ly.html?code=${encodeURIComponent(code)}">Đăng nhập cổng đại lý ngay →</a> <a class="btn btn-ghost" href="dai-ly.html">Về trang đại lý</a></div>`;
  window.scrollTo({top:0,behavior:'smooth'});
 };
 </script></body></html>
