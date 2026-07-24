@@ -1,6 +1,6 @@
 # PROJECT PROGRESS — Trà Nai Vàng Website
 
-> Cập nhật lần cuối: **2026-07-17 (kết phiên)** · Trạng thái: **Prototype TMĐT desktop hoàn chỉnh — chờ user duyệt tổng để sang batch trang nội dung**
+> Cập nhật lần cuối: **2026-07-17 [v170730]** · Trạng thái: **TOÀN BỘ FRONT-END hoàn thiện (24 trang) — chờ user kiểm tra; kết nối backend giai đoạn sau**
 
 ## 🔖 ĐIỂM DỪNG PHIÊN 2026-07-17 (đọc đầu tiên khi mở phiên mới)
 Đã hoàn thành và push GitHub (commit mới nhất `39c13de`):

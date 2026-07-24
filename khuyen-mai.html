@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="vi"><head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Khuyến mãi — Trà Nai Vàng</title><meta name="description" content="Mã giảm giá và chương trình ưu đãi Trà Nai Vàng: WELCOME15, NAIVANG10, FREESHIP, combo quà Tết."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css?v=170730"><script src="assets/i18n.js?v=170730"></script><script src="assets/store.js?v=170730"></script>
+</head><body data-page="khuyen-mai">
+<section class="phead"><div class="wrap"><div class="crumb"><a href="index.html">Trang chủ</a> › <b>Khuyến mãi</b></div><h1>Ưu đãi &amp; Khuyến mãi</h1><p>Săn mã giảm giá và chương trình ưu đãi mới nhất từ Trà Nai Vàng.</p></div></section>
+<div class="wrap" style="padding:34px 0 60px"><div class="promo">
+ <div class="pc"><div class="top"><div class="tag">Thành viên mới</div><div class="code">WELCOME15</div></div><div class="bd"><h3>Giảm 15% đơn đầu tiên</h3><p>Dành cho khách đăng ký tài khoản mới. Áp dụng cho đơn hàng đầu tiên, không giới hạn sản phẩm.</p><div class="act"><button class="btn btn-primary" data-ap="WELCOME15">Áp dụng ngay</button><a class="btn btn-ghost" href="dang-nhap.html#dang-ky">Đăng ký</a></div></div></div>
+ <div class="pc"><div class="top"><div class="tag">Toàn đơn</div><div class="code">NAIVANG10</div></div><div class="bd"><h3>Giảm 10% mọi đơn hàng</h3><p>Áp dụng cho tất cả khách hàng. Nhập mã tại giỏ hàng hoặc bấm áp dụng ngay.</p><div class="act"><button class="btn btn-primary" data-ap="NAIVANG10">Áp dụng ngay</button></div></div></div>
+ <div class="pc"><div class="top"><div class="tag">Vận chuyển</div><div class="code">FREESHIP</div></div><div class="bd"><h3>Miễn phí vận chuyển</h3><p>Miễn phí ship cho mọi đơn khi áp mã. Đơn từ 500.000₫ vốn đã được freeship tự động.</p><div class="act"><button class="btn btn-primary" data-ap="FREESHIP">Áp dụng ngay</button></div></div></div>
+ <div class="pc"><div class="top"><div class="tag">Quà tặng</div><div class="code">TẾT 2026</div></div><div class="bd"><h3>Combo quà biếu Tết</h3><p>Bộ quà trà cao cấp cho biếu tặng dịp Tết — thiết kế sang trọng, chiết khấu theo số lượng.</p><div class="act"><a class="btn btn-primary" href="san-pham.html">Xem sản phẩm</a><a class="btn btn-ghost" href="lien-he.html">Đặt quà DN</a></div></div></div>
+</div>
+<div class="box" style="margin-top:24px;font-size:13px">* Mỗi mã có điều kiện áp dụng riêng (giá trị đơn tối thiểu, thời hạn, số lần dùng) và không cộng dồn nếu không được ghi rõ. Chi tiết xem tại giỏ hàng khi áp mã.</div>
+</div>
+<script src="assets/layout.js?v=170730"></script><script>
+document.querySelectorAll('[data-ap]').forEach(b=>b.onclick=()=>{ if(typeof applyVoucher==='function'&&applyVoucher(b.dataset.ap)) setTimeout(()=>location.href='san-pham.html',600); });
+</script></body></html>

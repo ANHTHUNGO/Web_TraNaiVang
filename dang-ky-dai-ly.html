@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="vi"><head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Đăng ký đại lý — Trà Nai Vàng</title><meta name="description" content="Đăng ký làm đại lý, nhà phân phối Trà Nai Vàng. Chính sách chiết khấu hấp dẫn, hỗ trợ toàn diện."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css?v=170730"><script src="assets/i18n.js?v=170730"></script><script src="assets/store.js?v=170730"></script>
+</head><body data-page="dang-ky-dai-ly">
+<section class="phead"><div class="wrap"><div class="crumb"><a href="index.html">Trang chủ</a> › <b>Đăng ký đại lý</b></div><h1>Đăng ký làm đại lý</h1><p>Điền thông tin bên dưới, Nai Vàng sẽ liên hệ xác minh và tư vấn chính sách phù hợp.</p></div></section>
+<div class="wrap" style="padding:34px 0 60px;max-width:820px"><div class="panel"><form id="agForm" onsubmit="return false">
+ <h3 style="font-family:var(--serif);font-weight:500;font-size:19px;margin-bottom:16px">Thông tin liên hệ</h3>
+ <div class="frow"><div class="field"><label>Họ và tên *</label><input id="a-name"/><div class="err">Nhập họ tên</div></div>
+   <div class="field"><label>Số điện thoại *</label><input id="a-phone" inputmode="tel"/><div class="err">SĐT chưa đúng</div></div></div>
+ <div class="frow"><div class="field"><label>Email *</label><input id="a-email" type="email"/><div class="err">Email chưa đúng</div></div>
+   <div class="field"><label>Tên cửa hàng / doanh nghiệp *</label><input id="a-shop"/><div class="err">Nhập tên cửa hàng</div></div></div>
+ <div class="frow"><div class="field"><label>Mã số thuế <small>(nếu có)</small></label><input id="a-tax"/></div>
+   <div class="field"><label>Tỉnh / Thành phố *</label><select id="a-city"><option value="">Chọn tỉnh/thành</option><option>TP. Hồ Chí Minh</option><option>Hà Nội</option><option>Lâm Đồng</option><option>Đà Nẵng</option><option>Cần Thơ</option><option>Khác</option></select><div class="err">Chọn tỉnh/thành</div></div></div>
+ <div class="field"><label>Địa chỉ *</label><input id="a-addr"/><div class="err">Nhập địa chỉ</div></div>
+ <h3 style="font-family:var(--serif);font-weight:500;font-size:19px;margin:22px 0 16px">Thông tin kinh doanh</h3>
+ <div class="frow"><div class="field"><label>Loại hình đăng ký *</label><select id="a-type"><option>Cộng tác viên</option><option>Đại lý bán lẻ</option><option>Đại lý cấp 1</option><option>Nhà phân phối</option><option>Khách hàng doanh nghiệp</option><option>Đối tác quà tặng</option></select></div>
+   <div class="field"><label>Kênh bán hàng hiện tại</label><select id="a-channel"><option>Cửa hàng offline</option><option>Online (FB/Shopee/TikTok)</option><option>Cả hai</option><option>Chưa kinh doanh</option></select></div></div>
+ <div class="frow"><div class="field"><label>Số điểm bán</label><input id="a-points" inputmode="numeric" placeholder="VD: 1"/></div>
+   <div class="field"><label>Doanh số dự kiến / tháng</label><input id="a-rev" placeholder="VD: 20 triệu"/></div></div>
+ <div class="field"><label>Nhóm sản phẩm quan tâm</label><input id="a-interest" placeholder="VD: trà ướp hương, oolong, thảo mộc"/></div>
+ <div class="field"><label>Facebook / TikTok / Website <small>(nếu có)</small></label><input id="a-social"/></div>
+ <div class="field"><label>Ghi chú</label><textarea id="a-note" rows="3"></textarea></div>
+ <label class="check" style="margin-bottom:16px"><input type="checkbox" id="a-agree"/> <span>Tôi đồng ý với <a href="chinh-sach.html?p=dai-ly">Chính sách đại lý</a> và <a href="chinh-sach.html?p=bao-mat">Chính sách bảo mật</a>.</span></label>
+ <button class="btn btn-primary btn-block" id="agBtn">Gửi đăng ký</button>
+</form></div></div>
+<script src="assets/layout.js?v=170730"></script><script>
+document.getElementById('agBtn').onclick=()=>{
+ const v=id=>document.getElementById(id).value.trim();let ok=true;
+ const bad=(id,c)=>{const f=document.getElementById(id).closest('.field');f.classList.toggle('invalid',c);if(c)ok=false;};
+ bad('a-name',v('a-name').length<2);bad('a-phone',!/^0\d{8,10}$/.test(v('a-phone')));bad('a-email',!/^\S+@\S+\.\S+$/.test(v('a-email')));bad('a-shop',v('a-shop').length<2);bad('a-city',!v('a-city'));bad('a-addr',v('a-addr').length<3);
+ if(!document.getElementById('a-agree').checked){showToast('Vui lòng đồng ý chính sách');ok=false;}
+ if(!ok){window.scrollTo({top:0,behavior:'smooth'});return;}
+ const code='DL'+Date.now().toString().slice(-6);
+ try{ if(typeof sendEmail==='function'&&currentUser()) sendEmail('Đã nhận hồ sơ đăng ký đại lý '+code,`<p>Chào ${v('a-name')},</p><p>Nai Vàng đã nhận hồ sơ đăng ký <b>${v('a-type')||''}</b> của bạn (mã ${code}). Bộ phận kinh doanh sẽ liên hệ xác minh trong 24h làm việc.</p>`,'system',true);}catch(e){}
+ document.getElementById('agForm').innerHTML=`<div style="text-align:center;padding:30px 10px"><div style="width:70px;height:70px;border-radius:50%;background:var(--sage-100);display:grid;place-items:center;margin:0 auto 16px;font-size:32px">🎉</div><h3 style="font-family:var(--serif);font-weight:500;font-size:24px">Đăng ký thành công!</h3><p style="color:var(--stone);margin:10px 0">Mã hồ sơ: <b style="color:var(--tea)">${code}</b><br/>Bộ phận kinh doanh Nai Vàng sẽ liên hệ với bạn trong 24h làm việc.</p><a class="btn btn-primary" style="margin-top:8px" href="dai-ly.html">Về trang đại lý</a></div>`;
+ window.scrollTo({top:0,behavior:'smooth'});
+};
+</script></body></html>

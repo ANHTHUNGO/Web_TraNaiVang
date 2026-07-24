@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="vi"><head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Liên hệ — Trà Nai Vàng</title><meta name="description" content="Liên hệ Trà Nai Vàng: hotline 0855 256 512, email info@tranaivang.com, địa chỉ KCN Lộc Sơn, Bảo Lộc, Lâm Đồng."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css?v=170730"><script src="assets/i18n.js?v=170730"></script><script src="assets/store.js?v=170730"></script>
+</head><body data-page="lien-he">
+<section class="phead"><div class="wrap"><div class="crumb"><a href="index.html">Trang chủ</a> › <b>Liên hệ</b></div><h1>Liên hệ với Trà Nai Vàng</h1><p>Chúng tôi luôn sẵn sàng hỗ trợ bạn 7h30–21h00 mỗi ngày.</p></div></section>
+<div class="wrap" style="padding:34px 0 60px"><div class="two" style="align-items:start">
+ <div class="panel">
+   <h3 style="font-family:var(--serif);font-weight:500;font-size:20px">Gửi yêu cầu cho chúng tôi</h3>
+   <form id="ctForm" onsubmit="return false">
+     <div class="frow"><div class="field"><label>Họ và tên *</label><input id="c-name"/><div class="err">Vui lòng nhập họ tên</div></div>
+       <div class="field"><label>Số điện thoại *</label><input id="c-phone" inputmode="tel"/><div class="err">SĐT chưa đúng</div></div></div>
+     <div class="field"><label>Email</label><input id="c-email" type="email"/></div>
+     <div class="field"><label>Loại yêu cầu</label><select id="c-type"><option>Tư vấn sản phẩm</option><option>Hỗ trợ đơn hàng</option><option>Đăng ký đại lý</option><option>Hợp tác doanh nghiệp</option><option>Khiếu nại</option><option>Khác</option></select></div>
+     <div class="field"><label>Nội dung *</label><textarea id="c-msg" rows="4"></textarea><div class="err">Vui lòng nhập nội dung</div></div>
+     <label class="check" style="margin-bottom:16px"><input type="checkbox" id="c-agree"/> <span>Tôi đồng ý với <a href="chinh-sach.html?p=bao-mat">Chính sách bảo mật</a> của Trà Nai Vàng.</span></label>
+     <button class="btn btn-primary btn-block" id="ctBtn">Gửi yêu cầu</button>
+   </form>
+ </div>
+ <div>
+   <div class="panel" style="margin-bottom:20px">
+     <h3 style="font-family:var(--serif);font-weight:500;font-size:20px">Thông tin liên hệ</h3>
+     <p style="font-size:14.5px;line-height:2"><b>CÔNG TY TNHH TRÀ NAI VÀNG</b><br/>
+     📍 Lô CN7, KCN Lộc Sơn, P. Lộc Sơn, TP. Bảo Lộc, Lâm Đồng<br/>
+     📞 <a href="tel:0855256512" style="color:var(--tea)">0855 256 512</a><br/>
+     ✉️ <a href="mailto:info@tranaivang.com" style="color:var(--tea)">info@tranaivang.com</a><br/>
+     🕒 Thứ 2 – CN: 7h30 – 21h00</p>
+   </div>
+   <div style="border-radius:16px;overflow:hidden;border:1px solid var(--line-soft);background:linear-gradient(135deg,var(--sage-100),var(--off));height:230px;display:grid;place-items:center;text-align:center;color:var(--stone)">
+     <div><svg viewBox="0 0 24 24" width="40" fill="none" stroke="var(--tea)" stroke-width="1.4" style="margin:0 auto 8px"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>Bản đồ Google Maps<br/><small>(hiển thị khi tích hợp)</small></div>
+   </div>
+ </div>
+</div></div>
+<script src="assets/layout.js?v=170730"></script><script>
+document.getElementById('ctBtn').onclick=()=>{
+ const v=id=>document.getElementById(id).value.trim(); let ok=true;
+ const bad=(id,c)=>{const f=document.getElementById(id).closest('.field');f.classList.toggle('invalid',c);if(c)ok=false;};
+ bad('c-name',v('c-name').length<2);bad('c-phone',!/^0\d{8,10}$/.test(v('c-phone')));bad('c-msg',v('c-msg').length<5);
+ if(!document.getElementById('c-agree').checked){showToast('Vui lòng đồng ý chính sách bảo mật');ok=false;}
+ if(!ok)return;
+ const code='HT'+Date.now().toString().slice(-6);
+ try{ if(typeof sendEmail==='function'&&currentUser()) sendEmail('Đã tiếp nhận yêu cầu hỗ trợ '+code, `<p>Chào ${v('c-name')},</p><p>Nai Vàng đã nhận yêu cầu <b>${document.getElementById('c-type').value}</b> của bạn (mã ${code}). Chúng tôi sẽ phản hồi trong thời gian sớm nhất.</p><p>Nội dung: ${v('c-msg')}</p>`,'system',true);}catch(e){}
+ document.getElementById('ctForm').innerHTML=`<div style="text-align:center;padding:26px 10px"><div style="width:66px;height:66px;border-radius:50%;background:var(--sage-100);display:grid;place-items:center;margin:0 auto 14px;font-size:30px">✅</div><h3 style="font-family:var(--serif);font-weight:500;font-size:22px">Đã gửi yêu cầu!</h3><p style="color:var(--stone);margin:8px 0">Mã yêu cầu hỗ trợ: <b style="color:var(--tea)">${code}</b><br/>Nai Vàng sẽ liên hệ với bạn sớm nhất.</p></div>`;
+};
+</script></body></html>

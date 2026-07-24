@@ -1,5 +1,32 @@
 # CHANGELOG — Trà Nai Vàng Website
 
+## [v170730] 2026-07-17 — HOÀN THIỆN TOÀN BỘ TRANG FRONT-END (13 trang mới) ✅
+Người dùng giao 100% tự làm hết. Bổ sung toàn bộ nhóm trang nội dung + gia công + đại lý + tiện ích còn thiếu (bản thiết kế front-end; phần kết nối backend/thanh toán/CMS/chatbot-thật để giai đoạn sau).
+
+**Trang mới:**
+- `gioi-thieu.html` — Giới thiệu: câu chuyện 1982, ý nghĩa tên gọi, tầm nhìn/sứ mệnh/giá trị, năng lực sản xuất, quy trình, chứng nhận, thông tin doanh nghiệp.
+- `danh-muc-gia-cong.html` — **Danh mục gia công (OEM/ODM)**: 12 loại trà nền (trà xanh, oolong, hồng trà, bạch trà, shan tuyết…) — ảnh trà trong dĩa để KHÁCH CHỌN GIA CÔNG, không phải hàng bán lẻ; nút "Liên hệ báo giá".
+- `day-chuyen-cong-nghe.html` — Nhà máy 11.000m², 1.000 tấn/năm, KCN Lộc Sơn; quy trình 6 bước; chứng nhận FSSC/OCOP.
+- `chinh-sach.html` — **Hệ thống 14 chính sách** (điều khoản, bảo mật, dữ liệu cá nhân, cookie, đặt hàng, thanh toán, giao hàng, kiểm hàng, đổi trả, hoàn tiền, đảm bảo chất lượng, KH thân thiết, đại lý, CTV) — chuẩn pháp luật VN (NĐ 52/2013, 85/2021, 13/2023; Luật BVQLNTD 2023); mỗi chính sách có phiên bản + ngày hiệu lực + lịch sử; điều hướng sidebar theo ?p=.
+- `faq.html` — FAQ nhóm + accordion. `huong-dan-mua-hang.html` — 4 bước + payment/ship/return.
+- `lien-he.html` — form liên hệ (loại yêu cầu, mã hỗ trợ, email xác nhận) + thông tin DN + map placeholder.
+- `tra-cuu-don.html` — tra cứu đơn bằng mã đơn + SĐT → timeline trạng thái.
+- `khuyen-mai.html` — thẻ ưu đãi (WELCOME15/NAIVANG10/FREESHIP/combo Tết) + Áp dụng ngay.
+- `dai-ly.html` — landing đại lý (quyền lợi, nhóm đối tác, chính sách, CTA). `dang-ky-dai-ly.html` — form đăng ký đầy đủ + validate + email. `dang-nhap-dai-ly.html` — cổng đăng nhập đại lý. `he-thong-dai-ly.html` — tìm đại lý theo tỉnh (store locator + Google Maps).
+- `kien-thuc.html` — blog/tin tức (lọc danh mục). `bai-viet.html` — chi tiết bài viết + bài liên quan. `404.html`.
+
+**Nền chung nâng cấp (v170730):**
+- `assets/layout.js` — header thêm HOTLINE + nút "Đăng ký đại lý" + tìm kiếm; MENU 7 mục (Giới thiệu · Gia công · Dây chuyền · Sản phẩm · Đại lý · Kiến thức · Liên hệ); footer đầy đủ (Mua hàng/Hỗ trợ/Chính sách/Liên hệ + mạng XH + phương thức thanh toán + link cookie); **CHATBOT AI** toàn site (mock, gợi ý sản phẩm/đơn/ưu đãi/chính sách/gặp nhân viên, có disclaimer "trợ lý AI").
+- `assets/site.css` — style trang nội dung, chatbot, header/footer mở rộng.
+- `assets/i18n.js` — thêm khóa nav.oem/nav.tech/nav.about/nav.promo/nav.guide/nav.faq/h.agentBtn/cb.* …
+- `index.html` — menu 7 mục trỏ trang thật, footer link thật + chính sách, thêm section "Nhà máy & dịch vụ gia công".
+- Cache-bust đồng bộ **?v=170730** toàn bộ 24 trang.
+
+**Kiểm tra:** 13/13 trang HTTP 200 + có layout.js; chính sách render 14 mục + ?p= đúng; gia công 12 card; home 7 mục menu + 8 SP + OEM section; 0 ảnh lỗi; 0 lỗi console. (Ảnh chụp preview kẹt do renderer chạy lâu — DOM đã verify bằng JS.)
+
+**Cần user xác nhận / giai đoạn sau:** tách hẳn trà lá rời (dĩa) khỏi catalog bán lẻ (hiện còn xuất hiện ở cả 2 nơi); ảnh nhà máy thật; bảng giá thật; STK thật; backend (giỏ/đơn/đại lý/CMS/thanh toán/chatbot thật).
+
+
 ## 2026-07-17 — TỐI ƯU CHUYỂN ĐỔI: WELCOME15 + email có link đơn + tìm kiếm trang chủ ✅
 - **Voucher WELCOME15 (-15% đơn đầu cho thành viên mới)** + hàm `applyVoucher()`: mọi nơi hiện mã đều có nút **"Áp dụng ngay"** → mã kích hoạt, tự trừ tiền ở giỏ/thanh toán, chuyển tới trang mua sắm.
 - **Email đơn hàng nâng cấp**: ảnh sản phẩm từng món + nút "Theo dõi đơn hàng →" mở trang tiến trình (xac-nhan-don.html?ma=...). Email chào mừng có khối quà WELCOME15 + nút "Áp dụng ngay & mua sắm" (link san-pham.html?ap=WELCOME15).
