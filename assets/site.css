@@ -299,3 +299,7 @@ footer{background:#1E2E16;color:rgba(238,242,226,.72);padding:56px 0 24px;margin
 header .nav{height:76px}
 @media(max-width:1100px){.tb-left{display:none}}
 @media(max-width:1180px){.menu{gap:18px}.menu a{font-size:13.5px}}
+
+/* ===== v170732: nut vien sang tren nen xanh ===== */
+.btn-outline-light{background:transparent;border:1.5px solid rgba(255,255,255,.7);color:#fff}
+.btn-outline-light:hover{background:rgba(255,255,255,.14);border-color:#fff}

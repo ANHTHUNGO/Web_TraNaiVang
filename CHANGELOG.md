@@ -136,3 +136,10 @@ Người dùng giao 100% tự làm hết. Bổ sung toàn bộ nhóm trang nội
 - v1: prototype xanh rừng+vàng (trước khi thấy logo) → v2: đỏ sơn mài theo logo thật (render logo từ PDF) → **v3: user chốt hướng XANH thiên nhiên tươi mát** (logo đỏ chỉ là điểm nhấn), tham khảo OSULLOC/Tea Ceremony.
 - Tự vẽ bộ SVG placeholder (đồi trà, lon trà) — nay đã thay bằng ảnh thật, giữ file trong `assets/` làm dự phòng.
 - Liên hệ chính thức do user cung cấp: Lô CN7 KCN Lộc Sơn, Bảo Lộc · info@tranaivang.com · 0855 256 512 · T2–CN 7h30–21h00.
+
+## [v170732] 2026-07-24
+- Dây chuyền công nghệ: thay toàn bộ ảnh placeholder bằng 8 ẢNH THẬT lấy từ site chính tranaivang.vn (toàn cảnh nhà máy 11.000m², phòng nghiên cứu/kiểm định, chế biến, máy móc, đóng gói túi lọc, in tem nhãn, kho phân phối). Bố cục mới: hero toàn cảnh + số liệu, gallery 6 ảnh "Bên trong nhà máy", quy trình 6 bước, CTA hợp tác gia công.
+- Trang chủ: ảnh teaser khối OEM -> factory-aerial.jpg (nhà máy thật).
+- Danh mục gia công: ảnh intro -> factory-lab.jpg (phòng nghiên cứu thật).
+- CSS: thêm .btn-outline-light (nút viền sáng trên nền xanh). Cache-bust -> v170732 (24 trang).
+- (Đã xong trước đó trong batch này) Bỏ ảnh dĩa trà khỏi SP bán lẻ (RETAIL 8 SP đóng gói); header 2 tầng topbar+main gọn đẹp.
