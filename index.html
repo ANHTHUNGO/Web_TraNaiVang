@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<script src="assets/i18n.js?v=170739"></script>
+<script src="assets/i18n.js?v=170740"></script>
 <style>
   :root{
     --forest:#2F4A24;
@@ -616,10 +616,11 @@
       <svg style="width:48px;color:var(--tea);margin:0 auto"><use href="#leaf"/></svg>
       <h2 data-i18n="hm.newsH2">Nhận ưu đãi &amp; câu chuyện trà</h2>
       <p data-i18n="hm.newsP">Đăng ký để nhận ưu đãi thành viên, quà tặng và những chia sẻ về nghệ thuật thưởng trà.</p>
-      <form onsubmit="return false">
-        <input type="email" data-i18n-ph="hm.newsPh" placeholder="Email của bạn" aria-label="Email" />
+      <form id="newsForm" onsubmit="return false">
+        <input id="newsEmail" name="email" type="email" required data-i18n-ph="hm.newsPh" placeholder="Email của bạn" aria-label="Email" />
         <button class="btn btn-primary" type="submit" data-i18n="hm.newsBtn">Đăng ký</button>
       </form>
+      <div id="newsMsg" style="font-size:13px;color:var(--tea);margin-top:10px;display:none">✅ Đã đăng ký nhận tin! Cảm ơn bạn.</div>
     </div>
   </div>
 </section>
@@ -678,7 +679,7 @@
   <button class="top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Lên đầu"><svg viewBox="0 0 24 24" width="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V6M6 12l6-6 6 6"/></svg></button>
 </div>
 
-<script src="assets/store.js?v=170739"></script>
+<script src="assets/store.js?v=170740"></script>
 <script>
   const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.14});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
@@ -723,8 +724,17 @@
       <div class="row"><div class="price">'+(p.old?'<s>'+fmt(p.old)+'</s>':'')+fmt(p.price)+'</div>\
       <button class="add" onclick="addCart(\''+p.slug+'\')" aria-label="'+t('pd.addCart')+'">'+CARTMINI+'</button></div></div>\
    </article>';}).join('');
+  /* dang ky nhan tin -> luu subscriber + xac nhan */
+  document.getElementById('newsForm').addEventListener('submit',function(){
+    var i=document.getElementById('newsEmail'), e=i.value.trim();
+    if(!/^\S+@\S+\.\S+$/.test(e)){i.focus();i.style.borderColor='#c0392b';return;}
+    i.style.borderColor='';
+    try{var subs=JSON.parse(localStorage.getItem('nv_subscribers')||'[]');subs.push({email:e,time:new Date().toLocaleString('vi-VN'),source:'Newsletter trang chủ'});localStorage.setItem('nv_subscribers',JSON.stringify(subs));}catch(err){}
+    try{if(window.NVLead)NVLead.save('',e,'Đăng ký nhận tin');}catch(err){}
+    i.value=''; document.getElementById('newsMsg').style.display='block';
+  });
 </script>
-<script src="assets/cms.js?v=170739"></script>
-<script src="assets/lead.js?v=170739"></script>
+<script src="assets/cms.js?v=170740"></script>
+<script src="assets/lead.js?v=170740"></script>
 </body>
 </html>

@@ -171,3 +171,10 @@ Người dùng giao 100% tự làm hết. Bổ sung toàn bộ nhóm trang nội
 - BẮT SĐT (LEAD) qua Zalo/Chat: assets/lead.js — nút Zalo mở form opt-in "Nhận ưu đãi qua Zalo" (SĐT + email) → lưu nv_leads + mô phỏng gửi poster/khuyến mãi qua Zalo & Email (nv_promo_outbox) + mở zalo.me. Chatbot site & chatbot đại lý tự nhận diện SĐT trong tin nhắn → ghi lead.
 - ADMIN Marketing: xem danh sách SĐT/lead (sheet "Lead"), soạn & GỬI poster/khuyến mãi/sự kiện tới toàn bộ liên hệ qua Email+Zalo (mô phỏng), sửa banner ưu đãi đại lý.
 - ĐẤU LINK: footer (layout.js) thêm Hệ thống đại lý + Cổng đại lý + Quản trị → mọi trang truy cập được từ site chính; cổng đại lý/admin tách riêng khi bấm vào. Cache-bust v170738.
+
+## [v170740] 2026-07-24 — Đấu nối form → Admin thấy được + name attrs
+- Form LIÊN HỆ → lưu `nv_contacts` → hiện ở Admin > "Hộp thư & liên hệ".
+- Form ĐĂNG KÝ NHẬN TIN (trang chủ) → validate email bắt buộc + xác nhận + lưu `nv_subscribers` + ghi lead → Admin thấy.
+- Admin: mục MỚI "Hộp thư & liên hệ" (yêu cầu liên hệ + danh sách email đăng ký).
+- Thêm `name` cho input các form (lien-he, thanh-toan, dang-ky-dai-ly, dang-nhap, tra-cuu-don) — sẵn sàng backend.
+- (Lưu ý) Vẫn là mô phỏng localStorage; backend thật sẽ lưu DB + gửi email nội bộ. Cache-bust v170740.

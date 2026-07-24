@@ -5,9 +5,9 @@
 <title>Đăng nhập / Đăng ký — Trà Nai Vàng</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css?v=170739">
-<script src="assets/i18n.js?v=170739"></script>
-<script src="assets/store.js?v=170739"></script>
+<link rel="stylesheet" href="assets/site.css?v=170740">
+<script src="assets/i18n.js?v=170740"></script>
+<script src="assets/store.js?v=170740"></script>
 <style>
   .auth{min-height:calc(100vh - 240px);display:grid;place-items:center;padding:50px 20px;position:relative}
   .auth::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,var(--sage-100),transparent 60%);z-index:0}
@@ -54,10 +54,10 @@
 
     <!-- LOGIN -->
     <div class="pane on" id="pLogin">
-      <div class="field"><label data-i18n="au.id">Email hoặc số điện thoại</label><input id="l-id" placeholder="email@vidu.com / 09xxxxxxxx"/><div class="err">Nhập email hoặc SĐT</div></div>
-      <div class="field pwd"><label data-i18n="au.pw">Mật khẩu</label><input id="l-pw" type="password" placeholder="••••••••"/><button type="button" data-eye="l-pw" data-i18n="au.show">Hiện</button><div class="err">Nhập mật khẩu</div></div>
+      <div class="field"><label data-i18n="au.id">Email hoặc số điện thoại</label><input  id="l-id" name="id" placeholder="email@vidu.com / 09xxxxxxxx"/><div class="err">Nhập email hoặc SĐT</div></div>
+      <div class="field pwd"><label data-i18n="au.pw">Mật khẩu</label><input  id="l-pw" name="pw" type="password" placeholder="••••••••"/><button type="button" data-eye="l-pw" data-i18n="au.show">Hiện</button><div class="err">Nhập mật khẩu</div></div>
       <div class="between">
-        <label class="check" style="align-items:center"><input type="checkbox" id="l-rem" checked/> <span data-i18n="au.remember">Ghi nhớ đăng nhập</span></label>
+        <label class="check" style="align-items:center"><input type="checkbox"  id="l-rem" name="rem" checked/> <span data-i18n="au.remember">Ghi nhớ đăng nhập</span></label>
         <a href="#" onclick="showToast('Tính năng sẽ kích hoạt khi có backend');return false" data-i18n="au.forgot">Quên mật khẩu?</a>
       </div>
       <button class="btn btn-primary btn-block" id="loginBtn" data-i18n="au.login">Đăng nhập</button>
@@ -75,21 +75,21 @@
         <div class="rt on"><span class="ic">🛍️</span><b>Khách hàng lẻ</b><small>Mua lẻ, tích điểm, ưu đãi thành viên</small></div>
         <a class="rt" href="dang-ky-dai-ly.html"><span class="ic">🤝</span><b>Đại lý / Doanh nghiệp</b><small>Mua sỉ, giá riêng, công nợ B2B</small></a>
       </div>
-      <div class="field"><label data-i18n="au.name">Họ và tên *</label><input id="r-name" placeholder="Nguyễn Văn A"/><div class="err">Vui lòng nhập họ tên</div></div>
+      <div class="field"><label data-i18n="au.name">Họ và tên *</label><input  id="r-name" name="name" placeholder="Nguyễn Văn A"/><div class="err">Vui lòng nhập họ tên</div></div>
       <div class="frow2">
-        <div class="field"><label data-i18n="au.phone">Số điện thoại *</label><input id="r-phone" inputmode="tel" placeholder="09xxxxxxxx"/><div class="err">SĐT chưa đúng</div></div>
-        <div class="field"><label data-i18n="au.email">Email *</label><input id="r-email" type="email" placeholder="ban@email.com"/><div class="err">Email chưa đúng</div></div>
+        <div class="field"><label data-i18n="au.phone">Số điện thoại *</label><input  id="r-phone" name="phone" inputmode="tel" placeholder="09xxxxxxxx"/><div class="err">SĐT chưa đúng</div></div>
+        <div class="field"><label data-i18n="au.email">Email *</label><input  id="r-email" name="email" type="email" placeholder="ban@email.com"/><div class="err">Email chưa đúng</div></div>
       </div>
       <div class="frow2">
-        <div class="field pwd"><label data-i18n="au.pwReq">Mật khẩu *</label><input id="r-pw" type="password" placeholder="Tối thiểu 6 ký tự"/><button type="button" data-eye="r-pw" data-i18n="au.show">Hiện</button><div class="err">Tối thiểu 6 ký tự</div></div>
-        <div class="field"><label data-i18n="au.pw2">Nhập lại mật khẩu *</label><input id="r-pw2" type="password"/><div class="err">Mật khẩu chưa khớp</div></div>
+        <div class="field pwd"><label data-i18n="au.pwReq">Mật khẩu *</label><input  id="r-pw" name="pw" type="password" placeholder="Tối thiểu 6 ký tự"/><button type="button" data-eye="r-pw" data-i18n="au.show">Hiện</button><div class="err">Tối thiểu 6 ký tự</div></div>
+        <div class="field"><label data-i18n="au.pw2">Nhập lại mật khẩu *</label><input  id="r-pw2" name="pw2" type="password"/><div class="err">Mật khẩu chưa khớp</div></div>
       </div>
       <div class="frow2">
-        <div class="field"><label data-i18n="au.dob">Ngày sinh <small>(tuỳ chọn)</small></label><input id="r-dob" type="date"/></div>
-        <div class="field"><label data-i18n="au.sex">Giới tính <small>(tuỳ chọn)</small></label><select id="r-sex"><option value="">—</option><option>Nữ</option><option>Nam</option><option>Khác</option></select></div>
+        <div class="field"><label data-i18n="au.dob">Ngày sinh <small>(tuỳ chọn)</small></label><input  id="r-dob" name="dob" type="date"/></div>
+        <div class="field"><label data-i18n="au.sex">Giới tính <small>(tuỳ chọn)</small></label><select  id="r-sex" name="sex"><option value="">—</option><option>Nữ</option><option>Nam</option><option>Khác</option></select></div>
       </div>
       <div class="field">
-        <label class="check"><input type="checkbox" id="r-agree"/> <span data-i18n="au.agree">Tôi đồng ý với Điều khoản và Chính sách.</span></label>
+        <label class="check"><input type="checkbox"  id="r-agree" name="agree"/> <span data-i18n="au.agree">Tôi đồng ý với Điều khoản và Chính sách.</span></label>
         <div class="err" id="agreeErr" style="display:none">Bạn cần đồng ý điều khoản để tiếp tục</div>
       </div>
       <button class="btn btn-primary btn-block" id="regBtn" data-i18n="au.regBtn">Đăng ký tài khoản</button>
@@ -97,7 +97,7 @@
   </div>
 </main>
 
-<script src="assets/layout.js?v=170739"></script>
+<script src="assets/layout.js?v=170740"></script>
 <script>
 /* nếu đã đăng nhập → vào thẳng tài khoản */
 if(currentUser()) location.href='tai-khoan.html';
@@ -166,8 +166,8 @@ function openConsentModal(v){
     <h3>🔔 ${t('cs.title')}</h3>
     <p class="cx-note">${t('cs.intro')}</p>
     <label class="cx-opt" style="align-items:flex-start"><input type="checkbox" checked disabled style="margin-top:3px"/><span><b style="font-size:13.5px">${t('cs.noti')}</b><br/><small style="color:var(--stone)">${t('cs.notiS')}</small></span></label>
-    <label class="cx-opt" style="align-items:flex-start"><input type="checkbox" id="cs-loc" style="margin-top:3px"/><span><b style="font-size:13.5px">${t('cs.loc')}</b><br/><small style="color:var(--stone)">${t('cs.locS')}</small></span></label>
-    <label class="cx-opt" style="align-items:flex-start"><input type="checkbox" id="cs-track" style="margin-top:3px"/><span><b style="font-size:13.5px">${t('cs.track')}</b><br/><small style="color:var(--stone)">${t('cs.trackS')}</small></span></label>
+    <label class="cx-opt" style="align-items:flex-start"><input type="checkbox"  id="cs-loc" name="cs-loc" style="margin-top:3px"/><span><b style="font-size:13.5px">${t('cs.loc')}</b><br/><small style="color:var(--stone)">${t('cs.locS')}</small></span></label>
+    <label class="cx-opt" style="align-items:flex-start"><input type="checkbox"  id="cs-track" name="cs-track" style="margin-top:3px"/><span><b style="font-size:13.5px">${t('cs.track')}</b><br/><small style="color:var(--stone)">${t('cs.trackS')}</small></span></label>
     <div class="modal-actions">
       <button class="btn btn-ghost" id="csBack">${t('cs.back')}</button>
       <button class="btn btn-primary" id="csGo">${t('cs.agree')}</button>

@@ -4,7 +4,7 @@
 <title>Đăng ký đại lý — Trà Nai Vàng</title><meta name="description" content="Đăng ký làm đại lý, nhà phân phối Trà Nai Vàng. Chính sách chiết khấu hấp dẫn, hỗ trợ toàn diện."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css?v=170739"><script src="assets/i18n.js?v=170739"></script><script src="assets/store.js?v=170739"></script>
+<link rel="stylesheet" href="assets/site.css?v=170740"><script src="assets/i18n.js?v=170740"></script><script src="assets/store.js?v=170740"></script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":["Store","FoodEstablishment"],"name":"Công ty TNHH Trà Nai Vàng","alternateName":"Trà Nai Vàng","description":"Thương hiệu trà Việt từ cao nguyên Bảo Lộc, Lâm Đồng - Since 1982. Sản xuất, bán lẻ và gia công OEM/ODM trà xanh, oolong, hồng trà, trà ướp hương.","url":"https://tranaivang.vn/","logo":"https://tranaivang.vn/assets/logo-full.png","image":"https://tranaivang.vn/assets/real/factory-aerial.jpg","telephone":"+84855256512","email":"info@tranaivang.com","foundingDate":"1982","priceRange":"50.000₫ - 500.000₫","servesCuisine":"Trà","address":{"@type":"PostalAddress","streetAddress":"Lô CN7, KCN Lộc Sơn, P. Lộc Sơn","addressLocality":"TP. Bảo Lộc","addressRegion":"Lâm Đồng","postalCode":"66100","addressCountry":"VN"},"geo":{"@type":"GeoCoordinates","latitude":11.5241,"longitude":107.8419},"hasMap":"https://www.google.com/maps?q=C%C3%B4ng%20ty%20TNHH%20Tr%C3%A0%20Nai%20V%C3%A0ng%2C%20L%C3%B4%20CN7%20KCN%20L%E1%BB%99c%20S%C6%A1n%2C%20P.%20L%E1%BB%99c%20S%C6%A1n%2C%20TP.%20B%E1%BA%A3o%20L%E1%BB%99c%2C%20L%C3%A2m%20%C4%90%E1%BB%93ng","openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"07:30","closes":"21:00"},"sameAs":["https://tranaivang.vn/"]}
 </script>
@@ -13,32 +13,32 @@
 <div class="wrap" style="padding:34px 0 60px;max-width:820px"><div class="panel"><form id="agForm" onsubmit="return false">
  <h3 style="font-family:var(--serif);font-weight:500;font-size:19px;margin-bottom:6px">Tài khoản đại lý</h3>
  <p style="font-size:12.5px;color:var(--stone);margin-bottom:14px">Nhập <b>tên đại lý</b> — hệ thống tự tạo <b>tên đăng nhập @</b> và <b>cấp mã đại lý</b> theo tên này để dễ quản lý.</p>
- <div class="field"><label>Tên đại lý *</label><input id="a-shop" placeholder="VD: ANH THƯ NGÔ / Trà Việt An" autocomplete="off"/><div class="err">Nhập tên đại lý</div>
+ <div class="field"><label>Tên đại lý *</label><input  id="a-shop" name="shop" placeholder="VD: ANH THƯ NGÔ / Trà Việt An" autocomplete="off"/><div class="err">Nhập tên đại lý</div>
    <div style="margin-top:7px;font-size:13px;color:var(--stone)">Tên đăng nhập tự tạo: <b id="uview" style="color:var(--tea)">@daily_…</b></div></div>
  <div class="frow">
-   <div class="field"><label>Mật khẩu *</label><div style="position:relative"><input id="a-pw" type="password" placeholder="Tối thiểu 6 ký tự" autocomplete="new-password" style="padding-right:44px"/><button type="button" class="eyeb" data-eye="a-pw" aria-label="Hiện/ẩn mật khẩu" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:17px;line-height:1">👁️</button></div><div class="err">Mật khẩu tối thiểu 6 ký tự</div></div>
-   <div class="field"><label>Nhập lại mật khẩu *</label><div style="position:relative"><input id="a-pw2" type="password" placeholder="Nhập lại" autocomplete="new-password" style="padding-right:44px"/><button type="button" class="eyeb" data-eye="a-pw2" aria-label="Hiện/ẩn mật khẩu" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:17px;line-height:1">👁️</button></div><div class="err">Mật khẩu chưa khớp</div></div></div>
+   <div class="field"><label>Mật khẩu *</label><div style="position:relative"><input  id="a-pw" name="pw" type="password" placeholder="Tối thiểu 6 ký tự" autocomplete="new-password" style="padding-right:44px"/><button type="button" class="eyeb" data-eye="a-pw" aria-label="Hiện/ẩn mật khẩu" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:17px;line-height:1">👁️</button></div><div class="err">Mật khẩu tối thiểu 6 ký tự</div></div>
+   <div class="field"><label>Nhập lại mật khẩu *</label><div style="position:relative"><input  id="a-pw2" name="pw2" type="password" placeholder="Nhập lại" autocomplete="new-password" style="padding-right:44px"/><button type="button" class="eyeb" data-eye="a-pw2" aria-label="Hiện/ẩn mật khẩu" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:17px;line-height:1">👁️</button></div><div class="err">Mật khẩu chưa khớp</div></div></div>
  <h3 style="font-family:var(--serif);font-weight:500;font-size:19px;margin:24px 0 16px">Thông tin liên hệ</h3>
- <div class="frow"><div class="field"><label>Chủ / Người đại diện *</label><input id="a-name" placeholder="Họ tên chủ đại lý"/><div class="err">Nhập họ tên</div></div>
-   <div class="field"><label>Số điện thoại *</label><input id="a-phone" inputmode="tel"/><div class="err">SĐT chưa đúng</div></div></div>
- <div class="frow"><div class="field"><label>Email *</label><input id="a-email" type="email"/><div class="err">Email chưa đúng</div></div>
-   <div class="field"><label>Mã số thuế <small>(nếu có)</small></label><input id="a-tax"/></div></div>
- <div class="frow"><div class="field"><label>Tỉnh / Thành phố *</label><select id="a-city"><option value="">Chọn tỉnh/thành</option><option>TP. Hồ Chí Minh</option><option>Hà Nội</option><option>Lâm Đồng</option><option>Đà Nẵng</option><option>Cần Thơ</option><option>Khác</option></select><div class="err">Chọn tỉnh/thành</div></div>
-   <div class="field"><label>Quận / Huyện *</label><input id="a-district" placeholder="VD: Quận 3"/><div class="err">Nhập quận/huyện</div></div></div>
- <div class="field"><label>Địa chỉ trên giấy phép kinh doanh *</label><input id="a-bizaddr" placeholder="Địa chỉ ĐKKD / xuất hoá đơn VAT"/><div class="err">Nhập địa chỉ GPKD</div></div>
- <label class="check" style="margin:-2px 0 12px"><input type="checkbox" id="a-sameaddr"/> <span>Địa chỉ nhận hàng giống địa chỉ giấy phép kinh doanh</span></label>
- <div class="field"><label>Địa chỉ nhận hàng (kho) *</label><input id="a-addr" placeholder="Nơi nhận hàng thực tế"/><div class="err">Nhập địa chỉ nhận hàng</div></div>
+ <div class="frow"><div class="field"><label>Chủ / Người đại diện *</label><input  id="a-name" name="name" placeholder="Họ tên chủ đại lý"/><div class="err">Nhập họ tên</div></div>
+   <div class="field"><label>Số điện thoại *</label><input  id="a-phone" name="phone" inputmode="tel"/><div class="err">SĐT chưa đúng</div></div></div>
+ <div class="frow"><div class="field"><label>Email *</label><input  id="a-email" name="email" type="email"/><div class="err">Email chưa đúng</div></div>
+   <div class="field"><label>Mã số thuế <small>(nếu có)</small></label><input  id="a-tax" name="tax"/></div></div>
+ <div class="frow"><div class="field"><label>Tỉnh / Thành phố *</label><select  id="a-city" name="city"><option value="">Chọn tỉnh/thành</option><option>TP. Hồ Chí Minh</option><option>Hà Nội</option><option>Lâm Đồng</option><option>Đà Nẵng</option><option>Cần Thơ</option><option>Khác</option></select><div class="err">Chọn tỉnh/thành</div></div>
+   <div class="field"><label>Quận / Huyện *</label><input  id="a-district" name="district" placeholder="VD: Quận 3"/><div class="err">Nhập quận/huyện</div></div></div>
+ <div class="field"><label>Địa chỉ trên giấy phép kinh doanh *</label><input  id="a-bizaddr" name="bizaddr" placeholder="Địa chỉ ĐKKD / xuất hoá đơn VAT"/><div class="err">Nhập địa chỉ GPKD</div></div>
+ <label class="check" style="margin:-2px 0 12px"><input type="checkbox"  id="a-sameaddr" name="sameaddr"/> <span>Địa chỉ nhận hàng giống địa chỉ giấy phép kinh doanh</span></label>
+ <div class="field"><label>Địa chỉ nhận hàng (kho) *</label><input  id="a-addr" name="addr" placeholder="Nơi nhận hàng thực tế"/><div class="err">Nhập địa chỉ nhận hàng</div></div>
  <h3 style="font-family:var(--serif);font-weight:500;font-size:19px;margin:22px 0 16px">Thông tin kinh doanh</h3>
- <div class="frow"><div class="field"><label>Loại hình đăng ký *</label><select id="a-type"><option>Cộng tác viên</option><option>Đại lý bán lẻ</option><option>Đại lý cấp 1</option><option>Nhà phân phối</option><option>Khách hàng doanh nghiệp</option><option>Đối tác quà tặng</option></select></div>
-   <div class="field"><label>Kênh bán hàng hiện tại</label><select id="a-channel"><option>Cửa hàng offline</option><option>Online (FB/Shopee/TikTok)</option><option>Cả hai</option><option>Chưa kinh doanh</option></select></div></div>
- <div class="field"><label>Nhóm sản phẩm quan tâm <small>(nếu có)</small></label><input id="a-interest" placeholder="VD: trà ướp hương, oolong, thảo mộc"/></div>
- <div class="field"><label>Facebook / TikTok / Website <small>(nếu có)</small></label><input id="a-social"/></div>
- <div class="field"><label>Ghi chú</label><textarea id="a-note" rows="3"></textarea></div>
+ <div class="frow"><div class="field"><label>Loại hình đăng ký *</label><select  id="a-type" name="type"><option>Cộng tác viên</option><option>Đại lý bán lẻ</option><option>Đại lý cấp 1</option><option>Nhà phân phối</option><option>Khách hàng doanh nghiệp</option><option>Đối tác quà tặng</option></select></div>
+   <div class="field"><label>Kênh bán hàng hiện tại</label><select  id="a-channel" name="channel"><option>Cửa hàng offline</option><option>Online (FB/Shopee/TikTok)</option><option>Cả hai</option><option>Chưa kinh doanh</option></select></div></div>
+ <div class="field"><label>Nhóm sản phẩm quan tâm <small>(nếu có)</small></label><input  id="a-interest" name="interest" placeholder="VD: trà ướp hương, oolong, thảo mộc"/></div>
+ <div class="field"><label>Facebook / TikTok / Website <small>(nếu có)</small></label><input  id="a-social" name="social"/></div>
+ <div class="field"><label>Ghi chú</label><textarea  id="a-note" name="note" rows="3"></textarea></div>
  <p style="font-size:12px;color:var(--stone);margin:2px 0 16px">Bạn sẽ đăng nhập cổng đại lý bằng <b>@tên đăng nhập</b> hoặc <b>mã đại lý</b> (cấp sau khi gửi) cùng mật khẩu đã đặt ở trên.</p>
- <label class="check" style="margin-bottom:16px"><input type="checkbox" id="a-agree"/> <span>Tôi đồng ý với <a href="chinh-sach.html?p=dai-ly">Chính sách đại lý</a> và <a href="chinh-sach.html?p=bao-mat">Chính sách bảo mật</a>.</span></label>
+ <label class="check" style="margin-bottom:16px"><input type="checkbox"  id="a-agree" name="agree"/> <span>Tôi đồng ý với <a href="chinh-sach.html?p=dai-ly">Chính sách đại lý</a> và <a href="chinh-sach.html?p=bao-mat">Chính sách bảo mật</a>.</span></label>
  <button class="btn btn-primary btn-block" id="agBtn">Gửi đăng ký</button>
 </form></div></div>
-<script src="assets/layout.js?v=170739"></script><script>
+<script src="assets/layout.js?v=170740"></script><script>
 document.getElementById('agBtn').onclick=()=>{
  const v=id=>document.getElementById(id).value.trim();let ok=true;
  const bad=(id,c)=>{const f=document.getElementById(id).closest('.field');f.classList.toggle('invalid',c);if(c)ok=false;};
