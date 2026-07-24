@@ -165,3 +165,9 @@ Người dùng giao 100% tự làm hết. Bổ sung toàn bộ nhóm trang nội
 - CMS: mục "Nội dung website" trong admin sửa câu chữ + ẢNH banner (upload) → lưu nv_cms → assets/cms.js áp NGAY lên trang chủ (freeship, hotline, banner title/sub/ảnh, footer). Verify end-to-end OK.
 - GG SHEET CHUẨN RIÊNG ĐẠI LÝ: assets/templates/GG-SHEET-DAI-LY-INPUT.xlsx (training bot ĐL: sản phẩm sỉ, giá theo cấp, chính sách, mã, template chatbot ĐL, FAQ) + GG-SHEET-DAI-LY-OUTPUT.xlsx (Đại lý [mọi mã] · Đơn hàng sỉ · Công nợ · Lead · Log AI · Báo cáo). Tách biệt với sheet khách lẻ.
 - index: link "Cổng đại lý · Quản trị" ở footer. Cache-bust v170737.
+
+## [v170738] 2026-07-24 — Banner ưu đãi đại lý + bắt SĐT Zalo/Chat + đấu link toàn site
+- BANNER ĐẠI LÝ (~5cm): top dashboard-dai-ly hiện chương trình ưu đãi/chính sách áp cho đại lý (chiết khấu, freeship, thưởng); Admin sửa nội dung ở mục Marketing (nv_dealer_promo).
+- BẮT SĐT (LEAD) qua Zalo/Chat: assets/lead.js — nút Zalo mở form opt-in "Nhận ưu đãi qua Zalo" (SĐT + email) → lưu nv_leads + mô phỏng gửi poster/khuyến mãi qua Zalo & Email (nv_promo_outbox) + mở zalo.me. Chatbot site & chatbot đại lý tự nhận diện SĐT trong tin nhắn → ghi lead.
+- ADMIN Marketing: xem danh sách SĐT/lead (sheet "Lead"), soạn & GỬI poster/khuyến mãi/sự kiện tới toàn bộ liên hệ qua Email+Zalo (mô phỏng), sửa banner ưu đãi đại lý.
+- ĐẤU LINK: footer (layout.js) thêm Hệ thống đại lý + Cổng đại lý + Quản trị → mọi trang truy cập được từ site chính; cổng đại lý/admin tách riêng khi bấm vào. Cache-bust v170738.

@@ -75,11 +75,12 @@ const footer = `
         <a href="tel:0855256512">Hotline: 0855 256 512</a>
         <a href="mailto:info@tranaivang.com">info@tranaivang.com</a>
         <p>${t('foot.hours')}</p>
-        <a href="dang-ky-dai-ly.html" style="color:var(--gold-light);font-weight:600">${t('h.agentBtn')} →</a></div>
+        <a href="dang-ky-dai-ly.html" style="color:var(--gold-light);font-weight:600">${t('h.agentBtn')} →</a>
+        <a href="he-thong-dai-ly.html">${L==='vi'?'Hệ thống đại lý':'Store locator'}</a></div>
     </div>
     <div class="foot-bottom">
       <span>${t('foot.rights')}</span>
-      <span><a href="chinh-sach.html?p=bao-mat" style="color:inherit">${L==='vi'?'Bảo mật':'Privacy'}</a> · <a href="chinh-sach.html?p=dieu-khoan" style="color:inherit">${L==='vi'?'Điều khoản':'Terms'}</a> · <a href="chinh-sach.html?p=cookie" style="color:inherit">Cookie</a> · <a href="chinh-sach.html?p=doi-tra" style="color:inherit">${L==='vi'?'Đổi trả':'Returns'}</a></span>
+      <span><a href="chinh-sach.html?p=bao-mat" style="color:inherit">${L==='vi'?'Bảo mật':'Privacy'}</a> · <a href="chinh-sach.html?p=dieu-khoan" style="color:inherit">${L==='vi'?'Điều khoản':'Terms'}</a> · <a href="chinh-sach.html?p=cookie" style="color:inherit">Cookie</a> · <a href="dang-nhap-dai-ly.html" style="color:inherit">${L==='vi'?'Cổng đại lý':'Dealer portal'}</a> · <a href="dang-nhap-admin.html" style="color:inherit;opacity:.7">${L==='vi'?'Quản trị':'Admin'}</a></span>
     </div>
   </div>
 </footer>
@@ -118,6 +119,8 @@ document.getElementById('cbotBtn').onclick=()=>cbot.classList.contains('open')?c
 document.getElementById('cbotX').onclick=()=>cbot.classList.remove('open');
 function reply(text){
   const q=norm(text);
+  // bắt số điện thoại -> lead + gửi ưu đãi qua Zalo/Email
+  if(typeof NVLead!=='undefined'){ const ph=NVLead.detectPhone(text); if(ph){ NVLead.save(ph,'','Chatbot'); add(`Cảm ơn bạn! 🎁 Mình đã ghi nhận số <b>${ph}</b> — Nai Vàng sẽ kết bạn Zalo & gửi ngay poster, khuyến mãi, sự kiện mới nhất cho bạn. <a href="https://zalo.me/0855256512" target="_blank" rel="noopener">Mở Zalo →</a>`); return; } }
   // sản phẩm
   const hit=(typeof PRODUCTS!=='undefined')?PRODUCTS.filter(p=>searchText(p).includes(q)&&q.length>2).slice(0,3):[];
   if(hit.length){ add(`Mình gợi ý vài sản phẩm phù hợp nhé:`); hit.forEach(p=>add(`<b>${prodName(p)}</b> — ${fmt(p.price)}<div class="cp"><img src="${prodImg(p.slug)}"/><a href="chi-tiet-san-pham.html?sp=${p.slug}">Xem chi tiết →</a></div>`)); return; }
@@ -135,4 +138,6 @@ function send(text){ text=(text||input.value).trim(); if(!text)return; add(text,
 document.getElementById('cbotSend').onclick=()=>send();
 input.addEventListener('keydown',e=>{if(e.key==='Enter')send();});
 quick.addEventListener('click',e=>{const b=e.target.closest('[data-say]');if(b){if(!cbot.classList.contains('open'))openBot();send(b.dataset.say);}});
+/* nạp module bắt lead qua Zalo/Chat */
+(function(){var s=document.createElement('script');s.src='assets/lead.js?v=170738';document.body.appendChild(s);})();
 })();

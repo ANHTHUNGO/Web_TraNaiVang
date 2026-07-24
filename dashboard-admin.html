@@ -6,8 +6,8 @@
 <meta name="robots" content="noindex"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css?v=170737">
-<script src="assets/store.js?v=170737"></script>
+<link rel="stylesheet" href="assets/site.css?v=170738">
+<script src="assets/store.js?v=170738"></script>
 <style>
   body{background:var(--off)}
   .dwrap{display:grid;grid-template-columns:246px 1fr;min-height:100vh;align-items:start}
@@ -73,6 +73,8 @@
       <button data-p="products"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 9l9-6 9 6v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg>Sản phẩm &amp; giá</button>
       <div class="grp">Nội dung website</div>
       <button data-p="content"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 5h16v14H4Z"/><path d="M4 9h16M9 9v10"/></svg>Chỉnh sửa nội dung &amp; ảnh</button>
+      <div class="grp">Marketing</div>
+      <button data-p="marketing"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8l9 5 9-5M4 6h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1Z"/></svg>Zalo &amp; Marketing<span class="bdg" id="bLeads">0</span></button>
       <div class="grp">Hệ thống</div>
       <button data-p="connect"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 12a3 3 0 0 1 3-3h3a3 3 0 0 1 0 6h-1"/><path d="M15 12a3 3 0 0 1-3 3H9a3 3 0 0 1 0-6h1"/></svg>Kết nối Google Drive<span class="bdg" id="bConn">!</span></button>
       <button data-p="bots"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="7" width="16" height="12" rx="3"/><path d="M12 7V4M9 13h.01M15 13h.01"/></svg>Cấu hình chatbot</button>
@@ -223,14 +225,50 @@ P.content=()=>{
 function cmsUpload(input,idx){const f=input.files[0];if(!f)return;if(f.size>1200000){toast('Ảnh nên < 1.2MB');return;}const r=new FileReader();r.onload=e=>{const c=cms();c.banners=c.banners||[];c.banners[idx]=Object.assign({},c.banners[idx],{img:e.target.result});localStorage.setItem('nv_cms',JSON.stringify(c));toast('Đã tải ảnh banner '+(idx+1));go('content');};r.readAsDataURL(f);}
 function saveCMS(){const c=cms();c.freeship=$('#cms-freeship').value.trim();c.hotline=$('#cms-hotline').value.trim();c.footerDesc=$('#cms-footerDesc').value.trim();c.address=$('#cms-address').value.trim();c.banners=c.banners||[];[0,1,2,3].forEach(i=>{c.banners[i]=Object.assign({},c.banners[i],{title:$('#bt-'+i).value.trim(),sub:$('#bs-'+i).value.trim()});});localStorage.setItem('nv_cms',JSON.stringify(c));toast('Đã lưu & xuất bản nội dung ✓');}
 
+function leadsList(){try{return JSON.parse(localStorage.getItem('nv_leads'))||[]}catch(e){return []}}
+function outbox(){try{return JSON.parse(localStorage.getItem('nv_promo_outbox'))||[]}catch(e){return []}}
+function dealerPromo(){var d;try{d=JSON.parse(localStorage.getItem('nv_dealer_promo'))}catch(e){}return d||{tag:'Ưu đãi đại lý tháng '+(new Date().getMonth()+1)+'/'+new Date().getFullYear(),title:'Chiết khấu thêm +3% cho đơn từ 50 triệu',text:'Freeship đơn từ 30 triệu · Tích điểm ×2 · Thưởng 2% khi đạt mục tiêu tháng · Quà tặng cho đơn đầu tiên trong tháng.'};}
+P.marketing=()=>{
+  const leads=leadsList(), sent=outbox(), pr=dealerPromo();
+  const esc=s=>String(s||'').replace(/"/g,'&quot;');
+  return `<div class="kpis" style="grid-template-columns:repeat(3,1fr)">
+    <div class="kpi"><div class="lb">SĐT/Lead đã thu</div><div class="vl">${leads.length}</div><div class="sub">từ chat & nút Zalo</div></div>
+    <div class="kpi"><div class="lb">Tin đã gửi (Zalo/Email)</div><div class="vl">${sent.length}</div></div>
+    <div class="kpi"><div class="lb">Lead mới hôm nay</div><div class="vl">${leads.filter(l=>(l['Thời gian']||'').includes(new Date().toLocaleDateString('vi-VN'))).length}</div></div></div>
+
+  <div class="card" style="margin-top:18px"><h3>📣 Gửi poster / khuyến mãi / sự kiện</h3><div class="cdesc">Soạn nội dung rồi gửi tới toàn bộ SĐT đã thu qua <b>Zalo + Email</b> (mô phỏng — sẽ nối Zalo OA & email marketing ở backend).</div>
+    <div class="grid2"><div>
+      <div class="conn"><label>Loại</label><select id="bcType"><option>Khuyến mãi</option><option>Poster sản phẩm</option><option>Sự kiện</option><option>Thông báo</option></select></div>
+      <div class="conn"><label>Tiêu đề</label><input id="bcTitle" placeholder="VD: Sale Tết giảm 20%"/></div>
+      <div class="conn"><label>Nội dung</label><input id="bcMsg" placeholder="Nội dung gửi khách…"/></div>
+      <button class="btn btn-primary" id="bcSend">Gửi tới ${leads.length} liên hệ (Zalo + Email)</button>
+    </div>
+    <div><h3 style="font-size:14px">Nhật ký đã gửi</h3><div style="max-height:230px;overflow:auto">${sent.length?sent.slice().reverse().slice(0,30).map(o=>`<div class="alert info" style="margin-bottom:8px"><span>📨</span><div><b>${o.to}</b> · ${o.via}<br/><small>${o.time} — ${o.content}</small></div></div>`).join(''):'<div class="empty">Chưa gửi tin nào.</div>'}</div></div></div>
+  </div>
+
+  <div class="card"><h3>🎁 Banner ưu đãi trên cổng đại lý (top ~4-5cm)</h3><div class="cdesc">Nội dung này hiển thị ngay đầu dashboard mọi đại lý.</div>
+    <div class="conn"><label>Nhãn (tag)</label><input id="dpTag" value="${esc(pr.tag)}"/></div>
+    <div class="conn"><label>Tiêu đề lớn</label><input id="dpTitle" value="${esc(pr.title)}"/></div>
+    <div class="conn"><label>Mô tả</label><input id="dpText" value="${esc(pr.text)}"/></div>
+    <button class="btn btn-primary" id="dpSave">Lưu banner đại lý</button>
+  </div>
+
+  <div class="card"><h3>Danh sách SĐT / Lead (GG Sheet "Lead đại lý")</h3><div class="cdesc">Ai điền SĐT trên chat/Zalo → tự vào đây để chăm sóc & gửi ưu đãi.</div>
+  <div style="overflow-x:auto"><table class="tbl"><thead><tr><th>Thời gian</th><th>Kênh</th><th>SĐT</th><th>Email</th><th>Nguồn</th><th>Trạng thái</th></tr></thead><tbody>
+  ${leads.length?leads.slice().reverse().map(l=>`<tr><td>${l['Thời gian']||''}</td><td><span class="badge b-green">${l['Kênh']||'Zalo'}</span></td><td><b>${l['SĐT']||''}</b></td><td>${l['Email']||'—'}</td><td>${l['Nguồn']||''}</td><td><span class="badge b-amber">${l['Trạng thái']||'Mới'}</span></td></tr>`).join(''):`<tr><td colspan="6" class="empty">Chưa có SĐT nào. Khi khách điền SĐT ở chatbot/nút Zalo sẽ hiện tại đây.</td></tr>`}
+  </tbody></table></div></div>`;
+};
+
 /* ---- render ---- */
-const T={overview:'Dashboard',dealers:'Đại lý (mã & duyệt)',orders:'Đơn hàng đại lý',retail:'Đơn khách lẻ',debt:'Công nợ',products:'Sản phẩm & giá',content:'Nội dung website',connect:'Kết nối Google Drive',bots:'Cấu hình chatbot'};
-function go(p){document.querySelectorAll('#dnav button[data-p]').forEach(b=>b.classList.toggle('on',b.dataset.p===p));$('#paneTitle').textContent=T[p];$('#dbody').innerHTML=P[p]();if(p==='content'){const s=$('#cmsSave');if(s)s.onclick=saveCMS;}window.scrollTo(0,0);}
+const T={overview:'Dashboard',dealers:'Đại lý (mã & duyệt)',orders:'Đơn hàng đại lý',retail:'Đơn khách lẻ',debt:'Công nợ',products:'Sản phẩm & giá',content:'Nội dung website',marketing:'Zalo & Marketing',connect:'Kết nối Google Drive',bots:'Cấu hình chatbot'};
+function go(p){document.querySelectorAll('#dnav button[data-p]').forEach(b=>b.classList.toggle('on',b.dataset.p===p));$('#paneTitle').textContent=T[p];$('#dbody').innerHTML=P[p]();if(p==='content'){const s=$('#cmsSave');if(s)s.onclick=saveCMS;}if(p==='marketing'){const b=$('#bcSend');if(b)b.onclick=sendBroadcast;const d=$('#dpSave');if(d)d.onclick=saveDealerPromo;}window.scrollTo(0,0);}
+function sendBroadcast(){var leads=leadsList();if(!leads.length){toast('Chưa có SĐT nào để gửi');return;}var ty=$('#bcType').value,ti=$('#bcTitle').value.trim(),ms=$('#bcMsg').value.trim();if(!ti){toast('Nhập tiêu đề');return;}var out=outbox();leads.forEach(function(l){out.push({to:l['SĐT'],email:l['Email']||'',via:l['Email']?'Zalo + Email':'Zalo',time:new Date().toLocaleString('vi-VN'),content:'['+ty+'] '+ti+(ms?' — '+ms:'')});});localStorage.setItem('nv_promo_outbox',JSON.stringify(out));toast('Đã gửi "'+ti+'" tới '+leads.length+' liên hệ qua Zalo + Email');go('marketing');}
+function saveDealerPromo(){var p={tag:$('#dpTag').value.trim(),title:$('#dpTitle').value.trim(),text:$('#dpText').value.trim()};localStorage.setItem('nv_dealer_promo',JSON.stringify(p));toast('Đã lưu banner ưu đãi đại lý ✓');}
 function approveDealer(code){const reg=JSON.parse(localStorage.getItem('nv_dealer_accounts')||'{}');Object.keys(reg).forEach(k=>{if(reg[k]&&reg[k].code===code){reg[k].status='Đã duyệt';reg[k].tier='Đại lý cấp 1';reg[k].discount=0.35;reg[k].creditLimit=50000000;}});localStorage.setItem('nv_dealer_accounts',JSON.stringify(reg));toast('Đã duyệt '+code+' → Đại lý cấp 1');go('dealers');refreshBadges();}
 function viewDealer(code){const d=dealers().find(x=>x.code===code);alert('Đại lý '+code+'\n'+d.name+' · '+d.rep+'\n'+(d.phone||'')+' · '+(d.email||'')+'\nKhu vực: '+(d.city||'')+'\nCấp: '+d.tier+' (CK '+Math.round((d.discount||0)*100)+'%)\nTrạng thái: '+d.status);}
 function approveOrder(code){const os=allOrders();const o=os.find(x=>x.code===code);if(o){o.status='confirm';o.ship='Đang chuẩn bị hàng';localStorage.setItem('nv_dorders',JSON.stringify(os));toast('Đã duyệt đơn '+code+' → chuyển kho sản xuất');go('orders');}}
 function saveConn(key){const v=$('#in-'+key).value.trim();if(v&&!/docs\.google\.com|drive\.google\.com/.test(v)){toast('Link không phải Google Sheets/Drive');return;}const d=drive();d[key]=v;saveDrive(d);toast(v?'Đã kết nối '+key:'Đã xoá link');go('connect');refreshBadges();}
-function refreshBadges(){$('#bDealers').textContent=dealers().length;const dv=drive();$('#bConn').textContent=(dv.dealerOut||dv.dealerIn)?'✓':'!';$('#bConn').style.background=(dv.dealerOut||dv.dealerIn)?'#5fd07a':'var(--gold-light)';}
+function refreshBadges(){$('#bDealers').textContent=dealers().length;var lb=$('#bLeads');if(lb)lb.textContent=leadsList().length;const dv=drive();$('#bConn').textContent=(dv.dealerOut||dv.dealerIn)?'✓':'!';$('#bConn').style.background=(dv.dealerOut||dv.dealerIn)?'#5fd07a':'var(--gold-light)';}
 $('#aLogout').onclick=()=>{sessionStorage.removeItem('nv_admin');localStorage.removeItem('nv_admin');location.href='dang-nhap-admin.html';};
 $('#dnav').addEventListener('click',e=>{const b=e.target.closest('button[data-p]');if(b)go(b.dataset.p);});
 refreshBadges();go('overview');
