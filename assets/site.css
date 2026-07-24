@@ -303,3 +303,20 @@ header .nav{height:76px}
 /* ===== v170732: nut vien sang tren nen xanh ===== */
 .btn-outline-light{background:transparent;border:1.5px solid rgba(255,255,255,.7);color:#fff}
 .btn-outline-light:hover{background:rgba(255,255,255,.14);border-color:#fff}
+
+/* ===== v170733: luoi may moc + ban do + gia cong ===== */
+.mcgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.mcard{background:var(--paper);border:1px solid var(--line-soft);border-radius:14px;overflow:hidden;transition:.25s}
+.mcard:hover{box-shadow:0 10px 26px rgba(47,74,36,.10);transform:translateY(-2px)}
+.mcimg{aspect-ratio:1/.82;overflow:hidden;background:#f3f3ee}
+.mcimg img{width:100%;height:100%;object-fit:cover;transition:transform .55s}
+.mcard:hover .mcimg img{transform:scale(1.06)}
+.mcard figcaption{padding:11px 13px 13px;font-size:13px;font-weight:500;color:var(--forest);display:flex;gap:8px;align-items:baseline;line-height:1.35;min-height:56px}
+.mcno{font-family:var(--serif);color:var(--gold-light);font-size:13.5px;font-weight:600;flex:none}
+.mapwrap{border-radius:16px;overflow:hidden;border:1px solid var(--line-soft);box-shadow:0 6px 22px rgba(47,74,36,.08)}
+.mapwrap iframe{display:block;width:100%;height:100%;border:0}
+.gc-h{font-family:var(--serif);font-weight:500;font-size:21px;margin:30px 0 16px;padding-bottom:9px;border-bottom:1px solid var(--line-soft);color:var(--forest);display:flex;align-items:center;gap:10px}
+.gc-h:first-child{margin-top:0}
+.gc-h::before{content:"";width:22px;height:2px;background:var(--gold-light);display:inline-block}
+@media(max-width:1000px){.mcgrid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:640px){.mcgrid{grid-template-columns:repeat(2,1fr)}}

@@ -143,3 +143,10 @@ Người dùng giao 100% tự làm hết. Bổ sung toàn bộ nhóm trang nội
 - Danh mục gia công: ảnh intro -> factory-lab.jpg (phòng nghiên cứu thật).
 - CSS: thêm .btn-outline-light (nút viền sáng trên nền xanh). Cache-bust -> v170732 (24 trang).
 - (Đã xong trước đó trong batch này) Bỏ ảnh dĩa trà khỏi SP bán lẻ (RETAIL 8 SP đóng gói); header 2 tầng topbar+main gọn đẹp.
+
+## [v170733] 2026-07-24 — Bổ sung đầy đủ ảnh/thứ tự + bản đồ + SEO địa phương
+- DÂY CHUYỀN CÔNG NGHỆ: bổ sung **lưới 31 máy móc/thiết bị** (cắt từng ô từ ảnh gốc tranaivang.vn, đúng thứ tự trang cũ) kèm chú thích: máy tách màu, tách tạp chất, ướp hương, dàn sấy, băng tải, định lượng 14 đầu cân, các máy đóng gói túi lọc/PE/5in1, hút chân không, in date, dây chuyền đóng gói tự động, bồn chứa, kho nguyên liệu…
+- GIA CÔNG: liệt kê **đầy đủ 22 loại trà** (trước chỉ 12), nhóm theo danh mục (Trà xanh 3 · Ướp hương 2 · Oolong 5 · Trà đen 2 · Trà quý 7 · Thảo mộc 1 · Pha chế 2), ảnh trà lá rời thật + mô tả từng loại.
+- BẢN ĐỒ ĐỊNH VỊ: nhúng Google Maps thật (nhà máy KCN Lộc Sơn, Bảo Lộc) vào Liên hệ, Dây chuyền, Hệ thống đại lý và Trang chủ (khối "Vị trí nhà máy").
+- SEO ĐỊA PHƯƠNG: chèn **JSON-LD LocalBusiness/Store** (NAP + toạ độ 11.5241,107.8419 + giờ mở cửa + logo/ảnh nhà máy) vào **toàn bộ 24 trang** để Google hiển thị đúng địa điểm Trà Nai Vàng.
+- Kiểm thử: 24/24 trang HTTP 200; 31/31 ảnh máy 200; render động 31 máy đúng thứ tự + 22 gia công; giỏ hàng/voucher WELCOME15/tìm kiếm song ngữ/email/đơn hàng chạy OK; không ảnh vỡ. Cache-bust v170733.
