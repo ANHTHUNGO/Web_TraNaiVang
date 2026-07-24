@@ -25,7 +25,9 @@
    <div class="field"><label>Mã số thuế <small>(nếu có)</small></label><input id="a-tax"/></div></div>
  <div class="frow"><div class="field"><label>Tỉnh / Thành phố *</label><select id="a-city"><option value="">Chọn tỉnh/thành</option><option>TP. Hồ Chí Minh</option><option>Hà Nội</option><option>Lâm Đồng</option><option>Đà Nẵng</option><option>Cần Thơ</option><option>Khác</option></select><div class="err">Chọn tỉnh/thành</div></div>
    <div class="field"><label>Quận / Huyện *</label><input id="a-district" placeholder="VD: Quận 3"/><div class="err">Nhập quận/huyện</div></div></div>
- <div class="field"><label>Địa chỉ kho / nhận hàng *</label><input id="a-addr"/><div class="err">Nhập địa chỉ</div></div>
+ <div class="field"><label>Địa chỉ trên giấy phép kinh doanh *</label><input id="a-bizaddr" placeholder="Địa chỉ ĐKKD / xuất hoá đơn VAT"/><div class="err">Nhập địa chỉ GPKD</div></div>
+ <label class="check" style="margin:-2px 0 12px"><input type="checkbox" id="a-sameaddr"/> <span>Địa chỉ nhận hàng giống địa chỉ giấy phép kinh doanh</span></label>
+ <div class="field"><label>Địa chỉ nhận hàng (kho) *</label><input id="a-addr" placeholder="Nơi nhận hàng thực tế"/><div class="err">Nhập địa chỉ nhận hàng</div></div>
  <h3 style="font-family:var(--serif);font-weight:500;font-size:19px;margin:22px 0 16px">Thông tin kinh doanh</h3>
  <div class="frow"><div class="field"><label>Loại hình đăng ký *</label><select id="a-type"><option>Cộng tác viên</option><option>Đại lý bán lẻ</option><option>Đại lý cấp 1</option><option>Nhà phân phối</option><option>Khách hàng doanh nghiệp</option><option>Đối tác quà tặng</option></select></div>
    <div class="field"><label>Kênh bán hàng hiện tại</label><select id="a-channel"><option>Cửa hàng offline</option><option>Online (FB/Shopee/TikTok)</option><option>Cả hai</option><option>Chưa kinh doanh</option></select></div></div>
@@ -43,7 +45,7 @@ document.getElementById('agBtn').onclick=()=>{
  const nameSlug=v('a-shop').normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[đĐ]/g,'d').toLowerCase().replace(/[^a-z0-9]+/g,'').slice(0,18);
  let uname='daily_'+nameSlug;
  bad('a-shop',nameSlug.length<2);
- bad('a-name',v('a-name').length<2);bad('a-phone',!/^0\d{8,10}$/.test(v('a-phone')));bad('a-email',!/^\S+@\S+\.\S+$/.test(v('a-email')));bad('a-city',!v('a-city'));bad('a-district',v('a-district').length<2);bad('a-addr',v('a-addr').length<3);bad('a-pw',v('a-pw').length<6);bad('a-pw2',v('a-pw2')!==v('a-pw')||!v('a-pw2'));
+ bad('a-name',v('a-name').length<2);bad('a-phone',!/^0\d{8,10}$/.test(v('a-phone')));bad('a-email',!/^\S+@\S+\.\S+$/.test(v('a-email')));bad('a-city',!v('a-city'));bad('a-district',v('a-district').length<2);bad('a-bizaddr',v('a-bizaddr').length<3);bad('a-addr',v('a-addr').length<3);bad('a-pw',v('a-pw').length<6);bad('a-pw2',v('a-pw2')!==v('a-pw')||!v('a-pw2'));
  if(!document.getElementById('a-agree').checked){showToast('Vui lòng đồng ý chính sách');ok=false;}
  if(!ok){window.scrollTo({top:0,behavior:'smooth'});return;}
  const reg=JSON.parse(localStorage.getItem('nv_dealer_accounts')||'{}');
@@ -54,7 +56,7 @@ document.getElementById('agBtn').onclick=()=>{
  let code='TNV-'+(AB[v('a-city')]||'VN')+'-'+HANDLE;
  while(reg[code]) code=code+'-'+Math.floor(Math.random()*90+10);
  try{
-   const acct={code,username:uname,pw:v('a-pw'),name:v('a-shop'),rep:v('a-name'),phone:v('a-phone'),email:v('a-email'),addr:v('a-addr'),city:v('a-city'),district:v('a-district'),tax:v('a-tax'),biz:v('a-type'),channel:v('a-channel'),tier:'Đại lý tiêu chuẩn',discount:0.25,staff:'Chưa phân công',creditLimit:0,creditUsed:0,salesMonth:0,salesYear:0,targetMonth:30000000,orders:0,processing:0,shipping:0,points:0,joined:new Date().toLocaleDateString('vi-VN'),status:'Đã duyệt'};
+   const acct={code,username:uname,pw:v('a-pw'),name:v('a-shop'),rep:v('a-name'),phone:v('a-phone'),email:v('a-email'),addr:v('a-addr'),city:v('a-city'),district:v('a-district'),bizAddr:v('a-bizaddr'),tax:v('a-tax'),biz:v('a-type'),channel:v('a-channel'),tier:'Đại lý tiêu chuẩn',discount:0.25,staff:'Chưa phân công',creditLimit:0,creditUsed:0,salesMonth:0,salesYear:0,targetMonth:30000000,orders:0,processing:0,shipping:0,points:0,joined:new Date().toLocaleDateString('vi-VN'),status:'Đã duyệt'};
    reg[code]=acct; reg['@'+uname]=acct; reg[uname]=acct; if(v('a-email'))reg[v('a-email').toLowerCase()]=acct; if(v('a-phone'))reg[v('a-phone')]=acct;
    localStorage.setItem('nv_dealer_accounts',JSON.stringify(reg));
  }catch(e){}
@@ -68,4 +70,8 @@ document.getElementById('agBtn').onclick=()=>{
  s.addEventListener('input',upd);upd();})();
 /* Nút con mắt bật/tắt mật khẩu */
 document.querySelectorAll('.eyeb').forEach(function(b){b.onclick=function(){var i=document.getElementById(b.dataset.eye);if(i.type==='password'){i.type='text';b.textContent='🙈';}else{i.type='password';b.textContent='👁️';}};});
+/* Địa chỉ nhận hàng giống GPKD */
+(function(){var same=document.getElementById('a-sameaddr'),ba=document.getElementById('a-bizaddr'),ra=document.getElementById('a-addr');
+ function sync(){if(same.checked){ra.value=ba.value;ra.setAttribute('readonly','');ra.style.background='var(--off)';}else{ra.removeAttribute('readonly');ra.style.background='';}}
+ same.addEventListener('change',sync);ba.addEventListener('input',function(){if(same.checked)ra.value=ba.value;});})();
 </script></body></html>

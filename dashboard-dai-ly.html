@@ -382,7 +382,7 @@ PANES.reports=()=>{
 };
 
 PANES.profile=()=>`<div class="card"><h3>Hồ sơ đại lý</h3><div class="cdesc">Mã đại lý <b style="color:var(--tea)">${D.code}</b> · Trạng thái <span class="badge b-green">${D.status}</span></div>
-  <div class="grid2"><div><table class="tbl"><tbody><tr><td>Tên đại lý</td><td><b>${D.name}</b></td></tr><tr><td>Người đại diện</td><td>${D.rep}</td></tr><tr><td>Điện thoại</td><td>${D.phone}</td></tr><tr><td>Email</td><td>${D.email}</td></tr><tr><td>Địa chỉ nhận hàng</td><td>${D.addr}, ${D.district}, ${D.city}</td></tr><tr><td>Mã số thuế</td><td>${D.tax||'—'}</td></tr></tbody></table></div>
+  <div class="grid2"><div><table class="tbl"><tbody><tr><td>Tên đại lý</td><td><b>${D.name}</b></td></tr><tr><td>Người đại diện</td><td>${D.rep}</td></tr><tr><td>Điện thoại</td><td>${D.phone}</td></tr><tr><td>Email</td><td>${D.email}</td></tr><tr><td>Địa chỉ GPKD</td><td>${D.bizAddr||'—'}</td></tr><tr><td>Địa chỉ nhận hàng</td><td>${D.addr}, ${D.district}, ${D.city}</td></tr><tr><td>Mã số thuế</td><td>${D.tax||'—'}</td></tr></tbody></table></div>
   <div><table class="tbl"><tbody><tr><td>Loại hình</td><td>${D.biz||'—'}</td></tr><tr><td>Kênh bán</td><td>${D.channel||'—'}</td></tr><tr><td>Cấp đại lý</td><td><b>${D.tier}</b> (CK ${Math.round(D.discount*100)}%)</td></tr><tr><td>NV phụ trách</td><td>${D.staff}</td></tr><tr><td>Ngày tham gia</td><td>${D.joined}</td></tr><tr><td>Hạn mức công nợ</td><td>${fmt(D.creditLimit)}</td></tr></tbody></table></div></div>
   <div class="cdesc" style="margin-top:14px">Thay đổi cấp, giá riêng, hạn mức do Admin cấu hình &amp; lưu nhật ký.</div></div>`;
 
