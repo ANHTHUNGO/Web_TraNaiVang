@@ -6,9 +6,11 @@
 <meta name="robots" content="noindex"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css?v=170740">
-<script src="assets/store.js?v=170740"></script>
-<script src="assets/lead.js?v=170740"></script>
+<link rel="stylesheet" href="assets/site.css?v=170741">
+<script src="assets/store.js?v=170741"></script>
+<script src="assets/config.js?v=170741"></script>
+<script src="assets/backend.js?v=170741"></script>
+<script src="assets/lead.js?v=170741"></script>
 <style>
   body{background:var(--off)}
   .dwrap{display:grid;grid-template-columns:246px 1fr;min-height:100vh;align-items:start}
@@ -441,6 +443,7 @@ function makeOrder(lines,channel,note){
   const o={code,dealer:D.code,date:new Date().toLocaleDateString('vi-VN'),ts:Date.now(),channel,total:t.grand,paid:0,ship:'Chờ duyệt',pay:'Chờ thanh toán',status:'pending',staff:(D.staff||'NV').split('—')[0].trim(),note:note||'',lines:lines.slice()};
   const all=allOrders();all.unshift(o);saveOrders(all);
   ggSync(o);
+  try{ if(window.NV) NV.push('dealer_orders',{code:o.code,dealer:o.dealer,channel:o.channel,total:o.total,paid:o.paid,status:o.status,note:o.note,items:o.lines}); }catch(e){}
   appliedCode=null; localStorage.removeItem('nv_dcart'); updateCartN();
   return o;
 }

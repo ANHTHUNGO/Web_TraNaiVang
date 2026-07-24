@@ -8,6 +8,7 @@
       var leads=ls('nv_leads',[]);
       var row={"Thời gian":new Date().toLocaleString('vi-VN'),"Kênh":"Zalo/Chat","Tên/Nick":"","SĐT":phone,"Email":email||"","Nội dung quan tâm":note||"Nhận ưu đãi","Nguồn":source||"Website","Trạng thái":"Mới"};
       leads.push(row); sv('nv_leads',leads);
+      try{ if(window.NV) NV.push('leads',{phone:phone,email:email||'',source:source||'Website',note:note||'Nhận ưu đãi',channel:'Zalo/Chat',status:'Mới'}); }catch(e){}
       var out=ls('nv_promo_outbox',[]);
       out.push({to:phone,email:email||"",via:email?"Zalo + Email":"Zalo",time:row["Thời gian"],content:"Poster ưu đãi & khuyến mãi mới nhất — Trà Nai Vàng"});
       sv('nv_promo_outbox',out);

@@ -4,7 +4,7 @@
 <title>Liên hệ — Trà Nai Vàng</title><meta name="description" content="Liên hệ Trà Nai Vàng: hotline 0855 256 512, email info@tranaivang.com, địa chỉ KCN Lộc Sơn, Bảo Lộc, Lâm Đồng."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css?v=170740"><script src="assets/i18n.js?v=170740"></script><script src="assets/store.js?v=170740"></script>
+<link rel="stylesheet" href="assets/site.css?v=170741"><script src="assets/i18n.js?v=170741"></script><script src="assets/store.js?v=170741"></script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":["Store","FoodEstablishment"],"name":"Công ty TNHH Trà Nai Vàng","alternateName":"Trà Nai Vàng","description":"Thương hiệu trà Việt từ cao nguyên Bảo Lộc, Lâm Đồng - Since 1982. Sản xuất, bán lẻ và gia công OEM/ODM trà xanh, oolong, hồng trà, trà ướp hương.","url":"https://tranaivang.vn/","logo":"https://tranaivang.vn/assets/logo-full.png","image":"https://tranaivang.vn/assets/real/factory-aerial.jpg","telephone":"+84855256512","email":"info@tranaivang.com","foundingDate":"1982","priceRange":"50.000₫ - 500.000₫","servesCuisine":"Trà","address":{"@type":"PostalAddress","streetAddress":"Lô CN7, KCN Lộc Sơn, P. Lộc Sơn","addressLocality":"TP. Bảo Lộc","addressRegion":"Lâm Đồng","postalCode":"66100","addressCountry":"VN"},"geo":{"@type":"GeoCoordinates","latitude":11.5241,"longitude":107.8419},"hasMap":"https://www.google.com/maps?q=C%C3%B4ng%20ty%20TNHH%20Tr%C3%A0%20Nai%20V%C3%A0ng%2C%20L%C3%B4%20CN7%20KCN%20L%E1%BB%99c%20S%C6%A1n%2C%20P.%20L%E1%BB%99c%20S%C6%A1n%2C%20TP.%20B%E1%BA%A3o%20L%E1%BB%99c%2C%20L%C3%A2m%20%C4%90%E1%BB%93ng","openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"07:30","closes":"21:00"},"sameAs":["https://tranaivang.vn/"]}
 </script>
@@ -35,7 +35,7 @@
    <div class="mapwrap" style="height:300px"><iframe src="https://www.google.com/maps?q=C%C3%B4ng%20ty%20TNHH%20Tr%C3%A0%20Nai%20V%C3%A0ng%2C%20L%C3%B4%20CN7%20KCN%20L%E1%BB%99c%20S%C6%A1n%2C%20P.%20L%E1%BB%99c%20S%C6%A1n%2C%20TP.%20B%E1%BA%A3o%20L%E1%BB%99c%2C%20L%C3%A2m%20%C4%90%E1%BB%93ng&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Bản đồ nhà máy Trà Nai Vàng - Bảo Lộc"></iframe></div>
  </div>
 </div></div>
-<script src="assets/layout.js?v=170740"></script><script>
+<script src="assets/layout.js?v=170741"></script><script>
 document.getElementById('ctBtn').onclick=()=>{
  const v=id=>document.getElementById(id).value.trim(); let ok=true;
  const bad=(id,c)=>{const f=document.getElementById(id).closest('.field');f.classList.toggle('invalid',c);if(c)ok=false;};
@@ -45,6 +45,7 @@ document.getElementById('ctBtn').onclick=()=>{
  const code='HT'+Date.now().toString().slice(-6);
  /* luu vao hop thu Admin xem duoc */
  try{var box=JSON.parse(localStorage.getItem('nv_contacts')||'[]');box.push({code:code,time:new Date().toLocaleString('vi-VN'),name:v('c-name'),phone:v('c-phone'),email:v('c-email'),type:document.getElementById('c-type').value,msg:v('c-msg'),status:'Mới'});localStorage.setItem('nv_contacts',JSON.stringify(box));}catch(e){}
+ try{ if(window.NV) NV.push('contacts',{code:code,name:v('c-name'),phone:v('c-phone'),email:v('c-email'),type:document.getElementById('c-type').value,msg:v('c-msg'),status:'Mới'}); }catch(e){}
  try{ if(typeof sendEmail==='function'&&currentUser()) sendEmail('Đã tiếp nhận yêu cầu hỗ trợ '+code, `<p>Chào ${v('c-name')},</p><p>Nai Vàng đã nhận yêu cầu <b>${document.getElementById('c-type').value}</b> của bạn (mã ${code}). Chúng tôi sẽ phản hồi trong thời gian sớm nhất.</p><p>Nội dung: ${v('c-msg')}</p>`,'system',true);}catch(e){}
  document.getElementById('ctForm').innerHTML=`<div style="text-align:center;padding:26px 10px"><div style="width:66px;height:66px;border-radius:50%;background:var(--sage-100);display:grid;place-items:center;margin:0 auto 14px;font-size:30px">✅</div><h3 style="font-family:var(--serif);font-weight:500;font-size:22px">Đã gửi yêu cầu!</h3><p style="color:var(--stone);margin:8px 0">Mã yêu cầu hỗ trợ: <b style="color:var(--tea)">${code}</b><br/>Nai Vàng sẽ liên hệ với bạn sớm nhất.</p></div>`;
 };

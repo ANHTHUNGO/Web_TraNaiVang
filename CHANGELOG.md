@@ -178,3 +178,11 @@ Người dùng giao 100% tự làm hết. Bổ sung toàn bộ nhóm trang nội
 - Admin: mục MỚI "Hộp thư & liên hệ" (yêu cầu liên hệ + danh sách email đăng ký).
 - Thêm `name` cho input các form (lien-he, thanh-toan, dang-ky-dai-ly, dang-nhap, tra-cuu-don) — sẵn sàng backend.
 - (Lưu ý) Vẫn là mô phỏng localStorage; backend thật sẽ lưu DB + gửi email nội bộ. Cache-bust v170740.
+
+## [v170741] 2026-07-24 — Nền BACKEND Supabase (sẵn sàng triển khai, không phá demo)
+- `db/schema.sql`: bảng contacts/subscribers/leads/dealer_applications/dealer_orders/retail_orders + RLS (anon chỉ GHI form công khai, không đọc dữ liệu nhạy cảm).
+- `assets/config.js`: điền SUPABASE_URL + anon key (trống = demo).
+- `assets/backend.js`: lớp NV.push()/NV.list() — tự đẩy/đọc Supabase khi cấu hình; fire-and-forget, nuốt mọi lỗi, KHÔNG phá demo.
+- Đấu form đẩy Supabase (khi cấu hình): Liên hệ→contacts, Nhận tin→subscribers, Bắt SĐT/Zalo→leads, Đăng ký đại lý→dealer_applications, Đơn sỉ→dealer_orders, Đơn lẻ→retail_orders. Nạp config+backend trên mọi trang (layout.js) + index + dashboard đại lý.
+- `db/DEPLOY.md`: hướng dẫn 5 bước tạo Supabase → chạy thật.
+- Đã test: config trống → chế độ DEMO, form vẫn lưu localStorage, console sạch lỗi. Cache-bust v170741.

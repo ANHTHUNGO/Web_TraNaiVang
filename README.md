@@ -188,6 +188,8 @@ Sau khi đăng nhập, đại lý thấy sidebar + **banner ưu đãi ~5cm** (ch
 
 **Đã xong (front-end):** toàn bộ 27 trang, e-commerce lẻ, cổng đại lý B2B (đăng ký→mã→đăng nhập→đặt hàng thủ công & qua chat→đơn theo năm/tháng + tải file→công nợ→mã riêng→báo cáo), cổng admin (đại lý/đơn/công nợ/giá/CMS/marketing/kết nối Drive), chatbot + bắt lead Zalo, banner ưu đãi đại lý, song ngữ VI/EN, SEO JSON-LD, ảnh thật nhà máy/máy móc/sản phẩm, file mẫu Google Sheets.
 
+**Nền backend đã dựng sẵn (chỉ cần cấu hình để chạy thật):** `db/schema.sql` (bảng + RLS Supabase), `assets/backend.js` (lớp `NV.push/NV.list`), `assets/config.js` (điền URL+anon key). Form (Liên hệ, Nhận tin, Bắt SĐT/Zalo, Đăng ký đại lý, Đơn hàng lẻ+sỉ) **tự đẩy lên Supabase khi cấu hình**; để trống thì chạy demo localStorage. Hướng dẫn: [`db/DEPLOY.md`](db/DEPLOY.md).
+
 **Còn lại (giai đoạn backend — cần server/DB):**
 - Đọc/ghi Google Sheets **thật** qua Google API / Apps Script (đồng bộ đơn, đại lý, lead).
 - Đăng nhập/tài khoản thật (server auth), multi-tenant thật.

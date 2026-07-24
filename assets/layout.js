@@ -138,6 +138,6 @@ function send(text){ text=(text||input.value).trim(); if(!text)return; add(text,
 document.getElementById('cbotSend').onclick=()=>send();
 input.addEventListener('keydown',e=>{if(e.key==='Enter')send();});
 quick.addEventListener('click',e=>{const b=e.target.closest('[data-say]');if(b){if(!cbot.classList.contains('open'))openBot();send(b.dataset.say);}});
-/* nạp module bắt lead qua Zalo/Chat */
-(function(){var s=document.createElement('script');s.src='assets/lead.js?v=170738';document.body.appendChild(s);})();
+/* nạp cấu hình backend + module bắt lead */
+(function(){['assets/config.js?v=170741','assets/backend.js?v=170741','assets/lead.js?v=170741'].forEach(function(src){var s=document.createElement('script');s.src=src;document.body.appendChild(s);});})();
 })();
