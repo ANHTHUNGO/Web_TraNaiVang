@@ -4,7 +4,7 @@
 <title>Đăng nhập Admin — Trà Nai Vàng</title><meta name="robots" content="noindex"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css?v=170738">
+<link rel="stylesheet" href="assets/site.css?v=170739">
 <style>
  body{background:linear-gradient(160deg,#22301a,#0f1809)}
  .wrapA{min-height:100vh;display:grid;place-items:center;padding:40px 20px}
@@ -20,19 +20,19 @@
   <img src="assets/logo-full.png" alt="Nai Vàng"/>
   <h1>Quản trị Trà Nai Vàng</h1>
   <p>Cổng dành riêng cho Admin công ty</p>
-  <div class="field"><label>Tài khoản Admin</label><input id="au" placeholder="admin" autocomplete="username"/></div>
+  <div class="field"><label>Tài khoản Admin</label><input id="au" placeholder="Tên đăng nhập quản trị" autocomplete="username"/></div>
   <div class="field"><label>Mật khẩu</label><input id="ap" type="password" placeholder="••••••••" autocomplete="current-password"/></div>
   <button class="btn btn-primary btn-block" id="aBtn">Đăng nhập quản trị</button>
-  <div class="box" style="margin-top:16px;font-size:12px;background:var(--sage-100)">🔑 Demo: <b>admin</b> / <b>admin123</b></div>
-  <p style="margin-top:14px"><a href="index.html" style="color:var(--tea);font-size:12.5px">← Về trang chủ website</a></p>
+  <p style="margin-top:16px;font-size:11.5px;color:var(--stone);text-align:center">🔒 Khu vực dành riêng cho quản trị viên. Truy cập trái phép bị nghiêm cấm.</p>
+  <p style="margin-top:10px;text-align:center"><a href="index.html" style="color:var(--tea);font-size:12.5px">← Về trang chủ website</a></p>
 </div></div>
 <script>
 function toast(m){let t=document.createElement('div');t.textContent=m;t.style.cssText='position:fixed;left:50%;bottom:30px;transform:translateX(-50%);background:#28321f;color:#fff;padding:12px 22px;border-radius:30px;font-size:13.5px;z-index:999';document.body.appendChild(t);setTimeout(()=>t.remove(),2600);}
 document.getElementById('aBtn').onclick=()=>{
   const u=document.getElementById('au').value.trim(), p=document.getElementById('ap').value.trim();
   if(!u||!p){toast('Nhập tài khoản & mật khẩu');return;}
-  if(u==='admin'&&p==='admin123'){sessionStorage.setItem('nv_admin','1');toast('Đăng nhập thành công!');setTimeout(()=>location.href='dashboard-admin.html',500);}
-  else toast('Sai tài khoản hoặc mật khẩu (demo: admin/admin123)');
+  if(u.toLowerCase()==='admintranaivang'&&p==='888999'){sessionStorage.setItem('nv_admin','1');toast('Đăng nhập thành công!');setTimeout(()=>location.href='dashboard-admin.html',500);}
+  else toast('Sai tài khoản hoặc mật khẩu.');
 };
 document.getElementById('ap').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('aBtn').click();});
 </script>

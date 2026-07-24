@@ -5,9 +5,9 @@
 <title>Thanh toán — Trà Nai Vàng</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css?v=170738">
-<script src="assets/i18n.js?v=170738"></script>
-<script src="assets/store.js?v=170738"></script>
+<link rel="stylesheet" href="assets/site.css?v=170739">
+<script src="assets/i18n.js?v=170739"></script>
+<script src="assets/store.js?v=170739"></script>
 <style>
   .co{display:grid;grid-template-columns:1.4fr .9fr;gap:30px;padding:34px 0 40px;align-items:start}
   .opt{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--line);border-radius:14px;padding:15px 16px;margin-bottom:11px;cursor:pointer;transition:all .2s;background:var(--paper)}
@@ -65,6 +65,7 @@
 
       <div class="panel">
         <h3 data-i18n="co.pay">Phương thức thanh toán</h3>
+        <div style="background:#FBF0D5;border:1px solid #e0c66a;border-radius:12px;padding:11px 14px;font-size:12.5px;color:#7a5f14;margin-bottom:14px">⚠️ <b>Bản trình diễn (demo):</b> cổng thanh toán trực tuyến (VNPAY/MoMo/thẻ Visa/Mastercard) <b>chưa hoạt động thật</b>. Đơn đặt để tham khảo giao diện. Vui lòng đặt qua COD hoặc gọi <a href="tel:0855256512" style="color:#7a5f14;font-weight:600">0855 256 512</a> để chốt đơn.</div>
         <label class="opt on"><input type="radio" name="pay" value="cod" checked/><span><b data-i18n="co.cod">Thanh toán khi nhận hàng (COD)</b><small data-i18n="co.codS">Kiểm tra hàng trước khi thanh toán</small></span></label>
         <label class="opt"><input type="radio" name="pay" value="bank"/><span><b data-i18n="co.bank">Chuyển khoản ngân hàng</b><small data-i18n="co.bankS">Xác nhận đơn ngay sau khi nhận được chuyển khoản</small></span></label>
         <div class="bank" id="bankInfo"><b>Thông tin chuyển khoản:</b><br/>Ngân hàng: Vietcombank — CN Bảo Lộc<br/>Chủ TK: CÔNG TY TNHH TRÀ NAI VÀNG<br/>Số TK: 0123 456 789 · Nội dung: <b>SĐT của bạn</b></div>
@@ -76,7 +77,7 @@
   </div>
 </main>
 
-<script src="assets/layout.js?v=170738"></script>
+<script src="assets/layout.js?v=170739"></script>
 <script>
 const items = cartItems();
 if(!items.length) location.href='gio-hang.html';
