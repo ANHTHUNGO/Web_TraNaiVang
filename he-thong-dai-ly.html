@@ -4,7 +4,7 @@
 <title>Hệ thống đại lý — Trà Nai Vàng</title><meta name="description" content="Tìm đại lý, điểm bán Trà Nai Vàng gần bạn trên toàn quốc."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css?v=170730"><script src="assets/i18n.js?v=170730"></script><script src="assets/store.js?v=170730"></script>
+<link rel="stylesheet" href="assets/site.css?v=170731"><script src="assets/i18n.js?v=170731"></script><script src="assets/store.js?v=170731"></script>
 </head><body data-page="he-thong-dai-ly">
 <section class="phead"><div class="wrap"><div class="crumb"><a href="index.html">Trang chủ</a> › <b>Hệ thống đại lý</b></div><h1>Tìm đại lý gần bạn</h1><p>Hệ thống điểm bán Trà Nai Vàng trên toàn quốc.</p></div></section>
 <div class="wrap" style="padding:34px 0 60px">
@@ -12,7 +12,7 @@
    <select id="agCity"><option value="">Tất cả</option><option>TP. Hồ Chí Minh</option><option>Hà Nội</option><option>Lâm Đồng</option><option>Đà Nẵng</option><option>Cần Thơ</option></select></div>
  <div class="g3" id="agList" style="margin-top:20px"></div>
 </div>
-<script src="assets/layout.js?v=170730"></script><script>
+<script src="assets/layout.js?v=170731"></script><script>
 const AG=[{"name": "Đại lý Nai Vàng Q.3", "city": "TP. Hồ Chí Minh", "addr": "52/2 Lý Chính Thắng, P. Võ Thị Sáu, Q.3", "phone": "0855 256 512", "hours": "8h–21h"}, {"name": "Nai Vàng Bảo Lộc", "city": "Lâm Đồng", "addr": "512 Trần Phú, P.2, TP. Bảo Lộc", "phone": "0263 3864 316", "hours": "7h30–21h"}, {"name": "Nai Vàng Hà Nội", "city": "Hà Nội", "addr": "128 Cầu Giấy, Q. Cầu Giấy", "phone": "0855 256 512", "hours": "8h–20h30"}, {"name": "Nai Vàng Đà Nẵng", "city": "Đà Nẵng", "addr": "215 Nguyễn Văn Linh, Q. Thanh Khê", "phone": "0855 256 512", "hours": "8h–21h"}, {"name": "Nai Vàng Cần Thơ", "city": "Cần Thơ", "addr": "88 Trần Hưng Đạo, Q. Ninh Kiều", "phone": "0855 256 512", "hours": "8h–20h"}];
 function renderAg(){const c=document.getElementById('agCity').value;
  const list=AG.filter(a=>!c||a.city===c);

@@ -8,8 +8,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css?v=170730">
-<script src="assets/i18n.js?v=170730"></script>
+<link rel="stylesheet" href="assets/site.css?v=170731">
+<script src="assets/i18n.js?v=170731"></script>
 <style>
   :root{
     --tea:#5E7C3E;--tea-2:#4A6B2F;--forest:#2F4A24;--pine:#38562A;--sage:#7E9B54;--sage-100:#E7EEDA;
@@ -184,10 +184,10 @@
 
 <div class="toast" id="toast"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span id="toastMsg"></span></div>
 
-<script src="assets/store.js?v=170730"></script>
-<script src="assets/layout.js?v=170730"></script>
+<script src="assets/store.js?v=170731"></script>
+<script src="assets/layout.js?v=170731"></script>
 <script>
-/* Dữ liệu SP + giỏ hàng dùng chung từ assets/store.js?v=170730 */
+/* Dữ liệu SP + giỏ hàng dùng chung từ assets/store.js?v=170731 */
 let state = {cat:'all', q:'', sort:'featured'};
 /* wrap toggleWish để re-render tim */
 const _tw = toggleWish; toggleWish = s => { _tw(s); renderGrid(); };
@@ -195,11 +195,11 @@ const _tw = toggleWish; toggleWish = s => { _tw(s); renderGrid(); };
 /* chips */
 const chipsEl = document.getElementById('chips');
 function renderChips(){
-  const counts = {all: PRODUCTS.length};
-  PRODUCTS.forEach(p=>counts[p.cat]=(counts[p.cat]||0)+1);
+  const counts = {all: RETAIL.length};
+  RETAIL.forEach(p=>counts[p.cat]=(counts[p.cat]||0)+1);
   let html = `<button class="chip ${state.cat==='all'?'on':''}" data-cat="all">${t('cat.all')} <small>${counts.all}</small></button>`;
-  for(const k of Object.keys(CATS))
-    html += `<button class="chip ${state.cat===k?'on':''}" data-cat="${k}">${catName(k)} <small>${counts[k]||0}</small></button>`;
+  for(const k of Object.keys(CATS)){ if(!counts[k]) continue;
+    html += `<button class="chip ${state.cat===k?'on':''}" data-cat="${k}">${catName(k)} <small>${counts[k]}</small></button>`; }
   chipsEl.innerHTML = html;
 }
 chipsEl.addEventListener('click', e=>{
@@ -210,7 +210,7 @@ chipsEl.addEventListener('click', e=>{
 /* grid */
 const grid = document.getElementById('grid');
 function renderGrid(){
-  let list = PRODUCTS.filter(p => (state.cat==='all'||p.cat===state.cat) && (!state.q || searchText(p).includes(norm(state.q))));
+  let list = RETAIL.filter(p => (state.cat==='all'||p.cat===state.cat) && (!state.q || searchText(p).includes(norm(state.q))));
   if(state.sort==='price-asc') list.sort((a,b)=>a.price-b.price);
   if(state.sort==='price-desc') list.sort((a,b)=>b.price-a.price);
   if(state.sort==='name') list.sort((a,b)=>prodName(a).localeCompare(prodName(b),getLang()==='en'?'en':'vi'));

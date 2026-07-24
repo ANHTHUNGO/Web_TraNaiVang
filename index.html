@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<script src="assets/i18n.js?v=170730"></script>
+<script src="assets/i18n.js?v=170731"></script>
 <style>
   :root{
     --forest:#2F4A24;
@@ -117,6 +117,21 @@
   
   .langsw{border:1px solid var(--line);background:var(--paper);border-radius:40px;padding:7px 14px;font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--tea);cursor:pointer;transition:all .25s}
   .langsw:hover{background:var(--tea);color:#fff;border-color:var(--tea)}
+  .topbar{background:linear-gradient(90deg,var(--forest),var(--pine));color:rgba(238,242,226,.92);font-size:12px}
+  .topbar-in{display:flex;align-items:center;justify-content:space-between;height:40px;gap:16px}
+  .topbar a{color:inherit;text-decoration:none}
+  .tb-left{display:flex;align-items:center;gap:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .tb-left b{color:var(--gold-light);font-weight:600}
+  .tb-right{display:flex;align-items:center;gap:16px;flex:none}
+  .tb-hot{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+  .tb-hot b{color:var(--gold-light)}
+  .tb-agent{background:var(--gold-light);color:#4a3d16;border-radius:20px;padding:5px 14px;font-weight:600;white-space:nowrap;transition:.2s}
+  .tb-agent:hover{background:#e7cf94}
+  .topbar .langsw{border:1px solid rgba(255,255,255,.35);background:transparent;color:#fff;padding:4px 11px;font-size:11px}
+  .topbar .langsw:hover{background:rgba(255,255,255,.16);border-color:#fff}
+  .menu a{white-space:nowrap}
+  @media(max-width:1100px){.tb-left{display:none}}
+  @media(max-width:1180px){.menu{gap:18px}}
   .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;width:26px}
   .burger span{height:1.6px;background:var(--ink);width:100%}
 
@@ -350,19 +365,26 @@
   </symbol>
 </svg>
 
-<div class="announce" data-i18n="announce">Giao hàng toàn quốc · Đặt trà biếu Tết &amp; quà doanh nghiệp — Hotline <b>0855 256 512</b></div>
+<div class="topbar"><div class="wrap topbar-in">
+  <div class="tb-left" data-i18n="announce">Giao hàng toàn quốc · Hotline 0855 256 512</div>
+  <div class="tb-right">
+    <a class="tb-hot" href="tel:0855256512"><svg viewBox="0 0 24 24" width="15" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h3l2 5-2.5 1.5a12 12 0 0 0 5 5L14 13l5 2v3a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1Z"/></svg>Hotline: <b>0855 256 512</b></a>
+    <a class="tb-agent" href="dang-ky-dai-ly.html" data-i18n="h.agentBtn">Đăng ký đại lý</a>
+    <button class="langsw" id="langSw" aria-label="Language">EN</button>
+  </div>
+</div></div>
 
 <header id="top">
   <div class="wrap nav">
-    <a class="brand" href="#top" aria-label="Trà Nai Vàng">
+    <a class="brand" href="index.html" aria-label="Trà Nai Vàng">
       <img src="assets/logo-full.png" alt="Logo Trà Nai Vàng" />
       <span class="wm"><b>TRÀ NAI VÀNG</b><span>Since 1982 · Bảo Lộc</span></span>
     </a>
     <nav aria-label="Chính">
       <ul class="menu">
         <li><a href="gioi-thieu.html" data-i18n="nav.about">Giới thiệu</a></li>
-        <li><a href="danh-muc-gia-cong.html" data-i18n="nav.oem">Danh mục gia công</a></li>
-        <li><a href="day-chuyen-cong-nghe.html" data-i18n="nav.tech">Dây chuyền</a></li>
+        <li><a href="danh-muc-gia-cong.html" data-i18n="nav.oem2">Gia công</a></li>
+        <li><a href="day-chuyen-cong-nghe.html" data-i18n="nav.tech2">Dây chuyền</a></li>
         <li><a href="san-pham.html" data-i18n="nav.products">Sản phẩm</a></li>
         <li><a href="dai-ly.html" data-i18n="nav.agents">Đại lý</a></li>
         <li><a href="kien-thuc.html" data-i18n="nav.know">Kiến thức</a></li>
@@ -370,7 +392,7 @@
       </ul>
     </nav>
     <div class="nav-actions">
-      <button class="langsw" id="langSw" aria-label="Language">EN</button>
+      <a href="san-pham.html" aria-label="Tìm kiếm"><svg class="icon-btn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg></a>
       <a href="tai-khoan.html" aria-label="Tài khoản"><svg class="icon-btn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-3.5 4.5-5 8-5s6.5 1.5 8 5"/></svg></a>
       <a class="cart-wrap" href="gio-hang.html" aria-label="Giỏ hàng">
         <svg class="icon-btn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2.4 3.2h2.3l1.75 10a1.7 1.7 0 0 0 1.68 1.4h8.75a1.7 1.7 0 0 0 1.66-1.32L20.6 6H5.3"/><path d="M8.9 7.6l.5 4.5M13 7.6v4.5M17.1 7.6l-.5 4.5"/><circle cx="9.3" cy="19.1" r="1.75"/><circle cx="16.7" cy="19.1" r="1.75"/></svg>
@@ -637,7 +659,7 @@
   <button class="top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Lên đầu"><svg viewBox="0 0 24 24" width="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V6M6 12l6-6 6 6"/></svg></button>
 </div>
 
-<script src="assets/store.js?v=170730"></script>
+<script src="assets/store.js?v=170731"></script>
 <script>
   const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.14});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
@@ -659,14 +681,14 @@
   document.getElementById('bslider').addEventListener('mouseleave',bRestart);
   bGo(0);
   /* san pham noi bat (render dong, song ngu) */
-  const FEAT=['tra-sam-dua','oolong-tu-quy','tra-xanh-hoa-lai','ca-gai-leo-tia-to','bach-tra','pho-nhi-vien','tra-xanh-thai-nguyen','hong-tra-shan-tien'];
+  const FEAT=['tra-sam-dua','oolong-tu-quy','tra-xanh-hoa-lai','tra-xanh-hoa-soi','tra-bom-dua-sai-gon','tra-lai-pha-che','tra-gao-pha-che','tra-xanh-thai-nguyen'];
   const CARTMINI='<svg viewBox="0 0 24 24" width="18" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2.4 3.2h2.3l1.75 10a1.7 1.7 0 0 0 1.68 1.4h8.75a1.7 1.7 0 0 0 1.66-1.32L20.6 6H5.3"/><circle cx="9.3" cy="19.1" r="1.75"/><circle cx="16.7" cy="19.1" r="1.75"/></svg>';
   /* tim kiem nhanh canh Bo suu tap */
   const hq=document.getElementById('homeQ'), hsd=document.getElementById('hsDrop');
   hq.addEventListener('input',()=>{
     const q=hq.value.trim();
     if(!q){hsd.style.display='none';return;}
-    const res=PRODUCTS.filter(p=>searchText(p).includes(norm(q))).slice(0,6);
+    const res=RETAIL.filter(p=>searchText(p).includes(norm(q))).slice(0,6);
     hsd.innerHTML=(res.length?res.map(p=>`<a class="hs-item" href="chi-tiet-san-pham.html?sp=${p.slug}"><img src="${prodImg(p.slug)}" alt=""/><span>${prodName(p)}<small>${catName(p.cat)}</small></span><b>${fmt(p.price)}</b></a>`).join(''):`<div class="hs-all" style="color:var(--stone)">${t('cl.emptyT')}</div>`)
       +(res.length?`<a class="hs-all" href="san-pham.html?q=${encodeURIComponent(q)}">${t('hs.all')} →</a>`:'');
     hsd.style.display='block';

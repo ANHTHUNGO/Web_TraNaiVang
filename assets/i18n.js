@@ -206,6 +206,7 @@ const I18N = {
 "au.goAccount":["Vào tài khoản","Go to my account"],
 "au.forYou":["Dành riêng cho bạn — chọn ngay hương vị đầu tiên","Picked for you — choose your first tea"],
 "hs.all":["Xem tất cả kết quả","See all results"],
+"nav.oem2":["Gia công","OEM"],"nav.tech2":["Dây chuyền","Technology"],
 "nav.oem":["Danh mục gia công","OEM Tea"],"nav.tech":["Dây chuyền công nghệ","Technology"],
 "nav.about":["Giới thiệu","About"],"nav.promo":["Khuyến mãi","Promotions"],
 "nav.news":["Tin tức","News"],"nav.guide":["Hướng dẫn mua hàng","Buying guide"],"nav.faq":["Câu hỏi thường gặp","FAQ"],"nav.lookup":["Tra cứu đơn hàng","Order lookup"],

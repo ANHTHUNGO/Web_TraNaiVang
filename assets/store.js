@@ -36,6 +36,9 @@ const PRODUCTS=[
  _P("tra-gao-pha-che","Trà Gạo Pha Chế 350g","Rice Tea for Brewing 350g","rice brewing barista","pha-che",95000),
  _P("tra-lai-pha-che","Trà Lài Pha Chế 350g","Jasmine Tea for Brewing 350g","jasmine brewing barista","pha-che",92000),
 ];
+const RETAIL_SLUGS = new Set(['tra-sam-dua','oolong-tu-quy','tra-xanh-hoa-lai','tra-xanh-hoa-soi','tra-bom-dua-sai-gon','tra-gao-pha-che','tra-lai-pha-che','tra-xanh-thai-nguyen']);
+PRODUCTS.forEach(p=>p.retail=RETAIL_SLUGS.has(p.slug));
+const RETAIL = PRODUCTS.filter(p=>p.retail);
 const prodBySlug = s => PRODUCTS.find(p=>p.slug===s);
 const prodImg = s => `assets/real/products/${s}.jpg`;
 const fmt = n => n.toLocaleString('vi-VN')+'₫';

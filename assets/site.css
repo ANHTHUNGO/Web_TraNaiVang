@@ -280,3 +280,22 @@ footer{background:#1E2E16;color:rgba(238,242,226,.72);padding:56px 0 24px;margin
 .pay-row{display:flex;gap:7px;flex-wrap:wrap;margin-top:14px}
 .pay-row span{background:#fff;color:#333;font-size:9.5px;font-weight:700;border-radius:5px;padding:4px 8px;letter-spacing:.03em}
 @media(max-width:1080px){.foot-grid.big{grid-template-columns:1fr 1fr}}
+
+/* ===== v170731: header 2 tầng (topbar + main) ===== */
+.topbar{background:linear-gradient(90deg,var(--forest),var(--pine));color:rgba(238,242,226,.92);font-size:12px}
+.topbar-in{display:flex;align-items:center;justify-content:space-between;height:40px;gap:16px}
+.topbar a{color:inherit}
+.tb-left{display:flex;align-items:center;gap:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tb-left b{color:var(--gold-light);font-weight:600}
+.tb-right{display:flex;align-items:center;gap:16px;flex:none}
+.tb-hot{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.tb-hot b{color:var(--gold-light)}
+.tb-agent{background:var(--gold-light);color:#4a3d16;border-radius:20px;padding:5px 14px;font-weight:600;white-space:nowrap;transition:.2s}
+.tb-agent:hover{background:#e7cf94}
+.topbar .langsw{border:1px solid rgba(255,255,255,.35);background:transparent;color:#fff;padding:4px 11px;font-size:11px}
+.topbar .langsw:hover{background:rgba(255,255,255,.16);border-color:#fff}
+.menu a{white-space:nowrap}
+.nav-actions .hicon{width:21px;height:21px}
+header .nav{height:76px}
+@media(max-width:1100px){.tb-left{display:none}}
+@media(max-width:1180px){.menu{gap:18px}.menu a{font-size:13.5px}}

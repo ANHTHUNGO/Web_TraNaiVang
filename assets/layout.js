@@ -6,7 +6,14 @@ const L = getLang();
 
 /* ---------- HEADER ---------- */
 const header = `
-<div class="announce">${t('announce')}</div>
+<div class="topbar"><div class="wrap topbar-in">
+  <div class="tb-left">${t('announce')}</div>
+  <div class="tb-right">
+    <a class="tb-hot" href="tel:0855256512"><svg viewBox="0 0 24 24" width="15" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h3l2 5-2.5 1.5a12 12 0 0 0 5 5L14 13l5 2v3a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1Z"/></svg>${t('h.hotline')}: <b>0855 256 512</b></a>
+    <a class="tb-agent" href="dang-ky-dai-ly.html">${t('h.agentBtn')}</a>
+    <button class="langsw" id="langSw" aria-label="Language">${L==='vi'?'EN':'VI'}</button>
+  </div>
+</div></div>
 <header>
   <div class="wrap nav">
     <a class="brand" href="index.html" aria-label="Trà Nai Vàng">
@@ -15,20 +22,14 @@ const header = `
     </a>
     <nav aria-label="Chính"><ul class="menu">
       <li><a href="gioi-thieu.html"${A('gioi-thieu')}>${t('nav.about')}</a></li>
-      <li><a href="danh-muc-gia-cong.html"${A('gia-cong')}>${t('nav.oem')}</a></li>
-      <li><a href="day-chuyen-cong-nghe.html"${A('day-chuyen')}>${t('nav.tech')}</a></li>
+      <li><a href="danh-muc-gia-cong.html"${A('gia-cong')}>${t('nav.oem2')}</a></li>
+      <li><a href="day-chuyen-cong-nghe.html"${A('day-chuyen')}>${t('nav.tech2')}</a></li>
       <li><a href="san-pham.html"${A('san-pham')}>${t('nav.products')}</a></li>
       <li><a href="dai-ly.html"${A('dai-ly')}>${t('nav.agents')}</a></li>
       <li><a href="kien-thuc.html"${A('kien-thuc')}>${t('nav.know')}</a></li>
       <li><a href="lien-he.html"${A('lien-he')}>${t('nav.contact')}</a></li>
     </ul></nav>
     <div class="nav-actions">
-      <a class="hotline" href="tel:0855256512" aria-label="Hotline">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 4h3l2 5-2.5 1.5a12 12 0 0 0 5 5L14 13l5 2v3a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1Z"/></svg>
-        <span><small>${t('h.hotline')}</small><b>0855 256 512</b></span>
-      </a>
-      <a class="btn-agent" href="dang-ky-dai-ly.html">${t('h.agentBtn')}</a>
-      <button class="langsw" id="langSw" aria-label="Language">${L==='vi'?'EN':'VI'}</button>
       <a href="san-pham.html" aria-label="${t('cl.search')}"><svg class="hicon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg></a>
       <a href="tai-khoan.html" aria-label="${t('ac.crumb')}"><svg class="hicon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-3.5 4.5-5 8-5s6.5 1.5 8 5"/></svg></a>
       <a class="cart-wrap" href="gio-hang.html" aria-label="${t('ct.crumb')}">
